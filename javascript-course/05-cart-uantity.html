@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>lesson 5 Variables</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css" /> -->
+        <style>
+            .p-1 {
+                margin: 10px 0px 10px 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <p class="p-1">Cart Quantity</p>
+        <button onclick="console.log(`Cart quantity: ${var_q}`)">Show Quantity</button>
+        <button
+            onclick="
+                var_q++;
+                console.log(`Cart quantity: ${var_q}`);
+            "
+        >
+            Add to Cart
+        </button>
+        <button
+            onclick="
+                var_q += 2;
+                console.log(`Cart quantity: ${var_q}`);
+            "
+        >
+            +2
+        </button>
+        <button
+            onclick="
+                var_q += 3;
+                console.log(`Cart quantity: ${var_q}`);
+            "
+        >
+            +3
+        </button>
+        <button
+            onclick="
+                var_q = 0;
+                console.log('Cart is reset.');
+                console.log(`Cart quantity: ${var_q}`);
+            "
+        >
+            Reset Cart
+        </button>
+        <script>
+            let var_q = 0;
+        </script>
+    </body>
+</html>

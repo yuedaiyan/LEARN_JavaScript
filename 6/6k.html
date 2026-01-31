@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>5k</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css" /> -->
+        <style>
+            .p-1 {
+                margin: 10px 0px 10px 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <p class="p-1">Cart Quantity</p>
+        <button onclick="console.log(`Cart quantity: ${var_q}`)">Show Quantity</button>
+        <button
+            onclick="
+                if (var_q + 1 >= 10) {
+                    console.log('The cart is full');
+                } else {
+                    var_q++;
+                    console.log(`Cart quantity: ${var_q}`);
+                }
+            "
+        >
+            Add to Cart
+        </button>
+        <button
+            onclick="
+                if (var_q + 2 >= 10) {
+                    console.log('The cart is full');
+                } else {
+                    var_q += 2;
+                    console.log(`Cart quantity: ${var_q}`);
+                }
+            "
+        >
+            +2
+        </button>
+        <button
+            onclick="
+                if (var_q + 3 >= 10) {
+                    console.log('The cart is full');
+                } else {
+                    var_q += 3;
+                    console.log(`Cart quantity: ${var_q}`);
+                }
+            "
+        >
+            +3
+        </button>
+
+        <button
+            onclick="
+                if (var_q + 4 >= 10) {
+                    console.log('The cart is full');
+                } else {
+                    var_q += 4;
+                    console.log(`Cart quantity: ${var_q}`);
+                }
+            "
+        >
+            +4
+        </button>
+        <button
+            onclick="
+                if (var_q + 5 >= 10) {
+                    console.log('The cart is full');
+                } else {
+                    var_q += 5;
+                    console.log(`Cart quantity: ${var_q}`);
+                }
+            "
+        >
+            +5
+        </button>
+        <button
+            onclick="
+            if(var_q-1<0){
+             console.log('Not enough items in the cart')   ;
+            }else{
+                var_q--;
+                console.log(`Cart quantity: ${var_q}`);
+            }
+            "
+        >
+            Remove from cart
+        </button>
+        <button
+            onclick="
+            if(var_q-2<0){
+             console.log('Not enough items in the cart')   ;
+            }else{
+                var_q -= 2;
+                console.log(`Cart quantity: ${var_q}`);
+            }
+            "
+        >
+            -2
+        </button>
+        <button
+            onclick="
+            if(var_q-3<0){
+             console.log('Not enough items in the cart')   ;
+            }else{
+                var_q -= 3;
+                console.log(`Cart quantity: ${var_q}`);
+            }
+            "
+        >
+            -3
+        </button>
+        <button
+            onclick="
+                var_q = 0;
+                console.log('Cart is reset.');
+                console.log(`Cart quantity: ${var_q}`);
+            "
+        >
+            Reset Cart
+        </button>
+        <script>
+            let var_q = 0;
+            // if(var_q<=0){
+            //     var_q=0;
+            // }
+            //
+            // if(var_q>=10){
+            //     var_q-=;
+            //     console.log('The cart is full')
+            // }
+        </script>
+    </body>
+</html>

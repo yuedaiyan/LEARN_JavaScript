@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>8i</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css"> -->
+    </head>
+    <body>
+        <button onclick="game('hands')">hands</button>
+        <button onclick="game('tails')">tails</button>
+        <script>
+            function game(user_str) {
+                let a = Math.random();
+                if (a < 0.5) {
+                    a = "hands";
+                } else {
+                    a = "tails";
+                }
+                if(user_str===a){
+                    console.log('win');
+                }
+                else {
+                    console.log('lose');
+                }
+            }
+
+            // console.log(myResult === result ? "you win" : "you lose");
+        </script>
+    </body>
+</html>

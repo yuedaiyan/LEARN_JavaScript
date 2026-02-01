@@ -1,0 +1,80 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>07 function</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css"> -->
+    </head>
+    <body>
+        <button onclick="console.log(game(computer_random(), 0))">rock</button>
+        <button onclick="console.log(game(computer_random(), 1))">scissors</button>
+        <button onclick="console.log(game(computer_random(), 2))">paper</button>
+        <button onclick="console.log(reset_score())">resete score</button>
+        <script>
+            let score = JSON.parse(localStorage.getItem("score")) || {
+                wins: 0,
+                losses: 0,
+                ties: 0,
+            };
+
+            if (typeof score === "string") {
+                score = JSON.parse(localStorage.getItem("score"));
+            }
+
+            // computer random function
+            function computer_random() {
+                let k = Math.random();
+                if (k < 1 / 3) {
+                    return 0;
+                } else if (1 / 3 <= k && k < 2 / 3) {
+                    return 1;
+                } else {
+                    return 2;
+                }
+            }
+
+            // 0:rock 1:scissors 2:pape
+
+            // game function
+            function game(computer, human) {
+                console.log(`computer choose: ${computer}`);
+                console.log(`human choose: ${human}`);
+                let a = (human - computer + 3) % 3;
+                if (a == 0) {
+                    score.ties++;
+                    console.log(score);
+                    // save score in local storage
+                    localStorage.setItem("score", JSON.stringify(score));
+                    return "tie";
+                } else if (a == 1) {
+                    score.losses++;
+                    console.log(score);
+                    // save score in local storage
+                    localStorage.setItem("score", JSON.stringify(score));
+                    return "computer win";
+                } else {
+                    score.wins++;
+                    console.log(score);
+                    // save score in local storage
+                    localStorage.setItem("score", JSON.stringify(score));
+                    return "human win";
+                }
+            }
+
+            // function reset the score
+            function reset_score() {
+                score.wins = 0;
+                score.losses = 0;
+                score.ties = 0;
+                console.log(score);
+                // remove local storage
+                localStorage.removeItem("score");
+                // save score in local storage
+                localStorage.setItem("score", JSON.stringify(score));
+                return `reset the socre`;
+            }
+        </script>
+    </body>
+</html>

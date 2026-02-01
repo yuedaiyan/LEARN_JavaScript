@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>8j</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css"> -->
+    </head>
+    <body>
+        <button onclick="game('hands')">hands</button>
+        <button onclick="game('tails')">tails</button>
+        <script>
+            const score = JSON.parse(localStorage.getItem("score_local")) || { win: 0, lose: 0 };
+            function game(user_str) {
+                let a = Math.random();
+                if (a < 0.5) {
+                    a = "hands";
+                } else {
+                    a = "tails";
+                }
+                if (user_str === a) {
+                    score.win++;
+                    console.log("win");
+                    console.log(score);
+                    localStorage.setItem("score_local", JSON.stringify(score));
+                    return;
+                } else {
+                    score.lose++;
+                    console.log("lose");
+                    console.log(score);
+                    localStorage.setItem("score_local", JSON.stringify(score));
+                    return;
+                }
+            }
+        </script>
+    </body>
+</html>

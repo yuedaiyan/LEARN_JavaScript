@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>09-dom-projects</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css"> -->
+    </head>
+    <body>
+        <p>YouTube Subscribe Button</p>
+        <button onclick="subscirbeFunction()" class="subscirbe-button">Subscirbe</button>
+        <script>
+            function subscirbeFunction() {
+                const subscirbe_button = document.querySelector(".subscirbe-button");
+
+                if (subscirbe_button.innerText === "Subscirbe") {
+                    subscirbe_button.innerText = "Subscirbed";
+                } else if(subscirbe_button.innerText==="Subscirbed"){
+                    subscirbe_button.innerText = "Subscirbe";
+                }
+            }
+            
+            
+        </script>
+    </body>
+</html>

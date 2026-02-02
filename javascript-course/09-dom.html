@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>09-dom</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css"> -->
+    </head>
+    <body>
+        <!-- <button>hello</button> -->
+        <button class="js-button">button2</button>
+        <script>
+            const buttonElement = document.querySelector(".js-button");
+            console.log(typeof buttonElement);
+            console.log(buttonElement);
+
+            // console.log(document.querySelector("button"));
+            // console.log(document.querySelector("button").innerHTML);
+
+            // document.querySelector("button").innerHTML = "changed";
+
+            // document.querySelector('.js-button').innerHTML='changed 2'
+
+            // console.log("__________________body");
+            // console.log(document.body.innerHTML);
+
+            // console.log("__________________head");
+            // console.log(document.head.innerHTML);
+
+            // console.log("__________________chang html to hello");
+            // document.body.innerHTML = "hello";
+            // console.log(document.body.innerHTML);
+
+            // console.log("__________________change thml to p p");
+            // document.body.innerHTML = "<p>hello 1</p><p>hello 2</p>";
+            // console.log(document.body.innerHTML);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>9b</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+        <link rel="stylesheet" href="my_habit.css">
+        <!-- <link rel="stylesheet" href="style.css"> -->
+    </head>
+    <body>
+        <button onclick="click_b1()" class="b-1">9a</button>
+        <button onclick="click_b2()" class="b-2">9b</button>
+          <script>
+            function click_b1(){
+                console.log(document.querySelector('.b-1'));
+            }
+            function click_b2(){
+                document.querySelector('.b-2').innerHTML='9b done!'
+            }
+          </script>
+    </body>
+</html>

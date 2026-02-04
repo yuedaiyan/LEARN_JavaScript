@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>9g</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css"> -->
+    </head>
+    <body>
+        <p>Amazon Shipping Calculator</p>
+        <p>Orders under $40 = +$10 shipping.</p>
+        <p>Orders over $40 = FREE shipping.</p>
+        <input class="js-cost-input" type="text" placeholder="Cose of order" onkeydown="listen_key(event)"/>
+        <button onclick="calculateTotal() ">Calculate</button>
+        <p class="js-total-cost">$ 0</p>
+
+        <script>
+            function get_input() {
+                return document.querySelector(".js-cost-input").value;
+            }
+
+            function calculateTotal() {
+                let val = Number(get_input());
+                console.log(val);
+                if (val < 40) {
+                    val=(val*100+1000)/100;
+                }
+                console.log(val);
+                document.querySelector('.js-total-cost').innerHTML=`$ ${val}`
+            }
+             function listen_key(event){
+                if(event.key==='Enter'){
+                    calculateTotal();
+                }
+             }
+        </script>
+    </body>
+</html>

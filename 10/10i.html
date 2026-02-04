@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>10i</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <link rel="stylesheet" href="10i.css">
+
+    </head>
+    <body>
+        <div class="space">
+            <div class="js_result css_result">0</div>
+            <div class="line">
+                <button class="js_number_button css_number_button js_calculate_button" data-value="1">1</button>
+                <button class="js_number_button css_number_button js_calculate_button" data-value="2">2</button>
+                <button class="js_number_button css_number_button js_calculate_button" data-value="3">3</button>
+                <button class="js_symbol_button css_symbol_button js_calculate_button" data-value="+">+</button>
+            </div>
+
+            <div class="line">
+                <button class="js_number_button css_number_button js_calculate_button" data-value="4">4</button>
+                <button class="js_number_button css_number_button js_calculate_button" data-value="5">5</button>
+                <button class="js_number_button css_number_button js_calculate_button" data-value="6">6</button>
+                <button class="js_symbol_button css_symbol_button js_calculate_button" data-value="-">-</button>
+            </div>
+
+            <div class="line">
+                <button class="js_number_button css_number_button js_calculate_button" data-value="7">7</button>
+                <button class="js_number_button css_number_button js_calculate_button" data-value="8">8</button>
+                <button class="js_number_button css_number_button js_calculate_button" data-value="9">9</button>
+                <button class="js_symbol_button css_symbol_button js_calculate_button" data-value="*">*</button>
+            </div>
+
+            <div class="line">
+                <button class="js_number_button css_number_button js_calculate_button" data-value="0">0</button>
+                <button class="js_number_button css_number_button js_calculate_button" data-value=".">.</button>
+                <button class="js_number_button css_number_button js_calculate_button" data-value="=">=</button>
+                <button class="js_symbol_button css_symbol_button js_calculate_button" data-value="/">/</button>
+            </div>
+
+            <div class="line">
+                <button class="js_clear_button css_clear_button js_calculate_button" data-value="clear">Clear</button>
+            </div>
+        </div>
+        <script>
+            // Variable declaration
+            const numberEl = document.querySelectorAll(".js_number_button");
+            const symbolEl = document.querySelectorAll(".js_symbol_button");
+            const clearEl = document.querySelectorAll(".js_clear_button");
+            const resultEl = document.querySelector(".js_result");
+            const calculateEl = document.querySelectorAll(".js_calculate_button");
+        </script>
+        <!-- Button pressed color change -->
+        <script src="10i_buttonColorChange.js"></script>
+        <script>
+            // Result declaration
+            let result = "";
+
+            calculateEl.forEach((button) => {
+                button.addEventListener("click", (event) => {
+                    if (event.target.dataset.value === "=") {
+                        console.log("click = !!!");
+                        result = eval(result);
+                        console.log(result);
+                        resultEl.textContent = result;
+                        return;
+                    }
+                    if (event.target.dataset.value === "clear") {
+                        console.log("click clear !!!");
+                        result = "";
+                        console.log(result);
+                        resultEl.textContent = result;
+                        return;
+                    }
+                    result += event.target.dataset.value;
+                    console.log(result);
+                    resultEl.textContent = result;
+                    return;
+                });
+            });
+
+        </script>
+    </body>
+</html>

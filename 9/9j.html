@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Calculator</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css"> -->
+        <style>
+            .space {
+                padding: 50px 50px 50px 50px;
+            }
+            .line {
+                margin: 10px 0 10px 0;
+            }
+            .number-button,
+            .symbol-button {
+                width: 30px;
+                margin: 2px 2px 2px 2px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="space">
+            <div class="line screen">Calculation</div>
+            <div class="line">
+                <button onclick="put(1)" class="number-button">1</button>
+                <button onclick="put(2)" class="number-button">2</button>
+                <button onclick="put(3)" class="number-button">3</button>
+                <button onclick="put(' + ')" class="symbol-button">+</button>
+            </div>
+
+            <div class="line">
+                <button onclick="put(4)" class="number-button">4</button>
+                <button onclick="put(5)" class="number-button">5</button>
+                <button onclick="put(6)" class="number-button">6</button>
+                <button onclick="put(' - ')" class="symbol-button">-</button>
+            </div>
+
+            <div class="line">
+                <button onclick="put(7)" class="number-button">7</button>
+                <button onclick="put(8)" class="number-button">8</button>
+                <button onclick="put(9)" class="number-button">9</button>
+                <button onclick="put(' * ')" class="number-button">*</button>
+            </div>
+
+            <div class="line">
+                <button onclick="put(0)" class="number-button">0</button>
+                <button onclick="put('.')" class="number-button">.</button>
+                <button onclick="liquidation(calculation)" class="symbol-button">=</button>
+                <button onclick="put(' / ')" class="number-button">/</button>
+            </div>
+
+            <div class="line">
+                <button onclick="clean_screen()" class="clear-button">Clear</button>
+            </div>
+        </div>
+        <script>
+            let calculation = String(JSON.parse(localStorage.getItem("save_cal")) ?? "");
+            console.log(calculation);
+            
+            document.querySelector(".screen").innerHTML = calculation;
+
+            function put(new_int) {
+                calculation += new_int;
+                console.log(calculation);
+                document.querySelector(".screen").innerHTML = calculation;
+                localStorage.setItem('save_cal',JSON.stringify(calculation));
+            }
+
+            function liquidation(calculation_f) {
+                console.log(eval(calculation_f));
+                document.querySelector(".screen").innerHTML = eval(calculation_f);
+                // calculation = "";
+                localStorage.setItem('save_cal',JSON.stringify(eval(calculation_f)));
+            }
+
+            function clean_screen() {
+                calculation = "\n";
+                document.querySelector(".screen").innerHTML = "Calculator";
+                localStorage.setItem('save_cal',JSON.stringify(calculation));
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>09-dom-projects</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css"> -->
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                padding: 20px 20px 20px 20px;
+            }
+            .css-subscribe-button {
+                background-color: black;
+                color: white;
+                padding: 10px 20px 10px 20px;
+                border-radius: 100px;
+                margin: 10px 0px 0px 0px;
+                font-size: 18px;
+                font-weight: bold;
+                cursor: pointer;
+                border: none;
+                width: 135px;
+            }
+
+            /* .css-subscribe-button:active{
+                color: black;
+                background-color: khaki;
+            } */
+
+            .is-subscribed {
+                color: black;
+                background-color: khaki;
+            }
+        </style>
+    </head>
+    <body>
+        <p class="css-p-1">YouTube Subscribe Button</p>
+        <button onclick="subscirbeFunction()" class="js-subscribe-button css-subscribe-button">Subscirbe</button>
+
+        <script>
+            function subscirbeFunction() {
+                const buttonElement = document.querySelector(".js-subscribe-button");
+
+                if (buttonElement.innerText === "Subscirbe") {
+                    buttonElement.innerText = "Subscirbed";
+                    buttonElement.classList.add("is-subscribed");
+                } else if (buttonElement.innerText === "Subscirbed") {
+                    buttonElement.innerText = "Subscirbe";
+                    buttonElement.classList.remove("is-subscribed");
+                } else {
+                    alert("Subscribe button error");
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Amazon Shipping Calculator</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css"> -->
+         <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                padding: 20px 20px 20px 20px;
+            }
+            p{
+                margin: 15px 0px 5px 0px ;
+            }
+            .css-cost-input{
+                height: 50px;
+                border: 1px solid black;
+                border-radius: 2px;
+                padding: 0px 0px 0px 10px;
+                font-size: 16px;
+            }
+            .css-total-button{
+                background-color: green;
+                border: none;
+                border-radius: 2px;
+                /* padding: 0px 0px 0px 10px; */
+                height: 50px;
+                
+                margin: 10px 0 0 0 ;
+                width: 100px;
+                font-weight: bold;
+                font-size: 16px;
+                color: white;
+
+                cursor: pointer;
+            }
+
+
+         </style>
+    </head>
+    <body>
+        <p>Amazon Shipping Calculator</p>
+        <p>Orders under $40 = +$10 shipping.</p>
+        <p>Orders over $40 = FREE shipping.</p>
+        <input class="js-cost-input css-cost-input" type="text" placeholder="Cose of order" onkeydown="listen_key(event)"/>
+        <button onclick="calculateTotal()" class="css-total-button">Calculate</button>
+        <p class="js-total-cost ">$ 0</p>
+
+        <script>
+            function get_input() {
+                return document.querySelector(".js-cost-input").value;
+            }
+
+            function calculateTotal() {
+                let val = Number(get_input());
+                if (val < 40) {
+                    val += 10;
+                }
+                document.querySelector('.js-total-cost').innerHTML=`$ ${val}`
+            }
+             function listen_key(event){
+                if(event.key==='Enter'){
+                    calculateTotal();
+                }
+             }
+        </script>
+    </body>
+</html>

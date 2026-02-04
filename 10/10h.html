@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>10h</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                padding: 20px 20px 20px 20px;
+            }
+            p {
+                margin: 15px 0px 5px 0px;
+            }
+
+            .css_cost_input {
+                height: 50px;
+                border: 1px solid black;
+                border-radius: 2px;
+                padding: 0px 0px 0px 10px;
+                font-size: 16px;
+            }
+
+            .css_cost_input_error {
+                color: red;
+            }
+
+            .css_total_button_normal {
+                background-color: green;
+                border: none;
+                border-radius: 2px;
+                height: 50px;
+                margin: 10px 0 0 0;
+                width: 100px;
+                font-weight: bold;
+                font-size: 16px;
+                color: white;
+                cursor: pointer;
+            }
+
+            .css_total_button_pressed {
+                background-color: rgb(0, 78, 0);
+            }
+        </style>
+    </head>
+    <body>
+        <p>Amazon Shipping Calculator</p>
+        <p>Orders under $40 = +$10 shipping.</p>
+        <p>Orders over $40 = FREE shipping.</p>
+
+        <!-- <input class="js-cost-input css-cost-input" type="text" placeholder="Cose of order" onkeydown="listen_key(event)" />
+        <button onclick="calculateTotal()" class="css-total-button">Calculate</button> -->
+
+        <input class="js_input css_cost_input" type="text" placeholder="Cose of order" />
+        <button class="js_button css_total_button_normal">Calculate</button>
+        <p class="js_result">$ 0</p>
+
+        <script>
+            const input_lObj = document.querySelector(".js_input");
+            const button_lObj = document.querySelector(".js_button");
+            const resutl_lObj = document.querySelector(".js_result");
+            let result_show = null;
+
+            function calculate(value) {
+                if (value < 40) {
+                    value += 10;
+                }
+                return value;
+            }
+
+            button_lObj.addEventListener("mousedown", () => {
+                button_lObj.classList.add("css_total_button_pressed");
+                let input_value = Number(input_lObj.value);
+                if (input_value < 0) {
+                    result_show = "Error: cost cannot be less than $0";
+                    resutl_lObj.classList.add("css_cost_input_error");
+                } else {
+                    result_show = `$ ${calculate(input_value)}`;
+                    resutl_lObj.classList.remove("css_cost_input_error");
+                }
+                resutl_lObj.innerHTML = result_show;
+            });
+
+            button_lObj.addEventListener("mouseup", () => {
+                button_lObj.classList.remove("css_total_button_pressed");
+            });
+            button_lObj.addEventListener("mouseleave", () => {
+                button_lObj.classList.remove("css_total_button_pressed");
+            });
+        </script>
+    </body>
+</html>

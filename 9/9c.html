@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>9c</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+        <link rel="stylesheet" href="my_habit.css">
+        <!-- <link rel="stylesheet" href="style.css"> -->
+    </head>
+    <body>
+        <button onclick="heads_clicked()">heads</button>
+        <button onclick="tails_clicked()">tails</button>
+        <p class="p_1">You chose:</p>
+          <script>
+            function heads_clicked(){
+                document.querySelector('.p_1').innerHTML='You chose: heads'
+            }
+            function tails_clicked(){
+                document.querySelector('.p_1').innerHTML='You chose: tails'
+            }
+          </script>
+    </body>
+</html>

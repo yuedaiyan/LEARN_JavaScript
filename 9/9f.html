@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>9f</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css"> -->
+    </head>
+    <body>
+        <input class="input_1" type="text" onkeydown="key_listen(event)" />
+        <button class="button_1" onclick="submit_1()">Submit</button>
+        <p class="p_1">Your name is:</p>
+        <script>
+            function submit_1() {
+                document.querySelector(".p_1").innerHTML = `Your name is: ${document.querySelector(".input_1").value}`;
+            }
+            function key_listen(event) {
+                if (event.key === "Enter") {
+                    submit_1();
+                }
+            }
+        </script>
+    </body>
+</html>

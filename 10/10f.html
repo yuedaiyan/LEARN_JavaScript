@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>10f</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css"> -->
+        <style>
+            body {
+                padding: 20px 20px 20px 20px;
+            }
+
+            .css_btn_1 {
+                border: none;
+                padding: 10px 20px 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                background-color: black;
+                color: white;
+            }
+
+            .css_btn_1_on {
+                background-color: rgb(230, 230, 230);
+                color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <button class="js_btn_toggle css_btn_1 css_btn_1">Gaming</button>
+        <button class="js_btn_toggle css_btn_1 css_btn_1">Music</button>
+        <button class="js_btn_toggle css_btn_1 css_btn_1">Tech</button>
+
+        <script>
+            const btn_toggle = document.querySelectorAll(".js_btn_toggle");
+
+            btn_toggle.forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    btn.classList.toggle("css_btn_1_on");
+                });
+            });
+        </script>
+    </body>
+</html>

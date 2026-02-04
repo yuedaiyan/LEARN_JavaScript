@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>10d</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css"> -->
+        <style>
+            body {
+                padding: 20px 20px 20px 20px;
+            }
+
+            .css_btn_1 {
+                border: none;
+                padding: 10px 20px 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+            }
+
+            .css_btn_1_off {
+                background-color: black;
+                color: white;
+            }
+
+            .css_btn_1_on {
+                background-color: rgb(230, 230, 230);
+                color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <button class="js_btn_1 css_btn_1 css_btn_1_off">Gaming</button>
+        <script>
+            const js_btn_1 = document.querySelector(".js_btn_1");
+
+            js_btn_1.addEventListener("click", () => {
+                const js_btn_1_state = js_btn_1.classList.contains("css_btn_1_on");
+
+                js_btn_1.classList.toggle("css_btn_1_on", !js_btn_1_state);
+                js_btn_1.classList.toggle("css_btn_1_off", js_btn_1_state);
+
+                // if(js_btn_1_state){
+                //     // state: off
+                //     js_btn_1.classList.toggle('.css_btn_1_off',)
+                // }else{
+                //     // state: on
+                // }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>10g</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css"> -->
+        <style>
+            body {
+                padding: 20px 20px 20px 20px;
+            }
+
+            .css_btn_1 {
+                border: none;
+                padding: 10px 20px 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                background-color: black;
+                color: white;
+            }
+
+            .css_btn_1_on {
+                background-color: rgb(230, 230, 230);
+                color: black;
+            }
+        </style>
+    </head>
+    <body>
+        <button class="js_btn_toggle css_btn_1 css_btn_1">Gaming</button>
+        <button class="js_btn_toggle css_btn_1 css_btn_1">Music</button>
+        <button class="js_btn_toggle css_btn_1 css_btn_1">Tech</button>
+
+        <script>
+            const btn_toggle = document.querySelectorAll(".js_btn_toggle");
+
+            btn_toggle.forEach((button) => {
+                button.addEventListener("click", () => {
+                    if (button.classList.contains("css_btn_1_on")) {
+                        // current button is on
+                    } else {
+                        // current button is off
+                        btn_toggle.forEach((b_inside) => {
+                            b_inside.classList.remove("css_btn_1_on");
+                        });
+                    }
+                    button.classList.toggle("css_btn_1_on");
+                    return;
+                });
+            });
+        </script>
+    </body>
+</html>

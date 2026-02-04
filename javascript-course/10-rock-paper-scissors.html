@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>10-rock-paper-scissors</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- css style -->
+        <link rel="stylesheet" href="styles/10-rock-paper-scissors.css" />
+    </head>
+    <body>
+        <p class="css-p-1">Rock Paper Scissors</p>
+        <button class="css-button-1" onclick="game(0)"><img class="css-button-img" src="image/rock-emoji.png" /></button>
+        <button class="css-button-2" onclick="game(1)"><img class="css-button-img" src="image/paper-emoji.png" /></button>
+        <button class="css-button-3" onclick="game(2)"><img class="css-button-img" src="image/scissors-emoji.png" /></button>
+        <p class="js-show-result css-result">No result</p>
+
+        <p class="js-move css-move">You : <img class="css-move-image" src="image/rock-emoji.png" /> Computer: <img class="css-move-image" src="image/paper-emoji.png" /></p>
+
+        <p class="js-score css-score-result"></p>
+        <button class="css-button-reset" onclick="reset()">Reset Score</button>
+        <!-- js script -->
+        <script src="scripts/10-rock-paper-scissors.js"></script>
+    </body>
+</html>

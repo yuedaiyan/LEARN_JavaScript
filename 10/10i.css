@@ -1,0 +1,40 @@
+body {
+    padding: 20px 20px 20px 20px;
+    background-color: black;
+    color: white;
+}
+
+.css_result {
+    height: 70px;
+    font-weight: bold;
+    font-size: 45px;
+    padding: 0 0 0 5px;
+}
+
+.css_number_button,
+.css_symbol_button,
+.css_clear_button {
+    width: 60px;
+    height: 60px;
+    border-radius: 100px;
+    border: none;
+    background-color: #424242;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    margin: 7px 2px 7px 2px;
+}
+
+.css_number_button_press {
+    background-color: #636363;
+}
+.css_clear_button_press {
+    background-color: #636363;
+}
+
+.css_symbol_button {
+    background-color: #ffbf00;
+}
+.css_symbol_button_press {
+    background-color: #be8f00;
+}

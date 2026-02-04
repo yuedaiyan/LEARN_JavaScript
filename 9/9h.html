@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>9h</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css"> -->
+    </head>
+    <body>
+        <input class="input_1" type="text" onkeyup="c_1()" />
+        <p class="p_1"></p>
+        <script>
+            function c_1() {
+                // document.querySelector(".p_1").innerHTML += event.key;
+                document.querySelector(".p_1").innerHTML = document.querySelector('.input_1').value;
+            }
+        </script>
+    </body>
+</html>

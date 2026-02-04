@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>9i</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css" /> -->
+        <style>
+            .p-1,
+            .p-2 {
+                margin: 10px 0px 10px 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <p class="p-1">Cart Quantity</p>
+        <button onclick="console.log(`Cart quantity: ${var_q}`)">Show Quantity</button>
+        <button onclick="add(1)">Add to Cart</button>
+        <button onclick="add(2)">+2</button>
+        <button onclick="add(3)">+3</button>
+        <button onclick="add(4)">+4</button>
+        <button onclick="add(5)">+5</button>
+        <button onclick="add(-1)">Remove from cart</button>
+        <button onclick="add(-2)">-2</button>
+        <button onclick="add(-3)">-3</button>
+        <button onclick="add(0)">Reset Cart</button>
+        <p class="p-2"></p>
+        <script>
+            let var_q = 0;
+                    document.querySelector(".p-2").innerHTML = `Cart quantity: ${var_q}`;
+            function add(number_int) {
+                if (number_int === 0) {
+                    var_q = 0;
+                    console.log("Cart is reset.");
+                    console.log(`Cart quantity: ${var_q}`);
+                    document.querySelector(".p-2").innerHTML = `Cart quantity: ${var_q}`;
+                    return;
+                }
+                if (var_q + number_int > 10) {
+                    console.log("The cart is full");
+                    return;
+                }
+                if (var_q + number_int < 0) {
+                    console.log("Not enough items in the cart");
+                    return;
+                }
+                var_q = var_q + number_int;
+                console.log(`Cart quantity: ${var_q}`);
+                    document.querySelector(".p-2").innerHTML = `Cart quantity: ${var_q}`;
+                    return;
+            }
+        </script>
+    </body>
+</html>

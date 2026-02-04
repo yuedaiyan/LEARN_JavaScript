@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+        <title>innerHTML += 事件丢失示例</title>
+        <style>
+            #modal {
+                display: none;
+                padding: 20px;
+                margin-top: 10px;
+                border: 2px solid red;
+                background: #ffecec;
+            }
+        </style>
+    </head>
+    <body>
+        <button id="open">打开弹窗</button>
+        <button id="close">close弹窗</button>
+        <button id="add">追加内容（危险）</button>
+
+        <div id="modal">我是弹窗</div>
+
+        <script>
+            const openBtn = document.querySelector("#open");
+            const modal = document.querySelector("#modal");
+            const addBtn = document.querySelector("#add");
+            const closeBtn= document.querySelector('#close')
+
+            openBtn.onclick = () => {
+                modal.style.display = "block";
+            };
+            closeBtn.onclick = () => {
+                modal.style.display = "none";
+            };
+
+            addBtn.onclick = () => {
+                // ❌ 会导致整个 body 重建
+                document.body.innerHTML += "<p>new content</p>";
+            };
+        </script>
+    </body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>11-todo-list</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <style></style>
+    </head>
+    <body>
+        <p>Todo List Practice 1</p>
+        <input class="js_input" type="text" placeholder="Todo name" />
+        <button onclick="addToDoList()" class="js_button">Add</button>
+
+        <div class="js_div"></div>
+
+        <script>
+            const toDoList = JSON.parse(localStorage.getItem("toDoList_storage")) ?? [];
+            const divEl = document.querySelector(".js_div");
+
+            // replace the html show area
+            let html_code = "";
+            // add information on the html
+            for (let i = 0; i < toDoList.length; i++) {
+                html_code += `<p>${toDoList[i]}</p>`;
+            }
+
+            // refresh the html on screen
+            console.log(html_code);
+            divEl.innerHTML = html_code;
+
+            function addToDoList() {
+                const inputEl = document.querySelector(".js_input");
+                const input_name = inputEl.value;
+
+                // update the toDoList(list)
+                toDoList.push(input_name);
+                // save list in the local storage
+                localStorage.setItem("toDoList_storage", JSON.stringify(toDoList));
+
+                // refresh the input area
+                inputEl.value = "";
+
+                // replace the html show area
+                let html_code = "";
+                // add information on the html
+                for (let i = 0; i < toDoList.length; i++) {
+                    html_code += `<p>${toDoList[i]}</p>`;
+                }
+
+                // refresh the html on screen
+                console.log(html_code);
+                divEl.innerHTML = html_code;
+            }
+        </script>
+    </body>
+</html>

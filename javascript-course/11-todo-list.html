@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>11-todo-list</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="css/my_habit.css" />
+        <style></style>
+    </head>
+    <body>
+        <p>Todo List Practice 1</p>
+        <input class="js_input" type="text" placeholder="Todo name" />
+
+        <button onclick="addToDoList()" class="js_button">Add</button>
+        <div class="js_div"></div>
+        <script>
+            const toDoList = [];
+            const divEl = document.querySelector(".js_div");
+
+            function addToDoList() {
+                const inputEl = document.querySelector(".js_input");
+                const input_name = inputEl.value;
+                toDoList.push(input_name);
+
+                inputEl.value = "";
+                let html_code = "";
+                for (let i = 0; i < toDoList.length; i++) {
+                    html_code += `<p>${toDoList[i]}</p>`;
+                }
+
+                console.log(html_code);
+                divEl.innerHTML = html_code;
+            }
+        </script>
+    </body>
+</html>

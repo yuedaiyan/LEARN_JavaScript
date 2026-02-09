@@ -1,14 +1,9 @@
-const s = Symbol("hidden");
+let k=0
+const list_k = [];
+for (let i = 1; i <= 100; i++){
 
-const obj = {
-    a: 1,
-    [s]: 2,
-};
-
-console.log(Object.keys(obj));
-console.log(obj);
-
-// ["a"]
-for (const k in obj) {
-} // 只看到 "a"
-console.log(JSON.stringify(obj)) ;
+    k += i;
+    list_k.push(k)
+}
+    console.log(k)
+    console.log(list_k);

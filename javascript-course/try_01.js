@@ -1,15 +1,6 @@
-const ID = Symbol("id");
-
-const obj = {};
-obj[ID] = 123;
-console.log(obj);
-console.log(obj.ID);
-console.log(obj[ID]);
-console.log(obj.id)
-console.log('_________')
-const ED=Symbol('id')
-obj[ED] = 456;
-console.log(obj);
-console.log(obj.ED);
-console.log(obj[ED]);
-console.log(obj.id)
+const numbers=[1, 2, 3, 4, 5, 6,7,100];
+let sum = 0;
+for (let i = 0; i < numbers.length; i++){
+    sum += numbers[i];
+}
+console.log(sum);

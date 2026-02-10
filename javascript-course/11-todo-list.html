@@ -3,33 +3,131 @@
     <head>
         <meta charset="UTF-8" />
         <title>11-todo-list</title>
+        <link rel="icon" href="data:," />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-        <link rel="stylesheet" href="css/my_habit.css" />
-        <style></style>
+        <!-- <link rel="stylesheet" href="my_habit.css" /> -->
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                padding: 50px 50px 50px 50px;
+                font-size: 18px;
+            }
+
+            button {
+                cursor: pointer;
+                border-radius: 5px;
+            }
+
+            .css_title {
+                font-size: 25px;
+                font-weight: bold;
+                margin: 0px 0px 20px 0px;
+            }
+
+            .css_plate_row,
+            .css_input_row {
+                display: grid;
+                grid-template-columns: 200px 200px 120px;
+
+                column-gap: 20px;
+                margin: 0px 0px 15px 0px;
+
+                height: 50px;
+
+                justify-items: stretch;
+                align-items: stretch;
+            }
+
+            .css_input_text,
+            .css_input_date {
+                justify-self: stretch;
+                align-self: stretch;
+            }
+
+            .css_addButton {
+                background-color: rgb(0, 119, 0);
+                color: white;
+                border: none;
+            }
+
+            .css_delButton {
+                background-color: rgb(201, 0, 0);
+                color: white;
+                border: none;
+            }
+
+            .css_list_name,
+            .css_list_date {
+                align-self: center;
+            }
+        </style>
     </head>
     <body>
-        <p>Todo List Practice 1</p>
-        <input class="js_input" type="text" placeholder="Todo name" />
-
-        <button onclick="addToDoList()" class="js_button">Add</button>
+        <div class="css_title">Todo List</div>
+        <div class="css_plate_row">
+            <input class="js_input_text css_input_text" type="text" placeholder="Todo name" />
+            <input class="js_input_date css_input_date" type="date" />
+            <button onclick="addToDoList()" class="js_addButton css_addButton">Add</button>
+        </div>
         <div class="js_div"></div>
+
         <script>
-            const toDoList = [];
+            const toDoList = JSON.parse(localStorage.getItem("toDoList_storage")) ?? [];
             const divEl = document.querySelector(".js_div");
 
-            function addToDoList() {
-                const inputEl = document.querySelector(".js_input");
-                const input_name = inputEl.value;
-                toDoList.push(input_name);
+            const inputTextEl = document.querySelector(".js_input_text");
+            const inputDateEl = document.querySelector(".js_input_date");
 
-                inputEl.value = "";
+            // refresh screen and local storage
+            function renderToDoList() {
+                // refresh the input area
+                inputTextEl.value = "";
+                inputDateEl.value = "";
+                // replace the html data to empty
                 let html_code = "";
-                for (let i = 0; i < toDoList.length; i++) {
-                    html_code += `<p>${toDoList[i]}</p>`;
+                let toDoList_reverse = toDoList.slice().reverse();
+                // show the toDoList on the html screen
+                for (let i = 0; i < toDoList_reverse.length; i++) {
+                    html_code += `
+                    <div class="css_input_row">
+                        <div class='css_list_name'>${toDoList_reverse[i].name}</div>
+                        <div class='css_list_date'>${toDoList_reverse[i].date}</div>
+                        <button onclick="removeItem(${i});" class="js_delButton css_delButton">
+                            Delete
+                        </button>
+                    </div>
+                            `;
                 }
 
+                // refresh the local storage
+                localStorage.setItem("toDoList_storage", JSON.stringify(toDoList));
+
+                // show resutl in the console
                 console.log(html_code);
+
+                // refresh the html on screen
                 divEl.innerHTML = html_code;
+            }
+
+            // get the remove index of the list
+            function removeItem(index_in) {
+                // upadate the doDoList
+                toDoList.splice(index_in, 1);
+
+                renderToDoList();
+            }
+
+            /* === main part === */
+            renderToDoList();
+
+            function addToDoList() {
+                // update the toDoList(list)
+                const input_text = inputTextEl.value;
+                const input_date = inputDateEl.value;
+                toDoList.push({ name: input_text, date: input_date });
+                console.log(input_text);
+                console.log(input_date);
+                renderToDoList();
             }
         </script>
     </body>

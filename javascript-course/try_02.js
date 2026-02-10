@@ -1,9 +1,12 @@
-let k=0
-const list_k = [];
-for (let i = 1; i <= 100; i++){
+let a = 1;
+let b = 2;
 
-    k += i;
-    list_k.push(k)
-}
-    console.log(k)
-    console.log(list_k);
+const list1=[a,b]
+console.log(list1);
+
+[b,a]=list1
+
+// [a, b] = [b, a];
+
+console.log(a);
+console.log(b);

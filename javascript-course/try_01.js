@@ -1,6 +1,8 @@
 const numbers=[1, 2, 3, 4, 5, 6,7,100];
-let sum = 0;
-for (let i = 0; i < numbers.length; i++){
-    sum += numbers[i];
-}
-console.log(sum);
+
+const array_1=[10,20,30]
+
+const [a,b,c]=array_1
+console.log(a);
+console.log(b);
+console.log(c);

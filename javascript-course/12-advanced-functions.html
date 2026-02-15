@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>12-advanced-functions</title>
+        <link rel="icon" href="data:," />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="css/my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css"> -->
+    </head>
+    <body>
+        <button class="js_button">Click</button>
+        <script>
+            const buttonEl = document.querySelector(".js_button");
+
+            function printLetter_A() {
+                console.log("A");
+            }
+            function printLetter_B() {
+                console.log("B");
+            }
+
+            buttonEl.addEventListener("click", printLetter_A);
+            buttonEl.removeEventListener('click',printLetter_A)
+            buttonEl.addEventListener('click',printLetter_B)
+        </script>
+    </body>
+</html>

@@ -102,7 +102,7 @@
                 // refresh the local storage
                 localStorage.setItem("toDoList_storage", JSON.stringify(toDoList));
 
-                // show resutl in the console
+                // show result in the console
                 console.log(html_code);
 
                 // refresh the html on screen
@@ -111,7 +111,7 @@
 
             // get the remove index of the list
             function removeItem(index_in) {
-                // upadate the doDoList
+                // update the doDoList
                 toDoList.splice(index_in, 1);
 
                 renderToDoList();

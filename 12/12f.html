@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>12f</title>
+        <link rel="icon" href="data:," />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css"> -->
+    </head>
+    <body>
+        <button class="js_button" onclick="textShow()">Add to cart</button>
+        <div class="js_div"></div>
+        <script>
+            const divEl = document.querySelector(".js_div");
+            let timeId;
+
+            function textShow() {
+                console.log("show");
+                divEl.textContent = "Added";
+
+                clearTimeout(timeId);
+                clearInterval
+
+                timeId=setTimeout(() => {
+                    console.log(timeId);
+                    console.log("del");
+                    divEl.textContent = "";
+                }, 2000);
+                console.log(timeId);
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,76 @@
+body {
+    background-color: rgb(29, 29, 29);
+}
+
+.css_button_rock,
+.css_button_paper,
+.css_button_scissors {
+    background-color: black;
+    border: 3px solid white;
+
+    border-radius: 1000px;
+    padding: 40px 40px 40px 40px;
+    margin: 10px 5px 10px 5px;
+}
+
+.css_button_rock img,
+.css_button_paper img,
+.css_button_scissors img {
+    height: 100px;
+    width: 100px;
+}
+
+.css_div_resultEmoji,
+.css_area_warning {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.css_div_resultEmoji img {
+    height: 50px;
+    width: 50px;
+    margin: 0px 10px 0px 10px;
+}
+
+.css_button_reset,
+.css_button_autoPlay,
+.css_warning_yes,
+.css_warning_no {
+    background-color: black;
+    color: white;
+    border: none;
+    font-size: 30px;
+    font-weight: bold;
+    padding: 10px 20px 10px 20px;
+    margin: 10px 5px 10px 5px;
+    border-radius: 10px;
+}
+.css_warning_no,
+.css_warning_yes {
+    margin: 10px 10px 10px 5px;
+    background-color: white;
+    color: black;
+}
+.css_warning_button_active{
+    background-color: rgb(190, 190, 190);
+    color: black;
+}
+
+.css_button_reset_active,
+.css_button_autoPlay_active {
+    background-color: rgb(42, 42, 42);
+}
+
+.css_div_resultText,
+.css_div_resultEmoji,
+.css_div_rankBoard,
+.css_div_warning {
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 10px 10px 10px 10px;
+}
+
+.css_div_warning {
+    margin: 10px 20px 10px 10px;
+}

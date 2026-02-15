@@ -1,0 +1,66 @@
+body,
+p,
+button {
+    margin: 20px 10px 20px 10px;
+    background-color: rgb(28, 28, 28);
+    color: white;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.css-p-1 {
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+.css-button-img,
+.css-move-image {
+    height: 60px;
+    width: 60px;
+    /* display: block; */
+}
+.css-button-1,
+.css-button-2,
+.css-button-3 {
+    border: 3px solid white;
+    border-radius: 1000px;
+    height: 150px;
+    width: 150px;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 10px 0px 10px;
+}
+
+.css-button-1 {
+    padding-bottom: 15px;
+}
+.css-button-flexbox {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.css-move {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.css-move img {
+    margin: 0 10px 0 10px;
+}
+
+.css-button-reset,.css-button-autoPlay {
+    background-color: white;
+    color: black;
+    padding: 10px 20px 10px 21px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 20px 5px 20px 5px;
+}
+
+.css-button-reset:active {
+    background-color: rgb(209, 209, 209);
+}

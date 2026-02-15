@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>12q_12e</title>
+        <link rel="icon" href="data:," />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css"> -->
+    </head>
+    <body>
+        <button class="js_button" >Add to cart</button>
+        <div class="js_div"></div>
+        <script>
+            const divEl = document.querySelector(".js_div");
+            const buttonEl=document.querySelector('.js_button')
+            buttonEl.addEventListener("click", () => {
+                textShow();
+            });
+
+            function textShow() {
+                console.log("show");
+                divEl.textContent = "Added";
+                setTimeout(() => {
+                    console.log("del");
+                    divEl.textContent = "";
+                }, 2000);
+            }
+
+        </script>
+    </body>
+</html>

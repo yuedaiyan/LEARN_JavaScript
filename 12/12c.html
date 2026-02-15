@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>12c</title>
+        <link rel="icon" href="data:,">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+        <link rel="stylesheet" href="my_habit.css">
+        <!-- <link rel="stylesheet" href="style.css"> -->
+    </head>
+    <body>
+        <button class="js_button css_button" onclick="button_change()">Start</button>
+          <script>
+            const buttonEl=document.querySelector('.js_button')
+            function button_change(){
+                setTimeout(()=>{
+                    console.log('real run time');
+                    if(buttonEl.textContent==='Start'){
+                        // start -> finished
+                        buttonEl.textContent='Finished!'
+                    }
+                    else if(buttonEl.textContent==='Finished!'){
+                        // finished -> start
+                        buttonEl.textContent='Start'
+                    }
+                },1000)
+                console.log('press time');
+            }
+          </script>
+    </body>
+</html>

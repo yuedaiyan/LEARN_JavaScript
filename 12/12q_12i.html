@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>App</title>
+        <link rel="icon" href="data:," />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css"> -->
+    </head>
+    <body>
+        <button class="js_button_add">Add</button>
+        <button class="js_button_remove">Remove</button>
+
+        <script>
+            const addButtonEl = document.querySelector(".js_button_add");
+            const removeButtonEl = document.querySelector(".js_button_remove");
+
+            addButtonEl.addEventListener("click", () => {
+                messageNumAdd();
+            });
+            removeButtonEl.addEventListener("click", () => {
+                messageNumReduce();
+            });
+
+            let messagesNum = 2;
+
+            function messageNumAdd() {
+                messagesNum++;
+                console.log(messagesNum);
+            }
+            function messageNumReduce() {
+                messagesNum--;
+                console.log(messagesNum);
+            }
+
+            function changeTitle() {
+                if (messagesNum > 0) {
+                    let determineStr = `(${messagesNum})New message`;
+
+                    if (document.title === "App") {
+                        document.title = determineStr;
+                    } else {
+                        document.title = "App";
+                    }
+                } else {
+                    document.title = "App";
+                }
+            }
+
+            setInterval(changeTitle, 500);
+        </script>
+    </body>
+</html>

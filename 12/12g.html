@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>App</title>
+        <link rel="icon" href="data:," />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css"> -->
+    </head>
+    <body>
+        <script>
+            function changeTitle() {
+                if (document.title === "App") {
+                     document.title= "(2)New massage";
+                } else if ( document.title=== "(2)New massage") {
+                    document.title = "App";
+                }
+            }
+            setInterval(changeTitle, 2000);
+        </script>
+    </body>
+</html>

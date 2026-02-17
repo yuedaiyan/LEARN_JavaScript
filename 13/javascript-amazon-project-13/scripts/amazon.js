@@ -18,9 +18,9 @@ products.forEach((product) => {
 
                     <div class="product-price">${(product.priceCents / 100).toFixed(2)}</div>
 
-                    <div class="product-quantity-container">
-                        <select>
-                            <option selected value="1">1</option>
+                    <div class="product-quantity-container ">
+                        <select class="js-quantity-selector-${product.id}">
+                            <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
@@ -45,7 +45,7 @@ products.forEach((product) => {
     `;
 });
 // console 打印页面中所有商品条目的HTML
-// console.log(productsHTML);
+console.log(productsHTML);
 
 // 讲生成的商品条目HTML,加入到.js-products-grid中,以供渲染
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
@@ -53,10 +53,18 @@ document.querySelector(".js-products-grid").innerHTML = productsHTML;
 // 给每个按钮添加监听器 → 添加到购物车列表
 document.querySelectorAll(".js-add-to-cart").forEach((button) => {
     button.addEventListener("click", () => {
-        let marchingId;
         // console.log("打印新加入商品: ", button.dataset.productId);
+
+        // 获取用户的选择数量
+        const selectValue=Number(document.querySelector(`.js-quantity-selector-${button.dataset.productId}`).value);
+        // console.log(selectValue);
+
+
+
         // 检测当前cart中是否已经有商品了
+        let marchingId;
         cart.forEach((item) => {
+            // item:当前条目
             if (item.productId === button.dataset.productId) {
                 return (marchingId = item);
             }
@@ -64,12 +72,12 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
 
         if (marchingId) {
             // 已经在列表中了 → 修改数量
-            marchingId.quantity++;
+            marchingId.quantity+=selectValue;
         } else {
             // 不再列表中 → 需要将其加入到列表中
             cart.push({
                 productId: button.dataset.productId,
-                quantity: 1,
+                quantity: selectValue,
             });
         }
 
@@ -81,8 +89,7 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
         console.log("cart quantity: ", cartQuantity);
         console.log("打印购物车: ", cart);
 
-
         // 修改屏幕右上角购物车商品数量
-        document.querySelector(".js-cart-quantity").innerHTML=cartQuantity;
+        document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
     });
 });

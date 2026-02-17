@@ -53,10 +53,10 @@ document.querySelector(".js-products-grid").innerHTML = productsHTML;
 // 给每个按钮添加监听器 → 添加到购物车列表
 document.querySelectorAll(".js-add-to-cart").forEach((button) => {
     button.addEventListener("click", () => {
-        // console.log("打印新加入商品: ", button.dataset.productId);
-
+        const {productId}=button.dataset
+        // console.log("打印新加入商品: ", productId);
         // 获取用户的选择数量
-        const selectValue=Number(document.querySelector(`.js-quantity-selector-${button.dataset.productId}`).value);
+        const selectValue=Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
         // console.log(selectValue);
 
 
@@ -65,7 +65,7 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
         let marchingId;
         cart.forEach((item) => {
             // item:当前条目
-            if (item.productId === button.dataset.productId) {
+            if (item.productId === productId) {
                 return (marchingId = item);
             }
         });
@@ -76,7 +76,7 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
         } else {
             // 不再列表中 → 需要将其加入到列表中
             cart.push({
-                productId: button.dataset.productId,
+                productId: productId,
                 quantity: selectValue,
             });
         }

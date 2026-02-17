@@ -7,9 +7,7 @@ const products = [
         rating: { stars: 5, count: 1 },
         priceCents: 999999,
         keywords: ["witcher 3", "yuedaiyan"],
-
     },
-
     {
         id: "a7ad3bba44ce67fcd915e5c9dc4bd455",
         image: "images/products/a7ad3bba44ce67fcd915e5c9dc4bd455.jpg",

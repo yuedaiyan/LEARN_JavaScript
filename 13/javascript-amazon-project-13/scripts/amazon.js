@@ -35,7 +35,7 @@ products.forEach((product) => {
 
                     <div class="product-spacer"></div>
 
-                    <div class="added-to-cart">
+                    <div class="added-to-cart js-added-to-cart-${product.id}">
                         <img src="images/icons/checkmark.png" />
                         Added
                     </div>
@@ -51,15 +51,14 @@ console.log(productsHTML);
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
 
 // 给每个按钮添加监听器 → 添加到购物车列表
+const pressId = {};
 document.querySelectorAll(".js-add-to-cart").forEach((button) => {
     button.addEventListener("click", () => {
-        const {productId}=button.dataset
+        const { productId } = button.dataset;
         // console.log("打印新加入商品: ", productId);
         // 获取用户的选择数量
-        const selectValue=Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
+        const selectValue = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
         // console.log(selectValue);
-
-
 
         // 检测当前cart中是否已经有商品了
         let marchingId;
@@ -72,7 +71,7 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
 
         if (marchingId) {
             // 已经在列表中了 → 修改数量
-            marchingId.quantity+=selectValue;
+            marchingId.quantity += selectValue;
         } else {
             // 不再列表中 → 需要将其加入到列表中
             cart.push({
@@ -91,5 +90,16 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
 
         // 修改屏幕右上角购物车商品数量
         document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+
+        // 提前取消上一轮遗留的显示效果(如果显示效果存在的话(即便不存在,setTimeOut也不会报错))
+        clearTimeout(pressId[productId]);
+
+        // 点击 Add 按钮之后,上面出现绿色的提示
+        const addedToCartEl = document.querySelector(`.js-added-to-cart-${productId}`);
+        addedToCartEl.classList.add("added-to-cart-pressed");
+        pressId[productId] = setTimeout(() => {
+            addedToCartEl.classList.remove("added-to-cart-pressed");
+            delete pressId[productId];
+        }, 1500);
     });
 });

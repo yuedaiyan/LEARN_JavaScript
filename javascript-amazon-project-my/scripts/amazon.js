@@ -58,7 +58,7 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
         // 检测当前cart中是否已经有商品了
         cart.forEach((item) => {
             if (item.productId === button.dataset.productId) {
-                return (marchingId=item);
+                return (marchingId = item);
             }
         });
 
@@ -73,6 +73,16 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
             });
         }
 
+        // 初始化购物车内商品数量
+        let cartQuantity = 0;
+        cart.forEach((item) => {
+            cartQuantity += item.quantity;
+        });
+        console.log("cart quantity: ", cartQuantity);
         console.log("打印购物车: ", cart);
+
+
+        // 修改屏幕右上角购物车商品数量
+        document.querySelector(".js-cart-quantity").innerHTML=cartQuantity;
     });
 });

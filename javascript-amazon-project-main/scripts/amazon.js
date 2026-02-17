@@ -1,3 +1,7 @@
+import {products} from '../data/products.js'
+import {cart} from '../data/cart.js'
+
+
 // 初始化购物车列表
 let productsHTML = "";
 

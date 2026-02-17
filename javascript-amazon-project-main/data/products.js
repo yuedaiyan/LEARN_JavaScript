@@ -1,5 +1,5 @@
 // 页面商品条目(供scripts/amazon.js渲染)
-const products = [
+export const products = [
     {
         id: "9baab029f463f330bb33ed5676aa4dfd",
         image: "images/products/9baab029f463f330bb33ed5676aa4dfd.jpg",

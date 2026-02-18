@@ -44,7 +44,9 @@ cart.forEach((cartItem) => {
                   </span>
 <!--  -->
                   <input class="quantity-input">
-                  <span class="save-quantity-link link-primary">Save</span>
+                  <span class="save-quantity-link link-primary">
+                    Save
+               </span>
 <!--  -->
                   <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
                     Delete
@@ -105,7 +107,20 @@ document.querySelector(".js-order-summary").innerHTML = cartSummaryHTML;
 // 监听 update 按钮 → 实现按钮的 update 功能
 document.querySelectorAll(".js-update-link").forEach((link) => {
     link.addEventListener("click", () => {
-        console.log(link.dataset.productId);
+        // console.log(link.dataset.productId);
+        const productId = link.dataset.productId;
+        // 获得点击update时对应的完整容器
+        const container = document.querySelector(`.js-cart-item-container-${productId}`);
+        // 点击时,加入css: is-editing-quantity
+        container.classList.add("is-editing-quantity");
+        // 定位到当前容器内的 input 和 save 元素 → 使其显示
+        // input:
+
+        // const cc = document.querySelector(`.js-cart-item-container-${productId} .quantity-input`);
+        // console.log(cc);
+           document.querySelector(`.js-cart-item-container-${productId} .quantity-input`).classList.add('element-active');
+        // save:
+           document.querySelector(`.js-cart-item-container-${productId} .save-quantity-link`).classList.add('element-active');
     });
 });
 

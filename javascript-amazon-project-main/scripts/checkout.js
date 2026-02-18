@@ -2,10 +2,13 @@
 import { products } from "../data/products.js";
 // 导入购物车列表
 import { cart } from "../data/cart.js";
+// 导入money从美分转换为美元的计算函数
+import { formatCurrency } from "./utils/money.js";
+
 let cartSummaryHTML;
 cart.forEach((cartItem) => {
     let matchingProduct;
-    // 根据 cartItem 查找出完整项目
+    // 根据 cartItem 查找出完整项目 → 将完整条目存入matchingProduct(HTML将使用matchingProduct生成DOM树)
     products.forEach((product) => {
         if (product.id === cartItem.productId) {
             matchingProduct = product;
@@ -28,7 +31,7 @@ cart.forEach((cartItem) => {
                   ${matchingProduct.name}
                 </div>
                 <div class="product-price">
-                  $${(matchingProduct.priceCents / 100).toFixed(2)}
+                  $${formatCurrency(matchingProduct.priceCents)}
                 </div>
                 <div class="product-quantity">
                   <span>
@@ -48,9 +51,7 @@ cart.forEach((cartItem) => {
                   Choose a delivery option:
                 </div>
                 <div class="delivery-option">
-                  <input type="radio" checked
-                    class="delivery-option-input"
-                    name="delivery-option-1">
+                  <input type="radio" checked class="delivery-option-input" name="delivery-option-${matchingProduct.id}">
                   <div>
                     <div class="delivery-option-date">
                       Tuesday, June 21
@@ -61,12 +62,10 @@ cart.forEach((cartItem) => {
                   </div>
                 </div>
                 <div class="delivery-option">
-                  <input type="radio"
-                    class="delivery-option-input"
-                    name="delivery-option-1">
+                  <input type="radio" class="delivery-option-input" name="delivery-option-${matchingProduct.id}">
                   <div>
                     <div class="delivery-option-date">
-                      Wednesday, June 15
+                        Wednesday, June 15
                     </div>
                     <div class="delivery-option-price">
                       $4.99 - Shipping
@@ -74,12 +73,10 @@ cart.forEach((cartItem) => {
                   </div>
                 </div>
                 <div class="delivery-option">
-                  <input type="radio"
-                    class="delivery-option-input"
-                    name="delivery-option-1">
+                  <input type="radio" class="delivery-option-input" name="delivery-option-${matchingProduct.id}">
                   <div>
                     <div class="delivery-option-date">
-                      Monday, June 13
+                        Monday, June 13
                     </div>
                     <div class="delivery-option-price">
                       $9.99 - Shipping

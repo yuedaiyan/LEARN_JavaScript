@@ -2,6 +2,8 @@
 import { products } from "../data/products.js";
 // 导入购物车列表
 import { cart, addToCart } from "../data/cart.js";
+// 导入money从美分转换为美元的计算函数
+import { formatCurrency } from "./utils/money.js";
 
 // 初始化购物车列表
 let productsHTML = "";
@@ -23,7 +25,7 @@ products.forEach((product) => {
                         <div class="product-rating-count link-primary">${product.rating.count}</div>
                     </div>
 
-                    <div class="product-price">${(product.priceCents / 100).toFixed(2)}</div>
+                    <div class="product-price">${formatCurrency(product.priceCents)}</div>
 
                     <div class="product-quantity-container ">
                         <select class="js-quantity-selector-${product.id}">

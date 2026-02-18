@@ -44,7 +44,7 @@ cart.forEach((cartItem) => {
                   </span>
 <!--  -->
                   <input class="quantity-input js-quantity-input">
-                  <span class="save-quantity-link link-primary js-save-quantity-link">
+                  <span class="save-quantity-link link-primary js-save-quantity-link" data-product-id="${matchingProduct.id}">
                     Save
                </span>
 <!--  -->
@@ -110,17 +110,30 @@ document.querySelectorAll(".js-update-link").forEach((link) => {
         // console.log(link.dataset.productId);
         const productId = link.dataset.productId;
         // 获得点击update时对应的完整容器
-        const container = document.querySelector(`.js-cart-item-container-${productId}`);
+        // const container = document.querySelector(`.js-cart-item-container-${productId}`);
         // 点击时,加入css: is-editing-quantity
-        container.classList.add("is-editing-quantity");
+        // container.classList.add("is-editing-quantity");
         // 定位到当前容器内的 input 和 save 元素 → 使其显示
         // input 显示
-        document.querySelector(`.js-cart-item-container-${productId} .js-quantity-input`).classList.add("element-active");
+        document.querySelector(`.js-cart-item-container-${productId} .js-quantity-input`).classList.add("is-editing-quantity");
         // save 显示
-        document.querySelector(`.js-cart-item-container-${productId} .js-save-quantity-link`).classList.add("element-active");
+        document.querySelector(`.js-cart-item-container-${productId} .js-save-quantity-link`).classList.remove("save-quantity-link");
         // update 消失
-        document.querySelector(`.js-cart-item-container-${productId} .js-update-link`).classList.add("element-disappear");
+        document.querySelector(`.js-cart-item-container-${productId} .js-update-link`).classList.add("save-quantity-link");
+    });
+});
 
+// 监听 save 按钮 → 点击后消失 input + save, 同时显示 update
+document.querySelectorAll(".js-save-quantity-link").forEach((link) => {
+    link.addEventListener("click", () => {
+        // 获取当前容器 id
+        const productId = link.dataset.productId;
+        // input 消失
+        document.querySelector(`.js-cart-item-container-${productId} .js-quantity-input`).classList.remove("is-editing-quantity");
+        // save 消失
+        document.querySelector(`.js-cart-item-container-${productId} .js-save-quantity-link`).classList.add("save-quantity-link");
+        // update 显示
+        document.querySelector(`.js-cart-item-container-${productId} .js-update-link`).classList.remove("save-quantity-link");
     });
 });
 

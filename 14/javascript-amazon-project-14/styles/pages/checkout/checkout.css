@@ -216,14 +216,12 @@
     display: none;
 }
 
-.save-quantity-link {
-    display: none;
-}
-
-.element-active{
+.is-editing-quantity{
     display: initial;
 }
 
-.element-disappear{
+.save-quantity-link  {
     display: none;
 }
+
+

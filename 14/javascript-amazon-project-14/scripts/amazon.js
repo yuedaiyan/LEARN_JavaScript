@@ -4,6 +4,8 @@ import { products } from "../data/products.js";
 import { cart, addToCart } from "../data/cart.js";
 // 导入money从美分转换为美元的计算函数
 import { formatCurrency } from "./utils/money.js";
+// 导入购物车内商品总数计算函数
+import { updateCartQuantity } from "./utils/updateCartQuanti.js";
 
 // 初始化购物车列表
 let productsHTML = "";
@@ -60,23 +62,15 @@ products.forEach((product) => {
 // 将生成的商品条目HTML,加入到.js-products-grid中,以供渲染
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
 
+// 初始化购物车内商品数量
+let cartQuantity = 0;
+// 使用实际的cart数据,更新购物车数量
+cartQuantity = updateCartQuantity(cart);
+// 刷新屏幕
+document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
 
-
-function updateCartQuantity() {
-    // 初始化购物车内商品数量
-    let cartQuantity = 0;
-    cart.forEach((cartItem) => {
-        cartQuantity += cartItem.quantity;
-    });
-    console.log("cart quantity: ", cartQuantity);
-    console.log("打印购物车: ", cart);
-
-    // 修改屏幕右上角购物车商品数量
-    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
-}
-
+// Add 绿色提示
 function showAddedToCartIcon(productId) {
-    // Add 绿色提示部分
     // 提前取消上一轮遗留的显示效果(如果显示效果存在的话(即便不存在,setTimeOut也不会报错))
     clearTimeout(pressId[productId]);
     // 点击 Add 按钮之后,上面出现绿色的提示
@@ -93,7 +87,9 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
     button.addEventListener("click", () => {
         const { productId } = button.dataset;
         addToCart(productId);
-        updateCartQuantity();
+        
+        // 刷新屏幕:修改屏幕右上角购物车商品数量
+        document.querySelector(".js-cart-quantity").innerHTML = updateCartQuantity(cart);
         showAddedToCartIcon(productId);
     });
 });

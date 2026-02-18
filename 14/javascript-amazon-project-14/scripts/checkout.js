@@ -4,8 +4,10 @@ import { products } from "../data/products.js";
 import { cart, removeFromCart } from "../data/cart.js";
 // 导入money从美分转换为美元的计算函数
 import { formatCurrency } from "./utils/money.js";
+// 导入购物车内商品总数量计算
+import { updateCartQuantity } from "./utils/updateCartQuanti.js";
 
-let cartSummaryHTML;
+let cartSummaryHTML = "";
 cart.forEach((cartItem) => {
     let matchingProduct;
     // 根据 cartItem 查找出完整项目 → 将完整条目存入matchingProduct(HTML将使用matchingProduct生成DOM树)
@@ -103,5 +105,10 @@ document.querySelectorAll(".js-delete-link").forEach((link) => {
         removeFromCart(productId);
         const container = document.querySelector(`.js-cart-item-container-${productId}`);
         container.remove();
+        // 更新页面最上方的购物车内商品总数清单
+        document.querySelector(".js-return-to-home-link").innerHTML = updateCartQuantity(cart);
     });
 });
+
+// 更新页面最上方的购物车内商品总数清单
+document.querySelector(".js-return-to-home-link").innerHTML = updateCartQuantity(cart);

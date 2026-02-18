@@ -8,6 +8,7 @@ function saveToStorage() {
     localStorage.setItem("cart", JSON.stringify(cart));
 }
 
+// 商品加入函数 (点击 Add 按钮触发)
 export function addToCart(productId) {
     // console.log("打印新加入商品: ", productId);
     // 获取用户的选择数量
@@ -33,10 +34,12 @@ export function addToCart(productId) {
             quantity: selectValue,
         });
     }
+
     // 更新本地存储的购物车信息
     saveToStorage();
 }
 
+// 删除商品(在结算页面,点击删除按钮触发)
 export function removeFromCart(productId) {
     const newCart = [];
 

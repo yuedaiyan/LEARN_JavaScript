@@ -5,7 +5,7 @@ import { cart, removeFromCart } from "../data/cart.js";
 // 导入money从美分转换为美元的计算函数
 import { formatCurrency } from "./utils/money.js";
 
-let cartSummaryHTML;
+let cartSummaryHTML='';
 cart.forEach((cartItem) => {
     let matchingProduct;
     // 根据 cartItem 查找出完整项目 → 将完整条目存入matchingProduct(HTML将使用matchingProduct生成DOM树)

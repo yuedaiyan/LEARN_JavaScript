@@ -43,8 +43,8 @@ cart.forEach((cartItem) => {
                     Update
                   </span>
 <!--  -->
-                  <input class="quantity-input">
-                  <span class="save-quantity-link link-primary">
+                  <input class="quantity-input js-quantity-input">
+                  <span class="save-quantity-link link-primary js-save-quantity-link">
                     Save
                </span>
 <!--  -->
@@ -114,13 +114,13 @@ document.querySelectorAll(".js-update-link").forEach((link) => {
         // 点击时,加入css: is-editing-quantity
         container.classList.add("is-editing-quantity");
         // 定位到当前容器内的 input 和 save 元素 → 使其显示
-        // input:
+        // input 显示
+        document.querySelector(`.js-cart-item-container-${productId} .js-quantity-input`).classList.add("element-active");
+        // save 显示
+        document.querySelector(`.js-cart-item-container-${productId} .js-save-quantity-link`).classList.add("element-active");
+        // update 消失
+        document.querySelector(`.js-cart-item-container-${productId} .js-update-link`).classList.add("element-disappear");
 
-        // const cc = document.querySelector(`.js-cart-item-container-${productId} .quantity-input`);
-        // console.log(cc);
-           document.querySelector(`.js-cart-item-container-${productId} .quantity-input`).classList.add('element-active');
-        // save:
-           document.querySelector(`.js-cart-item-container-${productId} .save-quantity-link`).classList.add('element-active');
     });
 });
 

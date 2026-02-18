@@ -223,3 +223,7 @@
 .element-active{
     display: initial;
 }
+
+.element-disappear{
+    display: none;
+}

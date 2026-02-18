@@ -67,7 +67,7 @@ let cartQuantity = 0;
 // 使用实际的cart数据,更新购物车数量
 cartQuantity = calculateCartQuantity(cart);
 // 刷新屏幕
-document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+document.querySelector(".js-cart-quantity").innerHTML = cartQuantity||'';
 
 // Add 绿色提示
 function showAddedToCartIcon(productId) {
@@ -87,9 +87,11 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
     button.addEventListener("click", () => {
         const { productId } = button.dataset;
         addToCart(productId);
-        
+
         // 刷新屏幕:修改屏幕右上角购物车商品数量
-        document.querySelector(".js-cart-quantity").innerHTML = calculateCartQuantity(cart);
+        // 处理0的问题
+        document.querySelector(".js-cart-quantity").innerHTML = calculateCartQuantity(cart)||'';
+
         showAddedToCartIcon(productId);
     });
 });

@@ -170,5 +170,5 @@ document.querySelectorAll(".js-delete-link").forEach((link) => {
 refreshReturnToHomeLink();
 
 function refreshReturnToHomeLink() {
-    document.querySelector(".js-return-to-home-link").innerHTML = calculateCartQuantity(cart);
+    document.querySelector(".js-return-to-home-link").innerHTML = `${calculateCartQuantity(cart)}  items`;
 }

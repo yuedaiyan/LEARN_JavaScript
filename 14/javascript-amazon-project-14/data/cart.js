@@ -58,9 +58,6 @@ export function calculateCartQuantity(cart) {
     cart.forEach((cartItem) => {
         cartQuantity += cartItem.quantity;
     });
-    if (cartQuantity === 0) {
-        cartQuantity = "";
-    }
     return cartQuantity;
 }
 
@@ -78,7 +75,6 @@ export function updateQuantity(productId, newQuantity) {
 // 通过id获得指定的商品
 export function getProduct(productIdFind) {
     return cart.find((product) => {
-        return product.productId===productIdFind
-
-    })
+        return product.productId === productIdFind;
+    });
 }

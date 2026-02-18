@@ -1,7 +1,7 @@
 // 导入商品清单
 import { products } from "../data/products.js";
 // 导入购物车列表
-import { cart } from "../data/cart.js";
+import { cart ,removeFromCart} from "../data/cart.js";
 // 导入money从美分转换为美元的计算函数
 import { formatCurrency } from "./utils/money.js";
 
@@ -40,7 +40,7 @@ cart.forEach((cartItem) => {
                   <span class="update-quantity-link link-primary">
                     Update
                   </span>
-                  <span class="delete-quantity-link link-primary">
+                  <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
                     Delete
                   </span>
                 </div>
@@ -94,3 +94,12 @@ cart.forEach((cartItem) => {
 
 // 将生成的HTMl拼接到主HTML DOM树上
 document.querySelector(".js-order-summary").innerHTML = cartSummaryHTML;
+
+// 删除按钮的点击删除功能
+document.querySelectorAll(".js-delete-link").forEach((link) => {
+    link.addEventListener("click", () => {
+        const productId = link.dataset.productId;
+        removeFromCart(productId)
+        console.log(cart);
+    });
+});

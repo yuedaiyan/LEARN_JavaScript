@@ -1,14 +1,12 @@
 // 购物车列表(在scripts/amazon.js中修改)
-export let cart = [
-    {
-        productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-        quantity: 2,
-    },
-    {
-        productId: "15b6fc6f-327a-4ec4-896f-486349e85a3d",
-        quantity: 1,
-    },
-];
+// 从local storage中加载购物车列表,如果加载失败,则加载空列表
+export let cart = JSON.parse(localStorage.getItem("cart")) ?? [];
+// TODO 没有使用购物车中的 quantities 来刷新商品页面右上角的购物车内商品数量
+
+// 将购物车信息 储存到本地 local storage 中
+function saveToStorage() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
 
 export function addToCart(productId) {
     // console.log("打印新加入商品: ", productId);
@@ -35,6 +33,8 @@ export function addToCart(productId) {
             quantity: selectValue,
         });
     }
+    // 更新本地存储的购物车信息
+    saveToStorage();
 }
 
 export function removeFromCart(productId) {
@@ -46,4 +46,6 @@ export function removeFromCart(productId) {
         }
     });
     cart = newCart;
+    // 更新本地存储的购物车信息
+    saveToStorage();
 }

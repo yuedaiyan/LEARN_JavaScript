@@ -34,7 +34,6 @@ export function addToCart(productId) {
             quantity: selectValue,
         });
     }
-
     // 更新本地存储的购物车信息
     saveToStorage();
 }
@@ -53,6 +52,7 @@ export function removeFromCart(productId) {
     saveToStorage();
 }
 
+// 计算整个购物车中的商品总数
 export function calculateCartQuantity(cart) {
     let cartQuantity = 0;
     cart.forEach((cartItem) => {
@@ -62,4 +62,23 @@ export function calculateCartQuantity(cart) {
         cartQuantity = "";
     }
     return cartQuantity;
+}
+
+// 通过 id 和 quantity 更新cart中指定商品的数量
+export function updateQuantity(productId, newQuantity) {
+    cart.forEach((product) => {
+        if (product.productId === productId) {
+            product.quantity = newQuantity;
+        }
+    });
+    // 更新本地存储的购物车信息
+    saveToStorage();
+}
+
+// 通过id获得指定的商品
+export function getProduct(productIdFind) {
+    return cart.find((product) => {
+        return product.productId===productIdFind
+
+    })
 }

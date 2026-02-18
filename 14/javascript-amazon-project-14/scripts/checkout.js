@@ -5,7 +5,7 @@ import { cart, removeFromCart } from "../data/cart.js";
 // 导入money从美分转换为美元的计算函数
 import { formatCurrency } from "./utils/money.js";
 // 导入购物车内商品总数量计算
-import { calculateCartQuantity } from "../data/cart.js";
+import { calculateCartQuantity, updateQuantity, getProduct } from "../data/cart.js";
 
 let cartSummaryHTML = "";
 cart.forEach((cartItem) => {
@@ -37,7 +37,7 @@ cart.forEach((cartItem) => {
                 </div>
                 <div class="product-quantity">
                   <span>
-                    Quantity: <span class="quantity-label">${cartItem.quantity}</span>
+                    Quantity: <span class="quantity-label js-quantity-label">${cartItem.quantity}</span>
                   </span>
                   <span class="update-quantity-link link-primary js-update-link"  data-product-id="${matchingProduct.id}">
                     Update
@@ -128,12 +128,28 @@ document.querySelectorAll(".js-save-quantity-link").forEach((link) => {
     link.addEventListener("click", () => {
         // 获取当前容器 id
         const productId = link.dataset.productId;
+        // input element
+        const inputEl = document.querySelector(`.js-cart-item-container-${productId} .js-quantity-input`);
+        // save element
+        const saveEl = document.querySelector(`.js-cart-item-container-${productId} .js-save-quantity-link`);
+        // update element
+        const updateEl = document.querySelector(`.js-cart-item-container-${productId} .js-update-link`);
+        // 核心逻辑: 更新 quantity
+        // 获取输入的值
+        const inputNumber = Number(inputEl.value);
+        // 更新输入的值到 cart 中
+        updateQuantity(productId, inputNumber);
+        // 刷新容器内的 quantity
+        document.querySelector(`.js-cart-item-container-${productId} .js-quantity-label`).innerHTML = getProduct(productId).quantity;
+        // 刷新页面面正上方渲染
+        refreshReturnToHomeLink();
+
         // input 消失
-        document.querySelector(`.js-cart-item-container-${productId} .js-quantity-input`).classList.remove("is-editing-quantity");
+        inputEl.classList.remove("is-editing-quantity");
         // save 消失
-        document.querySelector(`.js-cart-item-container-${productId} .js-save-quantity-link`).classList.add("save-quantity-link");
+        saveEl.classList.add("save-quantity-link");
         // update 显示
-        document.querySelector(`.js-cart-item-container-${productId} .js-update-link`).classList.remove("save-quantity-link");
+        updateEl.classList.remove("save-quantity-link");
     });
 });
 
@@ -145,9 +161,14 @@ document.querySelectorAll(".js-delete-link").forEach((link) => {
         const container = document.querySelector(`.js-cart-item-container-${productId}`);
         container.remove();
         // 更新页面最上方的购物车内商品总数清单
-        document.querySelector(".js-return-to-home-link").innerHTML = calculateCartQuantity(cart);
+        refreshReturnToHomeLink();
     });
 });
 
 // 更新页面最上方的购物车内商品总数清单
-document.querySelector(".js-return-to-home-link").innerHTML = calculateCartQuantity(cart);
+// document.querySelector(".js-return-to-home-link").innerHTML = calculateCartQuantity(cart);
+refreshReturnToHomeLink();
+
+function refreshReturnToHomeLink() {
+    document.querySelector(".js-return-to-home-link").innerHTML = calculateCartQuantity(cart);
+}

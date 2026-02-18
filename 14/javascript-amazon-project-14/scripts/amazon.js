@@ -5,7 +5,7 @@ import { cart, addToCart } from "../data/cart.js";
 // 导入money从美分转换为美元的计算函数
 import { formatCurrency } from "./utils/money.js";
 // 导入购物车内商品总数计算函数
-import { updateCartQuantity } from "./utils/updateCartQuanti.js";
+import { calculateCartQuantity } from "../data/cart.js";
 
 // 初始化购物车列表
 let productsHTML = "";
@@ -65,7 +65,7 @@ document.querySelector(".js-products-grid").innerHTML = productsHTML;
 // 初始化购物车内商品数量
 let cartQuantity = 0;
 // 使用实际的cart数据,更新购物车数量
-cartQuantity = updateCartQuantity(cart);
+cartQuantity = calculateCartQuantity(cart);
 // 刷新屏幕
 document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
 
@@ -89,7 +89,7 @@ document.querySelectorAll(".js-add-to-cart").forEach((button) => {
         addToCart(productId);
         
         // 刷新屏幕:修改屏幕右上角购物车商品数量
-        document.querySelector(".js-cart-quantity").innerHTML = updateCartQuantity(cart);
+        document.querySelector(".js-cart-quantity").innerHTML = calculateCartQuantity(cart);
         showAddedToCartIcon(productId);
     });
 });

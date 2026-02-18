@@ -52,3 +52,14 @@ export function removeFromCart(productId) {
     // 更新本地存储的购物车信息
     saveToStorage();
 }
+
+export function calculateCartQuantity(cart) {
+    let cartQuantity = 0;
+    cart.forEach((cartItem) => {
+        cartQuantity += cartItem.quantity;
+    });
+    if (cartQuantity === 0) {
+        cartQuantity = "";
+    }
+    return cartQuantity;
+}

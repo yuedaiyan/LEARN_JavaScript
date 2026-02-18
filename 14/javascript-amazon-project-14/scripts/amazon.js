@@ -63,7 +63,7 @@ products.forEach((product) => {
 document.querySelector(".js-products-grid").innerHTML = productsHTML;
 
 // 初始化购物车内商品数量
-let cartQuantity =0;
+let cartQuantity = 0;
 // 使用实际的cart数据,更新购物车数量
 cartQuantity = updateCartQuantity(cart);
 // 刷新屏幕

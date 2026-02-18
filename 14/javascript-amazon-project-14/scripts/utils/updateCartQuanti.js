@@ -3,5 +3,8 @@ export function updateCartQuantity(cart) {
     cart.forEach((cartItem) => {
         cartQuantity += cartItem.quantity;
     });
+    if (cartQuantity === 0) {
+        cartQuantity=''
+    }
     return cartQuantity;
 }

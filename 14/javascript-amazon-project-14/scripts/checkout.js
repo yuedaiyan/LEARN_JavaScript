@@ -7,6 +7,9 @@ import { formatCurrency } from "./utils/money.js";
 // 导入购物车内商品总数量计算
 import { calculateCartQuantity, updateQuantity, getProduct } from "../data/cart.js";
 
+// 维护一个全局数组,指向当前的焦点Id
+let focusId;
+
 let cartSummaryHTML = "";
 cart.forEach((cartItem) => {
     let matchingProduct;
@@ -120,6 +123,8 @@ document.querySelectorAll(".js-update-link").forEach((link) => {
         document.querySelector(`.js-cart-item-container-${productId} .js-save-quantity-link`).classList.remove("save-quantity-link");
         // update 消失
         document.querySelector(`.js-cart-item-container-${productId} .js-update-link`).classList.add("save-quantity-link");
+        // 将当前的焦点 id 添加到 focusId 列表中
+        focusId = productId;
     });
 });
 
@@ -128,22 +133,33 @@ document.querySelectorAll(".js-save-quantity-link").forEach((link) => {
     link.addEventListener("click", () => {
         // 获取当前容器 id
         const productId = link.dataset.productId;
-        // input element
+        // 获取 input 元素
         const inputEl = document.querySelector(`.js-cart-item-container-${productId} .js-quantity-input`);
-        // save element
+        // 获取 save 元素
         const saveEl = document.querySelector(`.js-cart-item-container-${productId} .js-save-quantity-link`);
-        // update element
+        // 获取 update 元素
         const updateEl = document.querySelector(`.js-cart-item-container-${productId} .js-update-link`);
+
         // 核心逻辑: 更新 quantity
         // 获取输入的值
         const inputNumber = Number(inputEl.value);
-        // 更新输入的值到 cart 中
-        updateQuantity(productId, inputNumber);
-        // 刷新容器内的 quantity
-        document.querySelector(`.js-cart-item-container-${productId} .js-quantity-label`).innerHTML = getProduct(productId).quantity;
-        // 刷新页面面正上方渲染
-        refreshReturnToHomeLink();
+        // 检查输入的值是否是符合标准
+        if (0 < inputNumber && inputNumber <= 100) {
+            // 输入合法
+            // 更新输入的值到 cart 中
+            updateQuantity(productId, inputNumber);
+            // 刷新容器内的 quantity
+            document.querySelector(`.js-cart-item-container-${productId} .js-quantity-label`).innerHTML = getProduct(productId).quantity;
+            // 刷新页面面正上方渲染
+            refreshReturnToHomeLink();
 
+            // 移除fucusId列表中的id,表示当前容器已经被关闭
+            focusId = null;
+        } else {
+            // 输入不合法
+            // 弹出错误
+            alert("输入不合法,合法范围:(0,100]");
+        }
         // input 消失
         inputEl.classList.remove("is-editing-quantity");
         // save 消失
@@ -165,10 +181,17 @@ document.querySelectorAll(".js-delete-link").forEach((link) => {
     });
 });
 
+// 监听 enter 按键 → 实现 save 功能
+document.addEventListener("keyup", (keyUp) => {
+    if (keyUp.key === "Enter") {
+        document.querySelector(`.js-cart-item-container-${focusId} .js-save-quantity-link`).click();
+    }
+});
+
 // 更新页面最上方的购物车内商品总数清单
-// document.querySelector(".js-return-to-home-link").innerHTML = calculateCartQuantity(cart);
 refreshReturnToHomeLink();
 
+// 更新页面上方购物车函数
 function refreshReturnToHomeLink() {
     document.querySelector(".js-return-to-home-link").innerHTML = `${calculateCartQuantity(cart)}  items`;
 }

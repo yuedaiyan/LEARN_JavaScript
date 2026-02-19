@@ -32,6 +32,7 @@ export function addToCart(productId) {
         cart.push({
             productId: productId,
             quantity: selectValue,
+            deliveryOptionId: "1",
         });
     }
     // 更新本地存储的购物车信息

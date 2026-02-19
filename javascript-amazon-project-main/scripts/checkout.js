@@ -6,8 +6,21 @@ import { cart, removeFromCart } from "../data/cart.js";
 import { formatCurrency } from "./utils/money.js";
 // 导入购物车内商品总数量计算
 import { calculateCartQuantity, updateQuantity, getProduct } from "../data/cart.js";
+// 导入时间模块
+import  dayjs  from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 
-// 维护一个全局数组,指向当前的焦点Id
+
+// 处理时间问题 → 获取当前时间
+const today = dayjs();
+//
+console.log(today);
+let deliveryDate = today.add(7, 'day');
+console.log(deliveryDate);
+deliveryDate=deliveryDate.format('dddd, MMMM D')
+console.log(deliveryDate);
+
+
+// 维护一个全局Id,指向最后交互Id
 let focusId;
 
 let cartSummaryHTML = "";
@@ -195,3 +208,5 @@ refreshReturnToHomeLink();
 function refreshReturnToHomeLink() {
     document.querySelector(".js-return-to-home-link").innerHTML = `${calculateCartQuantity(cart)}  items`;
 }
+
+console.log(cart);

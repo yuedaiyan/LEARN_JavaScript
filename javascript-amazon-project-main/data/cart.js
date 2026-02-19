@@ -8,6 +8,7 @@ function saveToStorage() {
     localStorage.setItem("cart", JSON.stringify(cart));
 }
 
+// 商品加入函数 (点击 Add 按钮触发)
 export function addToCart(productId) {
     // console.log("打印新加入商品: ", productId);
     // 获取用户的选择数量
@@ -37,6 +38,7 @@ export function addToCart(productId) {
     saveToStorage();
 }
 
+// 删除商品(在结算页面,点击删除按钮触发)
 export function removeFromCart(productId) {
     const newCart = [];
 
@@ -48,4 +50,31 @@ export function removeFromCart(productId) {
     cart = newCart;
     // 更新本地存储的购物车信息
     saveToStorage();
+}
+
+// 计算整个购物车中的商品总数
+export function calculateCartQuantity(cart) {
+    let cartQuantity = 0;
+    cart.forEach((cartItem) => {
+        cartQuantity += cartItem.quantity;
+    });
+    return cartQuantity;
+}
+
+// 通过 id 和 quantity 更新cart中指定商品的数量
+export function updateQuantity(productId, newQuantity) {
+    cart.forEach((product) => {
+        if (product.productId === productId) {
+            product.quantity = newQuantity;
+        }
+    });
+    // 更新本地存储的购物车信息
+    saveToStorage();
+}
+
+// 通过id获得指定的商品
+export function getProduct(productIdFind) {
+    return cart.find((product) => {
+        return product.productId === productIdFind;
+    });
 }

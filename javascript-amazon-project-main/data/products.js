@@ -1,14 +1,6 @@
 // 页面商品条目(供scripts/amazon.js渲染)
 export const products = [
     {
-        id: "9baab029f463f330bb33ed5676aa4dfd",
-        image: "images/products/9baab029f463f330bb33ed5676aa4dfd.jpg",
-        name: "Ciri",
-        rating: { stars: 5, count: 1 },
-        priceCents: 999999,
-        keywords: ["witcher 3", "yuedaiyan"],
-    },
-    {
         id: "a7ad3bba44ce67fcd915e5c9dc4bd455",
         image: "images/products/a7ad3bba44ce67fcd915e5c9dc4bd455.jpg",
         name: "Geralt of Rivia",
@@ -16,6 +8,15 @@ export const products = [
         priceCents: 999999,
         keywords: ["witcher 3", "yuedaiyan"],
     },
+    {
+        id: "9baab029f463f330bb33ed5676aa4dfd",
+        image: "images/products/9baab029f463f330bb33ed5676aa4dfd.jpg",
+        name: "Ciri",
+        rating: { stars: 5, count: 1 },
+        priceCents: 999999,
+        keywords: ["witcher 3", "yuedaiyan"],
+    },
+
     {
         id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
         image: "images/products/athletic-cotton-socks-6-pairs.jpg",

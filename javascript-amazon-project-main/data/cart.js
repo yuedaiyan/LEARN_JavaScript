@@ -32,7 +32,8 @@ export function addToCart(productId) {
         cart.push({
             productId: productId,
             quantity: selectValue,
-            deliveryOptionId: "1",
+            // TODO: 这句话是调试的时候,补充的,最后要删除
+            deliveryOptionId: "2",
         });
     }
     // 更新本地存储的购物车信息
@@ -79,3 +80,7 @@ export function getProduct(productIdFind) {
         return product.productId === productIdFind;
     });
 }
+
+
+// 导出cart
+// console.log('cart:',cart);

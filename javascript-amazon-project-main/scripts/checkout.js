@@ -7,20 +7,12 @@ import { formatCurrency } from "./utils/money.js";
 // 导入购物车内商品总数量计算
 import { calculateCartQuantity, updateQuantity, getProduct } from "../data/cart.js";
 // 导入时间模块
-import  dayjs  from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
-
-
-// 处理时间问题 → 获取当前时间
-const today = dayjs();
-//
-console.log(today);
-let deliveryDate = today.add(7, 'day');
-console.log(deliveryDate);
-deliveryDate=deliveryDate.format('dddd, MMMM D')
-console.log(deliveryDate);
-
+import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
+// 导入三个时间选项
+import { deliveryOptions } from "../data/deliveryOptions.js";
 
 // 维护一个全局Id,指向最后交互Id
+// (主要功能是处理键盘enter确认save的效果)
 let focusId;
 
 let cartSummaryHTML = "";
@@ -33,11 +25,29 @@ cart.forEach((cartItem) => {
         }
     });
 
+    // 打印完整的matchingProduct条目
+    // console.log("matchingProduct:",matchingProduct);
+
+    // 计算真实的delivery date
+    const today = dayjs();
+    const deliveryOptionId = cartItem.deliveryOptionId;
+    let deliveryOption;
+
+    deliveryOptions.forEach((option) => {
+        if (option.id === deliveryOptionId) {
+            deliveryOption = option;
+        }
+    });
+    const deliveryDate = today.add(deliveryOption.deliveryDays, "day");
+    const dateString = deliveryDate.format("dddd, MMMM D");
+
     // 生成 HTML
     cartSummaryHTML += `
           <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
             <div class="delivery-date">
-              Delivery date: Tuesday, June 21
+<!--  -->
+              Delivery date: ${dateString}
+<!--  -->
             </div>
 
             <div class="cart-item-details-grid">
@@ -70,43 +80,16 @@ cart.forEach((cartItem) => {
                 </div>
               </div>
 
+<!-- 选择快递时间部分 -->
               <div class="delivery-options">
                 <div class="delivery-options-title">
                   Choose a delivery option:
                 </div>
-                <div class="delivery-option">
-                  <input type="radio" checked class="delivery-option-input" name="delivery-option-${matchingProduct.id}">
-                  <div>
-                    <div class="delivery-option-date">
-                      Tuesday, June 21
-                    </div>
-                    <div class="delivery-option-price">
-                      FREE Shipping
-                    </div>
-                  </div>
-                </div>
-                <div class="delivery-option">
-                  <input type="radio" class="delivery-option-input" name="delivery-option-${matchingProduct.id}">
-                  <div>
-                    <div class="delivery-option-date">
-                        Wednesday, June 15
-                    </div>
-                    <div class="delivery-option-price">
-                      $4.99 - Shipping
-                    </div>
-                  </div>
-                </div>
-                <div class="delivery-option">
-                  <input type="radio" class="delivery-option-input" name="delivery-option-${matchingProduct.id}">
-                  <div>
-                    <div class="delivery-option-date">
-                        Monday, June 13
-                    </div>
-                    <div class="delivery-option-price">
-                      $9.99 - Shipping
-                    </div>
-                  </div>
-                </div>
+
+<!-- 自动生成条目: -->
+    ${deliveryOptionsHTML(matchingProduct, cartItem)}
+
+
               </div>
             </div>
           </div>
@@ -115,7 +98,39 @@ cart.forEach((cartItem) => {
 `;
 });
 // 打印完整购物车DOM树
-// console.log(cartSummaryHTML);
+
+// console.log('cart's DOM: ',cartSummaryHTML);
+
+function deliveryOptionsHTML(matchingProduct, cartItem) {
+    let html = "";
+    const today = dayjs();
+    deliveryOptions.forEach((deliveryOption) => {
+        const deliveryDate = today.add(deliveryOption.deliveryDays, "day");
+        // 最终生成最后可以显示在屏幕上的时间字符串,并且此字符串是动态的
+        // 效果类似:Tuesday, June 21
+        const dateString = deliveryDate.format("dddd, MMMM D");
+        const priceSting = deliveryOption.priceCents === 0 ? "FREE" : `$${formatCurrency(deliveryOption.priceCents)} -`;
+
+        const isChecked = deliveryOption.id === cartItem.deliveryOptionId;
+        // console.log(isChecked);
+
+        html += `
+        <!-- 一个条目,依靠forEach()来确定顺序,不过就三种可能: -->
+        <div class="delivery-option">
+                <input type="radio" ${isChecked ? "checked" : ""} class="delivery-option-input" name="delivery-option-${matchingProduct.id}">
+            <div>
+                <div class="delivery-option-date">
+                    ${dateString}
+                </div>
+                <div class="delivery-option-price">
+                    ${priceSting} Shipping
+                </div>
+            </div>
+        </div>
+        `;
+    });
+    return html;
+}
 
 // 将生成的HTMl拼接到主HTML DOM树上
 document.querySelector(".js-order-summary").innerHTML = cartSummaryHTML;

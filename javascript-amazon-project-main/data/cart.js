@@ -1,3 +1,9 @@
+// 典型 cart 形式
+// 0: {productId: '9baab029f463f330bb33ed5676aa4dfd', quantity: 1, deliveryOptionId: '2'}
+// 1: {productId: 'a7ad3bba44ce67fcd915e5c9dc4bd455', quantity: 1, deliveryOptionId: '1'}
+// 2: {productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6', quantity: 4, deliveryOptionId: '2'}
+//
+
 // 购物车列表(在scripts/amazon.js中修改)
 // 从local storage中加载购物车列表,如果加载失败,则加载空列表
 export let cart = JSON.parse(localStorage.getItem("cart")) ?? [];
@@ -75,7 +81,7 @@ export function updateQuantity(productId, newQuantity) {
 }
 
 // 通过id获得指定的商品
-export function getProduct(productIdFind) {
+export function getProductFromCart(productIdFind) {
     return cart.find((product) => {
         return product.productId === productIdFind;
     });

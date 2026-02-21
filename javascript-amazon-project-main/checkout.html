@@ -28,7 +28,6 @@
                     </a>
                 </div>
 
-                <!-- <div class="checkout-header-middle-section">Checkout (<a class="return-to-home-link" href="amazon.html">3 items</a>)</div> -->
                 <div class="checkout-header-middle-section">Checkout (<a class="return-to-home-link js-return-to-home-link" href="amazon.html"></a>)</div>
 
                 <div class="checkout-header-right-section">
@@ -41,9 +40,11 @@
             <div class="page-title">Review your order</div>
 
             <div class="checkout-grid">
+                <!-- 重要 div → 左侧购物车详情部分 -->
                 <div class="order-summary js-order-summary"></div>
 
-                <div class="payment-summary">
+                <!-- 重要 div → 右侧金额计算部分 -->
+                <div class="payment-summary js-payment-summary">
                     <div class="payment-summary-title">Order Summary</div>
 
                     <div class="payment-summary-row">
@@ -76,8 +77,6 @@
             </div>
         </div>
 
-        <!-- <script src="https://unpkg.com/dayjs@1.11.10/dayjs.min.js"></script> -->
         <script type="module" src="/scripts/checkout.js"></script>
-        <!-- <script  src="https://unpkg.com/supersimpledev@1.0.1/hello.js"></script> -->
     </body>
 </html>

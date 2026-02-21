@@ -1,3 +1,10 @@
+// 辅助函数: 输入:商品Id 返回:含有完整商品信息的字典
+export function getProductFromProducts(productId) {
+    return products.find((product) => {
+        return product.id === productId;
+    });
+}
+
 // 页面商品条目(供scripts/amazon.js渲染)
 export const products = [
     {
@@ -5,7 +12,7 @@ export const products = [
         image: "images/products/a7ad3bba44ce67fcd915e5c9dc4bd455.jpg",
         name: "Geralt of Rivia",
         rating: { stars: 5, count: 1 },
-        priceCents: 999999,
+        priceCents: 9999,
         keywords: ["witcher 3", "yuedaiyan"],
     },
     {
@@ -13,10 +20,9 @@ export const products = [
         image: "images/products/9baab029f463f330bb33ed5676aa4dfd.jpg",
         name: "Ciri",
         rating: { stars: 5, count: 1 },
-        priceCents: 999999,
+        priceCents: 9999,
         keywords: ["witcher 3", "yuedaiyan"],
     },
-
     {
         id: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
         image: "images/products/athletic-cotton-socks-6-pairs.jpg",

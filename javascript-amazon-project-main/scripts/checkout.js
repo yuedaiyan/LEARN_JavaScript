@@ -1,7 +1,7 @@
 // 导入商品清单
 import { products } from "../data/products.js";
 // 导入购物车列表
-import { cart, removeFromCart } from "../data/cart.js";
+import { cart, removeFromCart, updateDeliveryOption } from "../data/cart.js";
 // 导入money从美分转换为美元的计算函数
 import { formatCurrency } from "./utils/money.js";
 // 导入购物车内商品总数量计算
@@ -32,7 +32,6 @@ cart.forEach((cartItem) => {
     const today = dayjs();
     const deliveryOptionId = cartItem.deliveryOptionId;
     let deliveryOption;
-
     deliveryOptions.forEach((option) => {
         if (option.id === deliveryOptionId) {
             deliveryOption = option;
@@ -116,7 +115,7 @@ function deliveryOptionsHTML(matchingProduct, cartItem) {
 
         html += `
         <!-- 一个条目,依靠forEach()来确定顺序,不过就三种可能: -->
-        <div class="delivery-option">
+        <div class="delivery-option js-delivery-option" data-product-id=${matchingProduct.id} data-delivery-option-id=${deliveryOption.id}>
                 <input type="radio" ${isChecked ? "checked" : ""} class="delivery-option-input" name="delivery-option-${matchingProduct.id}">
             <div>
                 <div class="delivery-option-date">
@@ -224,4 +223,13 @@ function refreshReturnToHomeLink() {
     document.querySelector(".js-return-to-home-link").innerHTML = `${calculateCartQuantity(cart)}  items`;
 }
 
-console.log(cart);
+// 给delivery date的选择增加交互功能
+// TODO: 但当前的click只能改变cart字典中的信息,页面变化则需要刷新(重新读取字典)
+document.querySelectorAll('.js-delivery-option').forEach((element) => {
+    element.addEventListener("click", () => {
+        const { productId, deliveryOptionId } =element.dataset
+        updateDeliveryOption(productId,deliveryOptionId)
+    });
+})
+    
+    

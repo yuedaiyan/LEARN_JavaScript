@@ -33,7 +33,7 @@ export function addToCart(productId) {
             productId: productId,
             quantity: selectValue,
             // TODO: 这句话是调试的时候,补充的,最后要删除
-            deliveryOptionId: "2",
+            deliveryOptionId: "3",
         });
     }
     // 更新本地存储的购物车信息
@@ -81,6 +81,17 @@ export function getProduct(productIdFind) {
     });
 }
 
+// // 更新购物车内特定商品的寄送时间
+export function updateDeliveryOption(productId,deliveryOptionId){
+    cart.forEach((cartItem) =>{
+        if(cartItem.productId === productId){
+            cartItem.deliveryOptionId=deliveryOptionId
+        }
+    })
+    // 更新本地存储的购物车信息
+    saveToStorage();
+}
+
 
 // 导出cart
-// console.log('cart:',cart);
+console.log('cart:',cart);

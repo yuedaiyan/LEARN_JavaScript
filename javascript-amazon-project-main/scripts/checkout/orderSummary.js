@@ -10,6 +10,8 @@ import { calculateCartQuantity, updateQuantity, getProductFromCart } from "../..
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 // 导入三档快递时间,档位信息查找函数
 import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
+// 导入: 渲染右侧总金额计算函数
+import { renderPaymentSummary } from "./paymentSummary.js";
 
 // 全局变量:最后一次鼠标的Id,指向最后交互Id(主要功能是处理键盘enter确认save的效果)
 let focusId;
@@ -177,6 +179,8 @@ export function renderOrderSummary() {
             updateEl.classList.remove("save-quantity-link");
             // cart字典已经改变 → 重新渲染左侧购物车详情部分
             // renderOrderSummary();
+            // 执行: 渲染右侧总金额计算函数
+            renderPaymentSummary();
         });
     });
 
@@ -191,6 +195,8 @@ export function renderOrderSummary() {
             refreshReturnToHomeLink();
             // cart字典已经改变 → 重新渲染左侧购物车详情部分
             // renderOrderSummary();
+            // 执行: 渲染右侧总金额计算函数
+            renderPaymentSummary();
         });
     });
 
@@ -209,13 +215,15 @@ export function renderOrderSummary() {
         document.querySelector(".js-return-to-home-link").innerHTML = `${calculateCartQuantity(cart)}  items`;
     }
 
-    // 给delivery date的选择增加交互功能
+    // 修改: 寄送时间
     document.querySelectorAll(".js-delivery-option").forEach((element) => {
         element.addEventListener("click", () => {
             const { productId, deliveryOptionId } = element.dataset;
             updateDeliveryOption(productId, deliveryOptionId);
             // cart字典已经改变 → 重新渲染左侧购物车详情部分
             renderOrderSummary();
+            // 执行: 渲染右侧总金额计算函数
+            renderPaymentSummary();
         });
     });
 }

@@ -63,5 +63,4 @@ export function renderPaymentSummary() {
 
     // 修改 DOM
     document.querySelector(".js-payment-summary").innerHTML=paymentSummaryHTML;
-    // TODO:现在如果修改了购物车,不刷新计算结果不会改变
 }

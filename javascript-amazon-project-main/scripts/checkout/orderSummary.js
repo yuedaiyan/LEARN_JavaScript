@@ -1,24 +1,20 @@
 // 导入商品清单,查找完整商品信息函数
 import { getProductFromProducts } from "../../data/products.js";
 // 导入购物车列表
-import { cart, removeFromCart, updateDeliveryOption } from "../../data/cart.js";
+import { cart, removeFromCart, updateDeliveryOption, calculateCartQuantity, updateQuantity, getProductFromCart } from "../../data/cart.js";
 // 导入money从美分转换为美元的计算函数
 import { formatCurrency } from "../utils/money.js";
-// 导入购物车内商品总数量计算
-import { calculateCartQuantity, updateQuantity, getProductFromCart } from "../../data/cart.js";
-// 导入时间模块
-import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 // 导入三档快递时间,档位信息查找函数
-import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
+import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from "../../data/deliveryOptions.js";
 // 导入: 渲染右侧总金额计算函数
 import { renderPaymentSummary } from "./paymentSummary.js";
+// 导入: 上面 Checkout (3 itmes) 数量计算函数
+import { renderCheckoutHeader } from "./checkoutHeader.js";
 
-// 全局变量:最后一次鼠标的Id,指向最后交互Id(主要功能是处理键盘enter确认save的效果)
+// 全局变量: 最后一次鼠标的Id,指向最后交互Id(主要功能是处理键盘enter确认save的效果)
 let focusId;
 
-// 全局变量:今天的时间
-const today = dayjs();
-
+// 渲染左侧购物车详情函数
 export function renderOrderSummary() {
     let cartSummaryHTML = "";
     cart.forEach((cartItem) => {
@@ -29,10 +25,13 @@ export function renderOrderSummary() {
         // console.log("matchingProduct:",matchingProduct);
 
         // 计算真实的delivery date
+        // 获取该商品的 寄送id
         const deliveryOptionId = cartItem.deliveryOptionId;
+        // 通过寄送id 获取具体的寄送时间和价格
         const deliveryOption = getDeliveryOption(deliveryOptionId);
-        const deliveryDate = today.add(deliveryOption.deliveryDays, "day");
-        const dateString = deliveryDate.format("dddd, MMMM D");
+        // 传入寄送时间obj → 返回格式化的送达时间(默认时间计算单位为'day')
+        // 结合今天的时间,计算实际送达时间+将送达时间格式化
+        const dateString = calculateDeliveryDate(deliveryOption);
 
         // 生成 HTML
         cartSummaryHTML += `
@@ -88,18 +87,22 @@ export function renderOrderSummary() {
           </div>
         `;
     });
-    // 打印完整购物车DOM树
-    // console.log('cart's DOM: ',cartSummaryHTML);
 
+    // 渲染三个寄送日期的函数
     function deliveryOptionsHTML(matchingProduct, cartItem) {
         let html = "";
         deliveryOptions.forEach((deliveryOption) => {
-            const deliveryDate = today.add(deliveryOption.deliveryDays, "day");
             // 最终生成最后可以显示在屏幕上的时间字符串,并且此字符串是动态的
             // 效果类似:Tuesday, June 21
-            const dateString = deliveryDate.format("dddd, MMMM D");
+
+            // 传入寄送时间obj → 返回格式化的送达时间(默认时间计算单位为'day')
+            // 结合今天的时间,计算实际送达时间+将送达时间格式化
+            const dateString = calculateDeliveryDate(deliveryOption);
+
+            // 获取运费价格: Free || 31.5…
             const priceSting = deliveryOption.priceCents === 0 ? "FREE" : `$${formatCurrency(deliveryOption.priceCents)} -`;
 
+            // 标记该件商品的具体的邮寄选项(使用cart中的信息)
             const isChecked = deliveryOption.id === cartItem.deliveryOptionId;
 
             html += `
@@ -120,8 +123,11 @@ export function renderOrderSummary() {
         return html;
     }
 
-    // 将生成的HTMl拼接到主HTML DOM树上
+    // 将生成的HTMl拼接到主 DOM 树上
     document.querySelector(".js-order-summary").innerHTML = cartSummaryHTML;
+
+    // 更新页面最上方的购物车内商品总数清单
+    renderCheckoutHeader();
 
     // 监听 update 按钮 → 实现按钮的 update 功能
     document.querySelectorAll(".js-update-link").forEach((link) => {
@@ -156,19 +162,18 @@ export function renderOrderSummary() {
             const inputNumber = Number(inputEl.value);
             // 检查输入的值是否是符合标准
             if (0 < inputNumber && inputNumber <= 100) {
-                // 输入合法
                 // 更新输入的值到 cart 中
                 updateQuantity(productId, inputNumber);
-                // 刷新容器内的 quantity
-                document.querySelector(`.js-cart-item-container-${productId} .js-quantity-label`).innerHTML = getProductFromCart(productId).quantity;
+                // cart字典已经改变 → 重新渲染左侧购物车详情部分
+                renderOrderSummary();
                 // 刷新页面面正上方渲染
-                refreshReturnToHomeLink();
-
+                renderCheckoutHeader();
+                // 执行: 渲染右侧总金额计算函数
+                renderPaymentSummary();
                 // 移除fucusId列表中的id,表示当前容器已经被关闭
                 focusId = null;
             } else {
-                // 输入不合法
-                // 弹出错误
+                // 输入不合法 → 弹出错误
                 alert("输入不合法,合法范围:(0,100]");
             }
             // input 消失
@@ -177,10 +182,6 @@ export function renderOrderSummary() {
             saveEl.classList.add("save-quantity-link");
             // update 显示
             updateEl.classList.remove("save-quantity-link");
-            // cart字典已经改变 → 重新渲染左侧购物车详情部分
-            // renderOrderSummary();
-            // 执行: 渲染右侧总金额计算函数
-            renderPaymentSummary();
         });
     });
 
@@ -189,31 +190,21 @@ export function renderOrderSummary() {
         link.addEventListener("click", () => {
             const productId = link.dataset.productId;
             removeFromCart(productId);
-            const container = document.querySelector(`.js-cart-item-container-${productId}`);
-            container.remove();
             // 更新页面最上方的购物车内商品总数清单
-            refreshReturnToHomeLink();
+            renderCheckoutHeader();
             // cart字典已经改变 → 重新渲染左侧购物车详情部分
-            // renderOrderSummary();
+            renderOrderSummary();
             // 执行: 渲染右侧总金额计算函数
             renderPaymentSummary();
         });
     });
 
-    // 监听 enter 按键 → 实现 save 功能
+    // 监听 enter 键盘按键 → 实现 save 功能
     document.addEventListener("keyup", (keyUp) => {
         if (keyUp.key === "Enter") {
             document.querySelector(`.js-cart-item-container-${focusId} .js-save-quantity-link`).click();
         }
     });
-
-    // 更新页面最上方的购物车内商品总数清单
-    refreshReturnToHomeLink();
-
-    // 更新页面上方购物车函数
-    function refreshReturnToHomeLink() {
-        document.querySelector(".js-return-to-home-link").innerHTML = `${calculateCartQuantity(cart)}  items`;
-    }
 
     // 修改: 寄送时间
     document.querySelectorAll(".js-delivery-option").forEach((element) => {

@@ -10,8 +10,11 @@ import { formatCurrency } from "../utils/money.js";
 export function renderPaymentSummary() {
     let productPriceCents = 0;
     let shippingPriceCents = 0;
+    let itemsNumbers = 0;
     cart.forEach((cartItem) => {
         const product = getProductFromProducts(cartItem.productId);
+        // 计算商品总数量
+        itemsNumbers+=cartItem.quantity
         // 计算商品条目总价: 价格*数量
         productPriceCents += product.priceCents * cartItem.quantity;
         // 计算商品运费:运费
@@ -24,7 +27,7 @@ export function renderPaymentSummary() {
                     <div class="payment-summary-title">Order Summary</div>
 
                     <div class="payment-summary-row">
-                        <div>Items (3):</div>
+                        <div>Items (${itemsNumbers}):</div>
                         <div class="payment-summary-money">
                             $${formatCurrency(productPriceCents)}
                         </div>

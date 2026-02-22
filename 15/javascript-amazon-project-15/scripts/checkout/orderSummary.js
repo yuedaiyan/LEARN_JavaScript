@@ -88,6 +88,7 @@ export function renderOrderSummary() {
         `;
     });
 
+    // 渲染三个寄送日期的函数
     function deliveryOptionsHTML(matchingProduct, cartItem) {
         let html = "";
         deliveryOptions.forEach((deliveryOption) => {
@@ -161,21 +162,18 @@ export function renderOrderSummary() {
             const inputNumber = Number(inputEl.value);
             // 检查输入的值是否是符合标准
             if (0 < inputNumber && inputNumber <= 100) {
-                // 输入合法
                 // 更新输入的值到 cart 中
                 updateQuantity(productId, inputNumber);
-                // 刷新容器内的 quantity
-                // document.querySelector(`.js-cart-item-container-${productId} .js-quantity-label`).innerHTML = getProductFromCart(productId).quantity;
                 // cart字典已经改变 → 重新渲染左侧购物车详情部分
                 renderOrderSummary();
                 // 刷新页面面正上方渲染
                 renderCheckoutHeader();
-
+                // 执行: 渲染右侧总金额计算函数
+                renderPaymentSummary();
                 // 移除fucusId列表中的id,表示当前容器已经被关闭
                 focusId = null;
             } else {
-                // 输入不合法
-                // 弹出错误
+                // 输入不合法 → 弹出错误
                 alert("输入不合法,合法范围:(0,100]");
             }
             // input 消失
@@ -184,8 +182,6 @@ export function renderOrderSummary() {
             saveEl.classList.add("save-quantity-link");
             // update 显示
             updateEl.classList.remove("save-quantity-link");
-            // 执行: 渲染右侧总金额计算函数
-            renderPaymentSummary();
         });
     });
 
@@ -203,7 +199,7 @@ export function renderOrderSummary() {
         });
     });
 
-    // 监听 enter 按键 → 实现 save 功能
+    // 监听 enter 键盘按键 → 实现 save 功能
     document.addEventListener("keyup", (keyUp) => {
         if (keyUp.key === "Enter") {
             document.querySelector(`.js-cart-item-container-${focusId} .js-save-quantity-link`).click();

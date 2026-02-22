@@ -1,17 +1,17 @@
 // 导入商品清单,查找完整商品信息函数
 import { getProductFromProducts } from "../../data/products.js";
 // 导入购物车列表
-import { cart, removeFromCart, updateDeliveryOption } from "../../data/cart.js";
+import { cart, removeFromCart, updateDeliveryOption, calculateCartQuantity, updateQuantity, getProductFromCart } from "../../data/cart.js";
 // 导入money从美分转换为美元的计算函数
 import { formatCurrency } from "../utils/money.js";
-// 导入购物车内商品总数量计算
-import { calculateCartQuantity, updateQuantity, getProductFromCart } from "../../data/cart.js";
 // 导入时间模块
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 // 导入三档快递时间,档位信息查找函数
 import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
 // 导入: 渲染右侧总金额计算函数
 import { renderPaymentSummary } from "./paymentSummary.js";
+// 导入: 上面 Checkout (3 itmes) 数量计算函数
+import { renderCheckoutHeader} from "./checkoutHeader.js";
 
 // 全局变量:最后一次鼠标的Id,指向最后交互Id(主要功能是处理键盘enter确认save的效果)
 let focusId;
@@ -19,6 +19,7 @@ let focusId;
 // 全局变量:今天的时间
 const today = dayjs();
 
+// 渲染左侧购物车详情函数
 export function renderOrderSummary() {
     let cartSummaryHTML = "";
     cart.forEach((cartItem) => {
@@ -120,11 +121,11 @@ export function renderOrderSummary() {
         return html;
     }
 
-    // 将生成的HTMl拼接到主HTML DOM树上
+    // 将生成的HTMl拼接到主 DOM 树上
     document.querySelector(".js-order-summary").innerHTML = cartSummaryHTML;
 
     // 更新页面最上方的购物车内商品总数清单
-    refreshReturnToHomeLink();
+    renderCheckoutHeader();
 
     // 监听 update 按钮 → 实现按钮的 update 功能
     document.querySelectorAll(".js-update-link").forEach((link) => {
@@ -167,7 +168,7 @@ export function renderOrderSummary() {
                 // cart字典已经改变 → 重新渲染左侧购物车详情部分
                 renderOrderSummary();
                 // 刷新页面面正上方渲染
-                refreshReturnToHomeLink();
+                renderCheckoutHeader();
 
                 // 移除fucusId列表中的id,表示当前容器已经被关闭
                 focusId = null;
@@ -193,7 +194,7 @@ export function renderOrderSummary() {
             const productId = link.dataset.productId;
             removeFromCart(productId);
             // 更新页面最上方的购物车内商品总数清单
-            refreshReturnToHomeLink();
+            renderCheckoutHeader();
             // cart字典已经改变 → 重新渲染左侧购物车详情部分
             renderOrderSummary();
             // 执行: 渲染右侧总金额计算函数
@@ -208,10 +209,6 @@ export function renderOrderSummary() {
         }
     });
 
-    // 更新页面上方购物车函数
-    function refreshReturnToHomeLink() {
-        document.querySelector(".js-return-to-home-link").innerHTML = `${calculateCartQuantity(cart)}  items`;
-    }
 
     // 修改: 寄送时间
     document.querySelectorAll(".js-delivery-option").forEach((element) => {

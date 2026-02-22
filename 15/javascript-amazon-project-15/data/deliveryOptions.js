@@ -1,6 +1,6 @@
 // 导入时间模块
-// import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
-import dayjs from "dayjs";
+import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
+// import dayjs from "dayjs";
 
 export const deliveryOptions = [
     {
@@ -29,12 +29,13 @@ export function getDeliveryOption(deliveryOptionId) {
 }
 
 // 传入寄送时间obj → 返回格式化的送达时间(默认时间计算单位为'day')
-// export function calculateDeliveryDate(deliveryOption) {
-//     // 结合今天的时间,计算实际送达时间
-//     const deliveryDate = today.add(deliveryOption.deliveryDays, "day");
-//     // 将送达时间格式化
-//     return deliveryDate.format("dddd, MMMM D");
-// }
+// 注意,已经通过在函数名前面添加 _ 来变相注释(删除)了函数,此函数在实际页面中并不会被引用
+export function _calculateDeliveryDate(deliveryOption) {
+    // 结合今天的时间,计算实际送达时间
+    const deliveryDate = today.add(deliveryOption.deliveryDays, "day");
+    // 将送达时间格式化
+    return deliveryDate.format("dddd, MMMM D");
+}
 
 // 传入寄送时间obj → 返回格式化的送达时间(默认时间计算单位为'day')
 // 检测周末(忽略周末版)

@@ -123,6 +123,9 @@ export function renderOrderSummary() {
     // 将生成的HTMl拼接到主HTML DOM树上
     document.querySelector(".js-order-summary").innerHTML = cartSummaryHTML;
 
+    // 更新页面最上方的购物车内商品总数清单
+    refreshReturnToHomeLink();
+
     // 监听 update 按钮 → 实现按钮的 update 功能
     document.querySelectorAll(".js-update-link").forEach((link) => {
         link.addEventListener("click", () => {
@@ -160,7 +163,9 @@ export function renderOrderSummary() {
                 // 更新输入的值到 cart 中
                 updateQuantity(productId, inputNumber);
                 // 刷新容器内的 quantity
-                document.querySelector(`.js-cart-item-container-${productId} .js-quantity-label`).innerHTML = getProductFromCart(productId).quantity;
+                // document.querySelector(`.js-cart-item-container-${productId} .js-quantity-label`).innerHTML = getProductFromCart(productId).quantity;
+                // cart字典已经改变 → 重新渲染左侧购物车详情部分
+                renderOrderSummary();
                 // 刷新页面面正上方渲染
                 refreshReturnToHomeLink();
 
@@ -177,8 +182,6 @@ export function renderOrderSummary() {
             saveEl.classList.add("save-quantity-link");
             // update 显示
             updateEl.classList.remove("save-quantity-link");
-            // cart字典已经改变 → 重新渲染左侧购物车详情部分
-            // renderOrderSummary();
             // 执行: 渲染右侧总金额计算函数
             renderPaymentSummary();
         });
@@ -189,12 +192,10 @@ export function renderOrderSummary() {
         link.addEventListener("click", () => {
             const productId = link.dataset.productId;
             removeFromCart(productId);
-            const container = document.querySelector(`.js-cart-item-container-${productId}`);
-            container.remove();
             // 更新页面最上方的购物车内商品总数清单
             refreshReturnToHomeLink();
             // cart字典已经改变 → 重新渲染左侧购物车详情部分
-            // renderOrderSummary();
+            renderOrderSummary();
             // 执行: 渲染右侧总金额计算函数
             renderPaymentSummary();
         });
@@ -206,9 +207,6 @@ export function renderOrderSummary() {
             document.querySelector(`.js-cart-item-container-${focusId} .js-save-quantity-link`).click();
         }
     });
-
-    // 更新页面最上方的购物车内商品总数清单
-    refreshReturnToHomeLink();
 
     // 更新页面上方购物车函数
     function refreshReturnToHomeLink() {

@@ -49,7 +49,6 @@ export function addToCart(productId) {
 // 删除商品(在结算页面,点击删除按钮触发)
 export function removeFromCart(productId) {
     const newCart = [];
-
     cart.forEach((cartItem) => {
         if (cartItem.productId !== productId) {
             newCart.push(cartItem);

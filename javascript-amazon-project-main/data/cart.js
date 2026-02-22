@@ -2,11 +2,16 @@
 // 0: {productId: '9baab029f463f330bb33ed5676aa4dfd', quantity: 1, deliveryOptionId: '2'}
 // 1: {productId: 'a7ad3bba44ce67fcd915e5c9dc4bd455', quantity: 1, deliveryOptionId: '1'}
 // 2: {productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6', quantity: 4, deliveryOptionId: '2'}
-//
 
 // 购物车列表(在scripts/amazon.js中修改)
 // 从local storage中加载购物车列表,如果加载失败,则加载空列表
-export let cart = JSON.parse(localStorage.getItem("cart")) ?? [];
+export let cart;
+
+// 读取本地储存的购物车数组
+loadFromStorage();
+export function loadFromStorage() {
+    cart = JSON.parse(localStorage.getItem("cart")) ?? [];
+}
 
 // 将购物车信息 储存到本地 local storage 中
 function saveToStorage() {
@@ -17,6 +22,7 @@ function saveToStorage() {
 export function addToCart(productId) {
     // console.log("打印新加入商品: ", productId);
     // 获取用户的选择数量
+    // TODO:此处逻辑不好,不应依赖DOM,建议拆分逻辑,js只接受数字
     const selectValue = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
 
     // 检测当前cart中是否已经有商品了
@@ -84,16 +90,15 @@ export function getProductFromCart(productIdFind) {
 }
 
 // // 更新购物车内特定商品的寄送时间
-export function updateDeliveryOption(productId,deliveryOptionId){
-    cart.forEach((cartItem) =>{
-        if(cartItem.productId === productId){
-            cartItem.deliveryOptionId=deliveryOptionId
+export function updateDeliveryOption(productId, deliveryOptionId) {
+    cart.forEach((cartItem) => {
+        if (cartItem.productId === productId) {
+            cartItem.deliveryOptionId = deliveryOptionId;
         }
-    })
+    });
     // 更新本地存储的购物车信息
     saveToStorage();
 }
 
-
 // 导出cart
-console.log('cart:',cart);
+console.log("cart:", cart);

@@ -4,7 +4,7 @@
 // 2. Edge cases
 // = test with values that are tricky
 
-import { formatCurrency } from "../scripts/utils/money.js";
+import { formatCurrency } from "../../../scripts/utils/money.js";
 
 describe("test suite: formatCurrency", () => {
     it("converts cents into dollars", () => {

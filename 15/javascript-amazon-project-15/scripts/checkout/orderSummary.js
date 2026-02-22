@@ -4,8 +4,6 @@ import { getProductFromProducts } from "../../data/products.js";
 import { cart, removeFromCart, updateDeliveryOption, calculateCartQuantity, updateQuantity, getProductFromCart } from "../../data/cart.js";
 // 导入money从美分转换为美元的计算函数
 import { formatCurrency } from "../utils/money.js";
-// 导入时间模块
-import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 // 导入三档快递时间,档位信息查找函数
 import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from "../../data/deliveryOptions.js";
 // 导入: 渲染右侧总金额计算函数
@@ -15,8 +13,6 @@ import { renderCheckoutHeader } from "./checkoutHeader.js";
 
 // 全局变量: 最后一次鼠标的Id,指向最后交互Id(主要功能是处理键盘enter确认save的效果)
 let focusId;
-// 全局变量: 今天的时间
-const today = dayjs();
 
 // 渲染左侧购物车详情函数
 export function renderOrderSummary() {

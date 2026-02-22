@@ -7,7 +7,6 @@
 // 购物车列表(在scripts/amazon.js中修改)
 // 从local storage中加载购物车列表,如果加载失败,则加载空列表
 export let cart = JSON.parse(localStorage.getItem("cart")) ?? [];
-// TODO 没有使用购物车中的 quantities 来刷新商品页面右上角的购物车内商品数量
 
 // 将购物车信息 储存到本地 local storage 中
 function saveToStorage() {
@@ -19,7 +18,6 @@ export function addToCart(productId) {
     // console.log("打印新加入商品: ", productId);
     // 获取用户的选择数量
     const selectValue = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
-    // console.log(selectValue);
 
     // 检测当前cart中是否已经有商品了
     let marchingId;
@@ -38,7 +36,6 @@ export function addToCart(productId) {
         cart.push({
             productId: productId,
             quantity: selectValue,
-            // TODO: 这句话是调试的时候,补充的,最后要删除
             deliveryOptionId: "3",
         });
     }

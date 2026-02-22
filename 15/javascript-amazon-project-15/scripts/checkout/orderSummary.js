@@ -7,16 +7,15 @@ import { formatCurrency } from "../utils/money.js";
 // 导入时间模块
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 // 导入三档快递时间,档位信息查找函数
-import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
+import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from "../../data/deliveryOptions.js";
 // 导入: 渲染右侧总金额计算函数
 import { renderPaymentSummary } from "./paymentSummary.js";
 // 导入: 上面 Checkout (3 itmes) 数量计算函数
-import { renderCheckoutHeader} from "./checkoutHeader.js";
+import { renderCheckoutHeader } from "./checkoutHeader.js";
 
-// 全局变量:最后一次鼠标的Id,指向最后交互Id(主要功能是处理键盘enter确认save的效果)
+// 全局变量: 最后一次鼠标的Id,指向最后交互Id(主要功能是处理键盘enter确认save的效果)
 let focusId;
-
-// 全局变量:今天的时间
+// 全局变量: 今天的时间
 const today = dayjs();
 
 // 渲染左侧购物车详情函数
@@ -30,10 +29,13 @@ export function renderOrderSummary() {
         // console.log("matchingProduct:",matchingProduct);
 
         // 计算真实的delivery date
+        // 获取该商品的 寄送id
         const deliveryOptionId = cartItem.deliveryOptionId;
+        // 通过寄送id 获取具体的寄送时间和价格
         const deliveryOption = getDeliveryOption(deliveryOptionId);
-        const deliveryDate = today.add(deliveryOption.deliveryDays, "day");
-        const dateString = deliveryDate.format("dddd, MMMM D");
+        // 传入寄送时间obj → 返回格式化的送达时间(默认时间计算单位为'day')
+        // 结合今天的时间,计算实际送达时间+将送达时间格式化
+        const dateString = calculateDeliveryDate(deliveryOption);
 
         // 生成 HTML
         cartSummaryHTML += `
@@ -89,18 +91,21 @@ export function renderOrderSummary() {
           </div>
         `;
     });
-    // 打印完整购物车DOM树
-    // console.log('cart's DOM: ',cartSummaryHTML);
 
     function deliveryOptionsHTML(matchingProduct, cartItem) {
         let html = "";
         deliveryOptions.forEach((deliveryOption) => {
-            const deliveryDate = today.add(deliveryOption.deliveryDays, "day");
             // 最终生成最后可以显示在屏幕上的时间字符串,并且此字符串是动态的
             // 效果类似:Tuesday, June 21
-            const dateString = deliveryDate.format("dddd, MMMM D");
+
+            // 传入寄送时间obj → 返回格式化的送达时间(默认时间计算单位为'day')
+            // 结合今天的时间,计算实际送达时间+将送达时间格式化
+            const dateString = calculateDeliveryDate(deliveryOption);
+
+            // 获取运费价格: Free || 31.5…
             const priceSting = deliveryOption.priceCents === 0 ? "FREE" : `$${formatCurrency(deliveryOption.priceCents)} -`;
 
+            // 标记该件商品的具体的邮寄选项(使用cart中的信息)
             const isChecked = deliveryOption.id === cartItem.deliveryOptionId;
 
             html += `
@@ -208,7 +213,6 @@ export function renderOrderSummary() {
             document.querySelector(`.js-cart-item-container-${focusId} .js-save-quantity-link`).click();
         }
     });
-
 
     // 修改: 寄送时间
     document.querySelectorAll(".js-delivery-option").forEach((element) => {

@@ -20,7 +20,7 @@ function saveToStorage() {
 
 // 商品加入函数 (点击 Add 按钮触发)
 export function addToCart(productId) {
-    // console.log("打印新加入商品: ", productId);
+
     // 获取用户的选择数量
     // TODO:此处逻辑不好,不应依赖DOM,建议拆分逻辑,js只接受数字
     const selectValue = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
@@ -101,4 +101,4 @@ export function updateDeliveryOption(productId, deliveryOptionId) {
 }
 
 // 导出cart
-console.log("cart:", cart);
+// console.log("cart", cart);

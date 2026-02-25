@@ -8,7 +8,7 @@ import { formatCurrency } from "../utils/money.js";
 import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from "../../data/deliveryOptions.js";
 // 导入: 渲染右侧总金额计算函数
 import { renderPaymentSummary } from "./paymentSummary.js";
-// 导入: 上面 Checkout (3 itmes) 数量计算函数
+// 导入: 上面 Checkout (3 items) 数量计算函数
 import { renderCheckoutHeader } from "./checkoutHeader.js";
 
 // 全局变量: 最后一次鼠标的Id,指向最后交互Id(主要功能是处理键盘enter确认save的效果)
@@ -35,7 +35,7 @@ export function renderOrderSummary() {
 
         // 生成 HTML
         cartSummaryHTML += `
-          <div class="cart-item-container js-cart-item-container-${matchingProduct.id}">
+          <div class="cart-item-container js-cart-item-container js-cart-item-container-${matchingProduct.id}">
             <div class="delivery-date">
 <!-- 快递抵达时间部分 -->
               Delivery date: ${dateString}
@@ -53,21 +53,21 @@ export function renderOrderSummary() {
                 <div class="product-price">
                   $${formatCurrency(matchingProduct.priceCents)}
                 </div>
-                <div class="product-quantity">
-                  <span>
-                    Quantity: <span class="quantity-label js-quantity-label">${cartItem.quantity}</span>
-                  </span>
-                  <span class="update-quantity-link link-primary js-update-link"  data-product-id="${matchingProduct.id}">
-                    Update
-                  </span>
+                <div class="product-quantity js-product-quantity-${matchingProduct.id}">
+                    <span>
+                        Quantity: <span class="quantity-label js-quantity-label">${cartItem.quantity}</span>
+                    </span>
+                    <span class="update-quantity-link link-primary js-update-link"  data-product-id="${matchingProduct.id}">
+                        Update
+                    </span>
 <!-- 修改商品数量部分 -->
-                  <input class="quantity-input js-quantity-input"  name="quantity">
-                  <span class="save-quantity-link link-primary js-save-quantity-link" data-product-id="${matchingProduct.id}">
-                    Save
-               </span>
+                    <input class="quantity-input js-quantity-input"  name="quantity">
+                    <span class="save-quantity-link link-primary js-save-quantity-link" data-product-id="${matchingProduct.id}">
+                        Save
+                   </span>
 <!-- 修改商品数量部分 -->
-                  <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
-                    Delete
+                  <span class="delete-quantity-link link-primary js-delete-link js-delete-link-${matchingProduct.id}" data-product-id="${matchingProduct.id}">
+                        Delete
                   </span>
                 </div>
               </div>

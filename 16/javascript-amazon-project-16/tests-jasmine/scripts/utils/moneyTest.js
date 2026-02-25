@@ -21,7 +21,10 @@ describe("test suite: 金额格式变换", () => {
     it("rounds up to the nearest cent", () => {
         expect(formatCurrency(2000.5)).toEqual("20.01");
     });
-    it("rounds down to the nearest cent", () => {
+    it("16a: rounds down to the nearest cent", () => {
         expect(formatCurrency(2000.4)).toEqual("20.00");
+    });
+    it("16b: 测试负数", () => {
+        expect(formatCurrency(-2000)).toEqual("-20.00");
     });
 });

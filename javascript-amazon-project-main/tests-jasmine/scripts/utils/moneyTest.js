@@ -4,9 +4,14 @@
 // 2. Edge cases
 // = test with values that are tricky
 
+// 两种测试集:
+// 1.基础测试集
+// 2.边界测试集
+
 import { formatCurrency } from "../../../scripts/utils/money.js";
 
-describe("test suite: formatCurrency", () => {
+// describe("test suite: formatCurrency", () => {
+describe("test suite: 金额格式变换", () => {
     it("converts cents into dollars", () => {
         expect(formatCurrency(2095)).toEqual("20.95");
     });

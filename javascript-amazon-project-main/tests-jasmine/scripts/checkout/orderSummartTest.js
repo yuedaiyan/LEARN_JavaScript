@@ -1,6 +1,6 @@
-// 2 things to test:
-// 1. How the page looks(测试页面的长相)
-// 2. How the page behaves(测试页面的行为逻辑)
+// 2 things to test:(主要测试两部分)
+// 1. How the page looks(1.测试页面的长相)
+// 2. How the page behaves(2.测试页面的行为逻辑)
 
 import { renderOrderSummary } from "../../../scripts/checkout/orderSummary.js";
 import { loadFromStorage, cart } from "../../../data/cart.js";

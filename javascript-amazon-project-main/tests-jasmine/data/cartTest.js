@@ -1,7 +1,8 @@
 // Best Practice
 // Test each condition of an if-statement
+// 测试要求
+// 1.被测试函数中的每个if逻辑,都应测试
 import { addToCart, cart, loadFromStorage } from "../../data/cart.js";
-// console.log(cart);
 
 // 测试 "加入购物车"
 describe("test suite: addToCart", () => {

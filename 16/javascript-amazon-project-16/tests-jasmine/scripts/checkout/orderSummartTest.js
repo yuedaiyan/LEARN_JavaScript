@@ -6,7 +6,7 @@ import { renderOrderSummary } from "../../../scripts/checkout/orderSummary.js";
 import { loadFromStorage, cart } from "../../../data/cart.js";
 
 describe("test suite: renderOrderSummary", () => {
-    // 初始化数据
+    // 初始化数据(全局变量,让beforeEach()和it()都可以使用)
     const productId1 = "e43638ce-6aa0-4b85-b27f-e1d07eb678c6";
     const productId2 = "15b6fc6f-327a-4ec4-896f-486349e85a3d";
     // 初始化共享设置
@@ -40,8 +40,9 @@ describe("test suite: renderOrderSummary", () => {
         expect(document.querySelector(`.js-product-quantity-${productId1}`).innerText).toContain("Quantity: 2");
         expect(document.querySelector(`.js-product-quantity-${productId2}`).innerText).toContain("Quantity: 1");
 
-        // 清空页面上遗留的HTML
-        // document.querySelector(".js-test-container").innerHTML = "";
+    // 测试: 两件商品的名字是不是显示在了页面上
+expect(document.querySelector(`.js-product-name-${productId1}`).innerText).toContain("Black and Gray Athletic Cotton Socks - 6 Pairs");
+
     });
 
     // 测试交互行为: 删除按钮
@@ -61,6 +62,9 @@ describe("test suite: renderOrderSummary", () => {
         expect(document.querySelector(`.js-cart-item-container-${productId2}`)).not.toEqual(null);
 
         expect(cart.length).toEqual(1);
+
+    // 测试: 两件商品的名字是不是显示在了页面上
+expect(document.querySelector(`.js-product-name-${productId2}`).innerText).toContain("Intermediate Size Basketball");
     });
 
     afterEach(() => {

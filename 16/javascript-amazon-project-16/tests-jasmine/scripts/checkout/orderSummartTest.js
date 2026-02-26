@@ -6,9 +6,9 @@ import { renderOrderSummary } from "../../../scripts/checkout/orderSummary.js";
 import { loadFromStorage, cart } from "../../../data/cart.js";
 
 describe("test suite: renderOrderSummary", () => {
-        // 初始化数据
-        const productId1 = "e43638ce-6aa0-4b85-b27f-e1d07eb678c6";
-        const productId2 = "15b6fc6f-327a-4ec4-896f-486349e85a3d";
+    // 初始化数据
+    const productId1 = "e43638ce-6aa0-4b85-b27f-e1d07eb678c6";
+    const productId2 = "15b6fc6f-327a-4ec4-896f-486349e85a3d";
     // 初始化共享设置
     beforeEach(() => {
         // 模拟:创建一个 js-order-summary 的容器,以便于 renderOrderSummary 往里面拼接字符串
@@ -30,18 +30,10 @@ describe("test suite: renderOrderSummary", () => {
 
         // 呼叫被测试主函数
         renderOrderSummary();
-    })
-    
-    afterEach(() => {
-        // 清空页面上遗留的HTML
-        document.querySelector(".js-test-container").innerHTML = "";
-    })
-
+    });
 
     // 测试页面长相部分
     it("display the cart", () => {
-
-
         // 测试部分
         expect(document.querySelectorAll(".js-cart-item-container").length).toEqual(2);
         // 测试特点的商品id下,quantity容器部分是不是包含"Quantity: 2"
@@ -54,10 +46,8 @@ describe("test suite: renderOrderSummary", () => {
 
     // 测试交互行为: 删除按钮
     it("removes a product", () => {
-
         // 补充:劫持函数: localStorage.setItem → null
         spyOn(localStorage, "setItem");
-
 
         // 原本有两个条目
         expect(document.querySelectorAll(".js-cart-item-container").length).toEqual(2);
@@ -71,6 +61,10 @@ describe("test suite: renderOrderSummary", () => {
         expect(document.querySelector(`.js-cart-item-container-${productId2}`)).not.toEqual(null);
 
         expect(cart.length).toEqual(1);
+    });
 
+    afterEach(() => {
+        // 清空页面上遗留的HTML
+        document.querySelector(".js-test-container").innerHTML = "";
     });
 });

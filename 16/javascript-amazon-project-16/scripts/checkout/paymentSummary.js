@@ -54,9 +54,9 @@ export function renderPaymentSummary() {
                         </div>
                     </div>
 
-                    <div class="payment-summary-row total-row">
+                    <div class="payment-summary-row total-row js-payment-summary-row">
                         <div>Order total:</div>
-                        <div class="payment-summary-money">
+                        <div class="payment-summary-money js-payment-summary-money">
                             $${formatCurrency(productPriceCents + shippingPriceCents + taxCents)}
                         </div>
                     </div>

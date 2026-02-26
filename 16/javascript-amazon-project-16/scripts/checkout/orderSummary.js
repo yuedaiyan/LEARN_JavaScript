@@ -51,7 +51,7 @@ export function renderOrderSummary() {
                   ${matchingProduct.name}
                 </div>
                 <div class="product-price js-product-price-${matchingProduct.id}">
-                  $ ${formatCurrency(matchingProduct.priceCents)}
+                  $${formatCurrency(matchingProduct.priceCents)}
                 </div>
                 <div class="product-quantity js-product-quantity-${matchingProduct.id}">
                     <span>
@@ -73,7 +73,7 @@ export function renderOrderSummary() {
               </div>
 
 <!-- 选择快递时间部分 -->
-              <div class="delivery-options">
+              <div class="delivery-options js-delivery-options-${matchingProduct.id}">
                 <div class="delivery-options-title">
                   Choose a delivery option:
                 </div>
@@ -108,7 +108,7 @@ export function renderOrderSummary() {
             html += `
         <!-- 一个条目,依靠forEach()来确定顺序,不过就三种可能: -->
         <div class="delivery-option js-delivery-option" data-product-id=${matchingProduct.id} data-delivery-option-id=${deliveryOption.id}>
-                <input type="radio" ${isChecked ? "checked" : ""} class="delivery-option-input" name="delivery-option-${matchingProduct.id}">
+                <input type="radio" ${isChecked ? "checked" : ""} class="delivery-option-input js-delivery-option-input" name="delivery-option-${matchingProduct.id}">
             <div>
                 <div class="delivery-option-date">
                     ${dateString}

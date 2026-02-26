@@ -6,6 +6,12 @@ import { addToCart, cart, loadFromStorage } from "../../data/cart.js";
 
 // 测试 "加入购物车"
 describe("test suite: addToCart", () => {
+    // 提群准备:
+    beforeEach(() => {
+        // 劫持函数: localStorage.setItem → null
+        spyOn(localStorage, "setItem");
+    });
+
     // 物品已经存在于购物车之中
     it("adds an existing product to the cart", () => {
         // 劫持函数: localStorage.getItem → 替换为空数组
@@ -18,8 +24,6 @@ describe("test suite: addToCart", () => {
         spyOn(document, "querySelector").and.callFake(() => {
             return { value: "1" };
         });
-        // 劫持函数: localStorage.setItem → null
-        spyOn(localStorage, "setItem");
 
         // 测试部分
         addToCart("9baab029f463f330bb33ed5676aa4dfd");
@@ -42,8 +46,6 @@ describe("test suite: addToCart", () => {
         spyOn(document, "querySelector").and.callFake(() => {
             return { value: "1" };
         });
-        // 劫持函数: localStorage.setItem → null
-        spyOn(localStorage, "setItem");
 
         // 测试部分
         addToCart("9baab029f463f330bb33ed5676aa4dfd");

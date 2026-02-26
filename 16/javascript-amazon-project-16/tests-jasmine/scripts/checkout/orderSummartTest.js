@@ -40,9 +40,10 @@ describe("test suite: renderOrderSummary", () => {
         expect(document.querySelector(`.js-product-quantity-${productId1}`).innerText).toContain("Quantity: 2");
         expect(document.querySelector(`.js-product-quantity-${productId2}`).innerText).toContain("Quantity: 1");
 
-    // 测试: 两件商品的名字是不是显示在了页面上
-expect(document.querySelector(`.js-product-name-${productId1}`).innerText).toContain("Black and Gray Athletic Cotton Socks - 6 Pairs");
-
+        // 测试: 商品名称名字是否显示
+        expect(document.querySelector(`.js-product-name-${productId1}`).innerText).toContain("Black and Gray Athletic Cotton Socks - 6 Pairs");
+        // 测试: 金额部分是否显示
+        expect(document.querySelector(`.js-product-price-${productId1}`).innerText).toEqual("$ 10.90");
     });
 
     // 测试交互行为: 删除按钮
@@ -63,8 +64,10 @@ expect(document.querySelector(`.js-product-name-${productId1}`).innerText).toCon
 
         expect(cart.length).toEqual(1);
 
-    // 测试: 两件商品的名字是不是显示在了页面上
-expect(document.querySelector(`.js-product-name-${productId2}`).innerText).toContain("Intermediate Size Basketball");
+        // 测试: 商品名称名字是否显示
+        expect(document.querySelector(`.js-product-name-${productId2}`).innerText).toContain("Intermediate Size Basketball");
+        // 测试: 金额部分是否显示
+        expect(document.querySelector(`.js-product-price-${productId2}`).innerText).toEqual("$ 20.95");
     });
 
     afterEach(() => {

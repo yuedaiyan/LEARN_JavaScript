@@ -20,7 +20,6 @@ function saveToStorage() {
 
 // 商品加入函数 (点击 Add 按钮触发)
 export function addToCart(productId) {
-
     // 获取用户的选择数量
     // TODO:此处逻辑不好,不应依赖DOM,建议拆分逻辑,js只接受数字
     const selectValue = Number(document.querySelector(`.js-quantity-selector-${productId}`).value);
@@ -42,7 +41,7 @@ export function addToCart(productId) {
         cart.push({
             productId: productId,
             quantity: selectValue,
-            deliveryOptionId: "3",
+            deliveryOptionId: "1",
         });
     }
     // 更新本地存储的购物车信息
@@ -91,13 +90,20 @@ export function getProductFromCart(productIdFind) {
 
 // // 更新购物车内特定商品的寄送时间
 export function updateDeliveryOption(productId, deliveryOptionId) {
-    cart.forEach((cartItem) => {
-        if (cartItem.productId === productId) {
-            cartItem.deliveryOptionId = deliveryOptionId;
-        }
-    });
-    // 更新本地存储的购物车信息
-    saveToStorage();
+    // TODO: 没有检测传入的deliveryOptionId是否合法
+    if (deliveryOptionId === "1" || deliveryOptionId === "2" || deliveryOptionId === "3") {
+        // 输入合法
+        cart.forEach((cartItem) => {
+            if (cartItem.productId === productId) {
+                cartItem.deliveryOptionId = deliveryOptionId;
+            }
+        });
+        // 更新本地存储的购物车信息
+        saveToStorage();
+    } else {
+        // 输入不合法
+        return;
+    }
 }
 
 // 导出cart

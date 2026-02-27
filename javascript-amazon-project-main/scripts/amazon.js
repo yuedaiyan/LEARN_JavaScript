@@ -2,8 +2,6 @@
 import { products } from "../data/products.js";
 // 导入购物车列表
 import { cart, addToCart } from "../data/cart.js";
-// 导入money从美分转换为美元的计算函数
-import { formatCurrency } from "./utils/money.js";
 // 导入购物车内商品总数计算函数
 import { calculateCartQuantity } from "../data/cart.js";
 
@@ -23,11 +21,11 @@ products.forEach((product) => {
                     <div class="product-name limit-text-to-2-lines">${product.name}</div>
 
                     <div class="product-rating-container">
-                        <img class="product-rating-stars" src="images/ratings/rating-${product.rating.stars * 10}.png" />
+                        <img class="product-rating-stars" src="${product.getStarsUrl()}" />
                         <div class="product-rating-count link-primary">${product.rating.count}</div>
                     </div>
 
-                    <div class="product-price">${formatCurrency(product.priceCents)}</div>
+                    <div class="product-price">${product.getPrice()}</div>
 
                     <div class="product-quantity-container ">
                         <select class="js-quantity-selector-${product.id}">

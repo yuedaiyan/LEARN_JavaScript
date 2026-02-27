@@ -7,7 +7,7 @@ import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 // import '../data/cart-oop.js'
 
 // 导入: cart-class.js
-import '../data/cart-class.js'
+// import '../data/cart-class.js'
 
 // 执行: 渲染左侧商品菜单函数
 renderOrderSummary();

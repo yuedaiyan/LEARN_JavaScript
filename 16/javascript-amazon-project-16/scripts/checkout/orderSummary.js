@@ -43,12 +43,10 @@ export function renderOrderSummary() {
             </div>
 
             <div class="cart-item-details-grid">
-              <img class="product-image"
-                src="${matchingProduct.image}">
-
-              <div class="cart-item-details">
+                <img class="product-image" src="${matchingProduct.image}">
+                <div class="cart-item-details">
                 <div class="product-name js-product-name-${matchingProduct.id}">
-                  ${matchingProduct.name}
+                    ${matchingProduct.name}
                 </div>
                 <div class="product-price js-product-price-${matchingProduct.id}">
                   $${formatCurrency(matchingProduct.priceCents)}
@@ -57,11 +55,11 @@ export function renderOrderSummary() {
                     <span>
                         Quantity: <span class="quantity-label js-quantity-label">${cartItem.quantity}</span>
                     </span>
-                    <span class="update-quantity-link link-primary js-update-link"  data-product-id="${matchingProduct.id}">
+                    <span class="update-quantity-link link-primary js-update-link js-update-link-${matchingProduct.id}"  data-product-id="${matchingProduct.id}">
                         Update
                     </span>
 <!-- 修改商品数量部分 -->
-                    <input class="quantity-input js-quantity-input"  name="quantity">
+                    <input class="quantity-input js-quantity-input js-quantity-input-${matchingProduct.id}"  name="quantity">
                     <span class="save-quantity-link link-primary js-save-quantity-link" data-product-id="${matchingProduct.id}">
                         Save
                    </span>

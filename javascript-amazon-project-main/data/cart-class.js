@@ -5,14 +5,16 @@
 
 class Cart {
     cartItems;
-    localStorageKey;
+    // 类私有属性
+    #localStorageKey;
 
     // 自动初始化程序(每次创建对象时,自动执行)
     // constructor 不能 return
     constructor(localStorageKey) {
-        this.localStorageKey = localStorageKey;
-        this.loadFromStorage();
+        this.#localStorageKey = localStorageKey;
+        this.#loadFromStorage();
 
+        // 购物车刷新至视频中状态(两件商品)
         this.addToCart("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
         this.addToCart("15b6fc6f-327a-4ec4-896f-486349e85a3d");
 
@@ -21,16 +23,14 @@ class Cart {
 
     // 读取本地储存的购物车数组
     // loadFromStorage: function () {
-    loadFromStorage() {
-        this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey)) ?? [];
+    #loadFromStorage() {
+        this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey)) ?? [];
 
-        // TODO:购物车刷新至视频中状态(两件商品)
-        // this.cartToVideo();
     }
     // 将购物车信息 储存到本地 local storage 中
 
     saveToStorage() {
-        localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+        localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
     }
 
     // 商品加入函数 (点击 Add 按钮触发)

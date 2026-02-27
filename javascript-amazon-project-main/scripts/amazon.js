@@ -41,9 +41,12 @@ products.forEach((product) => {
                             <option value="10">10</option>
                         </select>
                     </div>
-
+<!-- 添加尺码选择部分 -->
+                    ${product.extraInfoHTML()}
+<!--  -->
                     <div class="product-spacer"></div>
 
+<!-- 添加绿色的 Added 提示标 -->
                     <div class="added-to-cart js-added-to-cart-${product.id}">
                         <img src="images/icons/checkmark.png" />
                         Added

@@ -17,15 +17,34 @@ class Product {
     }
 
     getStarsUrl() {
-        return `images/ratings/rating-${this.rating.stars * 10}.png`
+        return `images/ratings/rating-${this.rating.stars * 10}.png`;
     }
 
     getPrice() {
         return `${formatCurrency(this.priceCents)}`;
     }
 
-
+    // 占位用(如果是 Clothing, 则会返回相关 HTML 代码)
+    extraInfoHTML() { return ''}
 }
+
+class Clothing extends Product {
+    sizeChartLink;
+    constructor(productDetails) {
+        super(productDetails);
+        this.sizeChartLink = productDetails.sizeChartLink;
+    }
+
+    // 尺码链接部分
+    extraInfoHTML() {
+        return `
+        <a href="${this.sizeChartLink}" target="_blank">
+            Size chart 
+        </a>
+        `;
+    }
+}
+
 
 // 辅助函数: 输入:商品Id 返回:含有完整商品信息的字典
 export function getProductFromProducts(productId) {
@@ -523,8 +542,9 @@ export const products = [
         keywords: ["sweaters", "hoodies", "apparel", "mens"],
     },
 ].map((productDetails) => {
-
+    if (productDetails.type === "clothing") {
+        return new Clothing(productDetails);
+    }
     return new Product(productDetails);
-    
 });
 // console.log(products);

@@ -39,7 +39,7 @@ export function renderOrderSummary() {
             <div class="delivery-date">
 <!-- 快递抵达时间部分 -->
               Delivery date: ${dateString}
-<!-s 快递抵达时间部分 -->
+<!-- 快递抵达时间部分 -->
             </div>
 
             <div class="cart-item-details-grid">

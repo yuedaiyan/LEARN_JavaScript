@@ -547,4 +547,8 @@ export const products = [
     }
     return new Product(productDetails);
 });
-// console.log(products);
+
+
+// const date = new Date()
+// console.log(date);
+// console.log(date.toLocaleDateString());

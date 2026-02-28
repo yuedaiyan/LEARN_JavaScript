@@ -1,7 +1,7 @@
 // 导入商品清单,查找完整商品信息函数
 import { getProductFromProducts } from "../../data/products.js";
 // 导入购物车列表
-import { cart, removeFromCart, updateDeliveryOption, calculateCartQuantity, updateQuantity, getProductFromCart } from "../../data/cart.js";
+// import { cart, removeFromCart, updateDeliveryOption,  updateQuantity  } from "../../data/cart.js";
 // 导入money从美分转换为美元的计算函数
 import { formatCurrency } from "../utils/money.js";
 // 导入三档快递时间,档位信息查找函数
@@ -10,6 +10,8 @@ import { deliveryOptions, getDeliveryOption, calculateDeliveryDate } from "../..
 import { renderPaymentSummary } from "./paymentSummary.js";
 // 导入: 上面 Checkout (3 items) 数量计算函数
 import { renderCheckoutHeader } from "./checkoutHeader.js";
+// 为 cart 使用类
+import { cart } from "../../data/cart-class.js";
 
 // 全局变量: 最后一次鼠标的Id,指向最后交互Id(主要功能是处理键盘enter确认save的效果)
 let focusId;
@@ -17,7 +19,7 @@ let focusId;
 // 渲染左侧购物车详情函数
 export function renderOrderSummary() {
     let cartSummaryHTML = "";
-    cart.forEach((cartItem) => {
+    cart.cartItems.forEach((cartItem) => {
         // 根据 cartItem 查找出完整项目 → 将完整条目存入matchingProduct(HTML将使用matchingProduct生成DOM树)
         const matchingProduct = getProductFromProducts(cartItem.productId);
 
@@ -161,7 +163,7 @@ export function renderOrderSummary() {
             // 检查输入的值是否是符合标准
             if (0 < inputNumber && inputNumber <= 100) {
                 // 更新输入的值到 cart 中
-                updateQuantity(productId, inputNumber);
+                cart.updateQuantity(productId, inputNumber);
                 // cart字典已经改变 → 重新渲染左侧购物车详情部分
                 renderOrderSummary();
                 // 刷新页面面正上方渲染
@@ -187,7 +189,7 @@ export function renderOrderSummary() {
     document.querySelectorAll(".js-delete-link").forEach((link) => {
         link.addEventListener("click", () => {
             const productId = link.dataset.productId;
-            removeFromCart(productId);
+            cart.removeFromCart(productId);
             // 更新页面最上方的购物车内商品总数清单
             renderCheckoutHeader();
             // cart字典已经改变 → 重新渲染左侧购物车详情部分
@@ -197,18 +199,13 @@ export function renderOrderSummary() {
         });
     });
 
-    // 监听 enter 键盘按键 → 实现 save 功能
-    document.addEventListener("keyup", (keyUp) => {
-        if (keyUp.key === "Enter") {
-            document.querySelector(`.js-cart-item-container-${focusId} .js-save-quantity-link`).click();
-        }
-    });
 
     // 修改: 寄送时间
     document.querySelectorAll(".js-delivery-option").forEach((element) => {
         element.addEventListener("click", () => {
             const { productId, deliveryOptionId } = element.dataset;
-            updateDeliveryOption(productId, deliveryOptionId);
+            // updateDeliveryOption(productId, deliveryOptionId);
+            cart.updateDeliveryOption(productId, deliveryOptionId);
             // cart字典已经改变 → 重新渲染左侧购物车详情部分
             renderOrderSummary();
             // 执行: 渲染右侧总金额计算函数
@@ -216,3 +213,17 @@ export function renderOrderSummary() {
         });
     });
 }
+
+    // 监听 enter 键盘按键 → 实现 save 功能
+    document.addEventListener("keyup", (keyUp) => {
+        if (keyUp.key === "Enter") {
+            // // test
+            // console.log('good');
+            // console.log(focusId);
+            // console.log(document.querySelector(`.js-cart-item-container-${focusId}`));
+            // console.log(document.querySelector(`.js-cart-item-container-${focusId} .js-save-quantity-link`));
+            // //
+            document.querySelector(`.js-cart-item-container-${focusId} .js-save-quantity-link`).click();
+            // document.querySelector(`.js-save-quantity-link`).click();
+        }
+    });

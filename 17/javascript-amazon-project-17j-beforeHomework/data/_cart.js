@@ -88,9 +88,8 @@ export function getProductFromCart(productIdFind) {
     });
 }
 
-// // 更新购物车内特定商品的寄送时间
+// 更新购物车内特定商品的寄送时间
 export function updateDeliveryOption(productId, deliveryOptionId) {
-    // TODO: 没有检测传入的deliveryOptionId是否合法
     if (deliveryOptionId === "1" || deliveryOptionId === "2" || deliveryOptionId === "3") {
         // 输入合法
         cart.forEach((cartItem) => {

@@ -3,7 +3,7 @@
 // 1: {productId: 'a7ad3bba44ce67fcd915e5c9dc4bd455', quantity: 1, deliveryOptionId: '1'}
 // 2: {productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6', quantity: 4, deliveryOptionId: '2'}
 
- class Cart {
+ export class Cart {
     // 核心 list
     cartItems;
     // 类私有属性

@@ -3,7 +3,7 @@
 // 2. How the page behaves(2.测试页面的行为逻辑)
 
 import { renderOrderSummary } from "../../../scripts/checkout/orderSummary.js";
-import { loadFromStorage, cart } from "../../../data/cart.js";
+import { cart } from "../../../data/cart-class.js";
 import { renderPaymentSummary } from "../../../scripts/checkout/paymentSummary.js";
 
 describe("test suite: renderOrderSummary", () => {
@@ -20,15 +20,14 @@ describe("test suite: renderOrderSummary", () => {
             `;
 
         // 劫持函数: localStorage.getItem → 替换为空数组
-        spyOn(localStorage, "getItem").and.callFake(() => {
-            return JSON.stringify([
+        spyOn(localStorage, "getItem");
+
+        cart.cartItems = [
+            
+
                 { productId: productId1, quantity: 2, deliveryOptionId: "1" },
                 { productId: productId2, quantity: 1, deliveryOptionId: "2" },
-            ]);
-        });
-        // 将上面的劫持假cart数组结果,载入栈中
-        loadFromStorage();
-
+        ]
         // 呼叫被测试主函数
         renderOrderSummary();
     });
@@ -63,7 +62,7 @@ describe("test suite: renderOrderSummary", () => {
         // 删除之后,第二个条目应正常
         expect(document.querySelector(`.js-cart-item-container-${productId2}`)).not.toEqual(null);
 
-        expect(cart.length).toEqual(1);
+        expect(cart.cartItems.length).toEqual(1);
 
         // 测试: 商品名称名字是否显示
         expect(document.querySelector(`.js-product-name-${productId2}`).innerText).toContain("Intermediate Size Basketball");
@@ -90,14 +89,12 @@ describe("updating the delivery option", () => {
                 <div class="js-payment-summary"></div>
             `;
         // 劫持函数: localStorage.getItem → 替换为空数组
-        spyOn(localStorage, "getItem").and.callFake(() => {
-            return JSON.stringify([
-                { productId: productId1, quantity: 2, deliveryOptionId: "1" },
-                { productId: productId2, quantity: 1, deliveryOptionId: "2" },
-            ]);
-        });
+        spyOn(localStorage, "getItem")
         // 将上面的劫持假cart数组结果,载入栈中
-        loadFromStorage();
+        cart.cartItems = [
+            { productId: productId1, quantity: 2, deliveryOptionId: "1" },
+            { productId: productId2, quantity: 1, deliveryOptionId: "2" },
+        ];
 
         // 呼叫被测试主函数
         renderOrderSummary();
@@ -116,7 +113,7 @@ describe("updating the delivery option", () => {
         expect(radio3.checked).toBe(true);
 
         // 购物车长度测试
-        expect(cart.length).toEqual(2);
+        expect(cart.cartItems.length).toEqual(2);
 
         // 最终价格测试
         const paymentSummaryMoney = document.querySelector(".js-payment-summary-row .js-payment-summary-money");

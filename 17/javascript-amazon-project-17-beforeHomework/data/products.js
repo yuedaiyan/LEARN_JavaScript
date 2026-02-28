@@ -1,7 +1,8 @@
 // 导入money从美分转换为美元的计算函数
 import { formatCurrency } from "../scripts/utils/money.js";
+
 // 生成类
-class Product {
+export class Product {
     id;
     image;
     name;
@@ -30,7 +31,7 @@ class Product {
     }
 }
 
-class Clothing extends Product {
+export class Clothing extends Product {
     sizeChartLink;
     constructor(productDetails) {
         super(productDetails);
@@ -47,21 +48,7 @@ class Clothing extends Product {
     }
 }
 
-// {
-//     id: "54e0eccd-8f36-462b-b68a-8182611d9add",
-//     image: "images/products/black-2-slot-toaster.jpg",
-//     name: "2 Slot Toaster - Black",
-//     rating: {
-//         stars: 5,
-//         count: 2197,
-//     },
-//     priceCents: 1899,
-//     keywords: ["toaster", "kitchen", "appliances"],
-//     type:'appliance',
-//     instructionsLink: '/images/appliance-instructions.png',
-//     warrantyLink: '/images/appliance-warranty.png',
-// },
-class Appliance extends Product {
+export class Appliance extends Product {
     instructionsLink;
     warrantyLink;
 

@@ -12,6 +12,8 @@ import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 // 导入: 17a 作业
 // import '../data/car.js'
 
+import '../data/backend-practice.js'
+
 // 执行: 渲染左侧商品菜单函数
 renderOrderSummary();
 // 执行: 渲染右侧总金额计算函数

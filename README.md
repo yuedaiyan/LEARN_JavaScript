@@ -12,7 +12,7 @@ The project centers on the generation and manipulation of DOM trees, maintaining
 
     <div align="center">
         <a href="https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/amazon.html">
-            <!-- <img src="/YouTube_my/screenshot.png" height="200"  alt="YouTube.com Diagram"> -->
+            <img src="amazon.png" height="200"  alt="Amazon.com Diagram">
         </a>
     </div>
 

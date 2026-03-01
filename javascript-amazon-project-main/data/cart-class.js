@@ -3,7 +3,8 @@
 // 1: {productId: 'a7ad3bba44ce67fcd915e5c9dc4bd455', quantity: 1, deliveryOptionId: '1'}
 // 2: {productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6', quantity: 4, deliveryOptionId: '2'}
 
-class Cart {
+ export class Cart {
+    // 核心 list
     cartItems;
     // 类私有属性
     #localStorageKey;
@@ -15,28 +16,26 @@ class Cart {
         this.#loadFromStorage();
 
         // 购物车刷新至视频中状态(两件商品)
-        this.addToCart("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
-        this.addToCart("15b6fc6f-327a-4ec4-896f-486349e85a3d");
-
-        console.log(this.cartItems);
+        // this.addToCart("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
+        // this.addToCart("15b6fc6f-327a-4ec4-896f-486349e85a3d");
+        // console.log(this.cartItems);
     }
 
     // 读取本地储存的购物车数组
     // loadFromStorage: function () {
     #loadFromStorage() {
         this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey)) ?? [];
-
     }
-    // 将购物车信息 储存到本地 local storage 中
 
+    // 将购物车信息 储存到本地 local storage 中
     saveToStorage() {
         localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
     }
 
     // 商品加入函数 (点击 Add 按钮触发)
     addToCart(productId) {
-        // 获取用户的选择数量
         // TODO:此处逻辑不好,不应依赖DOM,建议拆分逻辑,js只接受数字
+        // 获取用户的选择数量
         const selectValueEl = document.querySelector(`.js-quantity-selector-${productId}`)?.value ?? "1";
         const selectValue = Number(selectValueEl);
 
@@ -95,7 +94,7 @@ class Cart {
     }
 
     // 计算整个购物车中的商品总数
-    calculateCartQuantity(cart) {
+    calculateCartQuantity() {
         let cartQuantity = 0;
         this.cartItems.forEach((cartItem) => {
             cartQuantity += cartItem.quantity;
@@ -120,8 +119,26 @@ class Cart {
             return product.productId === productIdFind;
         });
     }
+
+    // 更新购物车内特定商品的寄送时间
+    updateDeliveryOption(productId, deliveryOptionId) {
+        if (deliveryOptionId === "1" || deliveryOptionId === "2" || deliveryOptionId === "3") {
+            // 输入合法
+            this.cartItems.forEach((cartItem) => {
+                if (cartItem.productId === productId) {
+                    cartItem.deliveryOptionId = deliveryOptionId;
+                }
+            });
+            // 更新本地存储的购物车信息
+            this.saveToStorage();
+        } else {
+            // 输入不合法
+            return;
+        }
+    }
 }
 
-const cart = new Cart('cart-oop');
-const businessCart = new Cart('cart-business');
+// const cart = new Cart('cart-oop');
+// const businessCart = new Cart('cart-business');
 
+export const cart=new Cart('cart-class')

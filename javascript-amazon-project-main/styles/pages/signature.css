@@ -1,0 +1,19 @@
+.signature {
+    /* background-color: #f7f7f7; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0 40px 0;
+}
+.signature .name {
+    color: #cfcfcf;
+    font-style: italic;
+    font-size: 30px;
+    margin: 0 0 5px 0;
+}
+
+.signature .time {
+    font-style: italic;
+    color: #cfcfcf;
+}

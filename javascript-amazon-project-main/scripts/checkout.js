@@ -5,7 +5,7 @@ import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 // 导入: 后端购物车
 import { products, loadProducts } from "../data/products.js";
 
-// 在页面中载入 products
+// 使用后端: 在页面中载入 products
 loadProducts(() => {
     // 执行: 渲染左侧商品菜单函数
     renderOrderSummary();

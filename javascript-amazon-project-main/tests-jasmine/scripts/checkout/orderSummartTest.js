@@ -4,11 +4,20 @@
 
 import { renderOrderSummary } from "../../../scripts/checkout/orderSummary.js";
 import { cart } from "../../../data/cart-class.js";
+// 异步函数
+import { loadProducts } from "../../../data/products.js";
 
-describe("test suite: renderOrderSummary", () => {
+describe("test suite: renderOrderSummary()", () => {
     // 初始化数据(全局变量,让beforeEach()和it()都可以使用)
     const productId1 = "e43638ce-6aa0-4b85-b27f-e1d07eb678c6";
     const productId2 = "15b6fc6f-327a-4ec4-896f-486349e85a3d";
+
+    // 等待products列表从后端完全加载之后,才进行下一步操作
+    beforeAll((done) => {
+        loadProducts(() => {
+            done();
+        });
+    });
 
     beforeEach(() => {
         // 模拟:创建一个 js-order-summary 的容器,以便于 renderOrderSummary 往里面拼接字符串
@@ -78,6 +87,14 @@ describe("updating the delivery option", () => {
     // 初始化数据(全局变量,让beforeEach()和it()都可以使用)
     const productId1 = "e43638ce-6aa0-4b85-b27f-e1d07eb678c6";
     const productId2 = "15b6fc6f-327a-4ec4-896f-486349e85a3d";
+
+    // 等待products列表从后端完全加载之后,才进行下一步操作
+    beforeAll((done) => {
+        loadProducts(() => {
+            done();
+        });
+    });
+
     // 初始化共享设置
     beforeEach(() => {
         // 模拟:创建一个 js-order-summary 的容器,以便于 renderOrderSummary 往里面拼接字符串

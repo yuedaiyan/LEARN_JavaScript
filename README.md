@@ -1,4 +1,4 @@
-# Javascript Practice: Amazon.com Clone
+# Javascript Practice: Amazon Clone
 
 This repository contains my final project and exercises from completing the Javascript comprehensive course.
 

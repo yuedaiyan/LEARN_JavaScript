@@ -142,18 +142,3 @@
 // const businessCart = new Cart('cart-business');
 
 export const cart=new Cart('cart-class')
-
-// 演示,解决回调地域
-// 使用后端购物车("https://supersimplebackend.dev/products")
-export let cartFromBackend = [];
-export function loadCart(func_s) {
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener("load", () => {
-        // console.log(xhr.response);
-        // 服务器已成功返回数据
-        console.log('load cart from "https://supersimplebackend.dev/cart"');
-        func_s();
-    });
-    xhr.open("GET", "https://supersimplebackend.dev/cart");
-    xhr.send();
-}

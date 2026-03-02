@@ -76,7 +76,7 @@ export function getProductFromProducts(productId) {
     });
 }
 
-// 使用后端购物车("https://supersimplebackend.dev/products")
+// 使用后端商品清单("https://supersimplebackend.dev/products")
 export let products = [];
 
 export function loadProducts(func_s) {

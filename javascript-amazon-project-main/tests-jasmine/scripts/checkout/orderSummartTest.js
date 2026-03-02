@@ -5,7 +5,7 @@
 import { renderOrderSummary } from "../../../scripts/checkout/orderSummary.js";
 import { cart } from "../../../data/cart-class.js";
 // 异步函数
-import { loadProducts } from "../../../data/products.js";
+import { loadProducts, loadProductsFetch } from "../../../data/products.js";
 
 describe("test suite: renderOrderSummary()", () => {
     // 初始化数据(全局变量,让beforeEach()和it()都可以使用)
@@ -14,7 +14,7 @@ describe("test suite: renderOrderSummary()", () => {
 
     // 等待products列表从后端完全加载之后,才进行下一步操作
     beforeAll((done) => {
-        loadProducts(() => {
+        loadProductsFetch().then(() => {
             done();
         });
     });

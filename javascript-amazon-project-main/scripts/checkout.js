@@ -3,7 +3,7 @@ import { renderOrderSummary } from "./checkout/orderSummary.js";
 // 导入: 渲染右侧总金额计算函数
 import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 // 导入: 后端购物车
-import { products, loadProducts } from "../data/products.js";
+import { products, loadProducts, loadProductsFetch } from "../data/products.js";
 
 // 导入: cart-oop.js
 // import '../data/cart-oop.js'
@@ -19,12 +19,15 @@ import { products, loadProducts } from "../data/products.js";
 // 演示回调地域
 import { loadCart } from "../data/cart-class.js";
 
+// console.log('in checkout',loadProductsFetch());
+
 Promise.all([
-    new Promise((resolve) => {
-        loadProducts(() => {
-            resolve();
-        });
-    }),
+    // new Promise((resolve) => {
+    //     loadProducts(() => {
+    //         resolve();
+    //     });
+    // }),
+    loadProductsFetch(),
     new Promise((resolve) => {
         loadCart(() => {
             resolve();

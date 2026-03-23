@@ -79,13 +79,13 @@ export function getProductFromProducts(productId) {
 export function loadProductsFetch() {
     const promise = fetch("https://supersimplebackend.dev/products")
         .then((response) => {
-            console.log('response:',response);
+            console.log("response:", response);
             // console.log(response.json);
             return response.json();
         })
         .then((productData) => {
-            console.log('load product: \n\tproductData: ',productData);
-           products= productData.map((productDetails) => {
+            console.log("load product: \n\tproductData: ", productData);
+            products = productData.map((productDetails) => {
                 if (productDetails.type === "clothing") {
                     return new Clothing(productDetails);
                 }
@@ -94,9 +94,13 @@ export function loadProductsFetch() {
                 }
                 return new Product(productDetails);
             });
+        })
+        .catch((error) => {
+            console.log("Unexpected error.\nPlease try again later.");
         });
     return promise;
 }
+
 // loadProductsFetch().then(() => {
 //     console.log("next step");
 // });
@@ -106,8 +110,8 @@ export let products = [];
 
 export function loadProducts(func_s) {
     const xhr = new XMLHttpRequest();
+    // 添加回调函数
     xhr.addEventListener("load", () => {
-        // console.log(xhr.response);
         products = JSON.parse(xhr.response).map((productDetails) => {
             if (productDetails.type === "clothing") {
                 return new Clothing(productDetails);
@@ -120,6 +124,9 @@ export function loadProducts(func_s) {
         // 服务器已成功返回数据
         console.log('load products from "https://supersimplebackend.dev/products"');
         func_s();
+    });
+    xhr.addEventListener("error", (error) => {
+        console.log("Unexpected error.\nPlease try again later.");
     });
     xhr.open("GET", "https://supersimplebackend.dev/products");
     xhr.send();

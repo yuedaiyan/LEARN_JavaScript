@@ -6,6 +6,8 @@ import { products, getProductFromProducts } from "../../data/products.js";
 import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
 // 导入money从美分转换为美元的计算函数
 import { formatCurrency } from "../utils/money.js";
+//
+import { addOrder } from "../../data/orders.js";
 
 export function renderPaymentSummary() {
     let productPriceCents = 0;
@@ -14,7 +16,7 @@ export function renderPaymentSummary() {
     cart.cartItems.forEach((cartItem) => {
         const product = getProductFromProducts(cartItem.productId);
         // 计算商品总数量
-        itemsNumbers+=cartItem.quantity
+        itemsNumbers += cartItem.quantity;
         // 计算商品条目总价: 价格*数量
         productPriceCents += product.priceCents * cartItem.quantity;
         // 计算商品运费:运费
@@ -61,9 +63,29 @@ export function renderPaymentSummary() {
                         </div>
                     </div>
 
-                    <button class="place-order-button button-primary">Place your order</button> 
+                    <button class="place-order-button button-primary js-palce-roder">
+                        Place your order
+                    </button> 
     `;
 
     // 修改 DOM
-    document.querySelector(".js-payment-summary").innerHTML=paymentSummaryHTML;
+    document.querySelector(".js-payment-summary").innerHTML = paymentSummaryHTML;
+
+    // 购物车页面点击结算效果 → 点击后请求后端的结算页面
+    document.querySelector(".js-palce-roder").addEventListener("click", async () => {
+        try {
+            const response = await fetch("https://supersimplebackend.dev/orders", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ cart: cart }),
+            });
+            const order = await response.json();
+            // console.log(order);
+            addOrder(order);
+        } catch (error) {
+            console.log('@paymentSummary.js|function .js-place-order."click"\nUnexpected error.\nPlease try again later.');
+        }
+
+        window.location.href = "orders.html";
+    });
 }

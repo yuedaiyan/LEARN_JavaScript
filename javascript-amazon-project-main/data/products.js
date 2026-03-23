@@ -96,7 +96,7 @@ export function loadProductsFetch() {
             });
         })
         .catch((error) => {
-            console.log("Unexpected error.\nPlease try again later.");
+            console.log("@products.js|loadProductsFetch():\nUnexpected error.\nPlease try again later.");
         });
     return promise;
 }

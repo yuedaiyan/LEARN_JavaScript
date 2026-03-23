@@ -21,24 +21,34 @@ import { loadCart } from "../data/cart-class.js";
 
 // console.log('in checkout',loadProductsFetch());
 
-Promise.all([
-    // new Promise((resolve) => {
-    //     loadProducts(() => {
-    //         resolve();
-    //     });
-    // }),
-    loadProductsFetch(),
-    new Promise((resolve) => {
+async function loadPage() {
+    await loadProductsFetch();
+    await new Promise((resolve) => {
         loadCart(() => {
             resolve();
         });
-    }),
-]).then(() => {
+    });
     // 执行: 渲染左侧商品菜单函数
     renderOrderSummary();
     // 执行: 渲染右侧总金额计算函数
     renderPaymentSummary();
-});
+}
+loadPage()
+
+
+// Promise.all([
+//     loadProductsFetch(),
+//     new Promise((resolve) => {
+//         loadCart(() => {
+//             resolve();
+//         });
+//     }),
+// ]).then(() => {
+//     // 执行: 渲染左侧商品菜单函数
+//     renderOrderSummary();
+//     // 执行: 渲染右侧总金额计算函数
+//     renderPaymentSummary();
+// });
 
 // // 18: learn Promise()
 // new Promise((resolve) => {

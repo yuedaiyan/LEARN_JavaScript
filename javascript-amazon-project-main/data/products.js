@@ -79,12 +79,12 @@ export function getProductFromProducts(productId) {
 export function loadProductsFetch() {
     const promise = fetch("https://supersimplebackend.dev/products")
         .then((response) => {
-            console.log(response);
-            console.log(response.json);
+            console.log('response:',response);
+            // console.log(response.json);
             return response.json();
         })
         .then((productData) => {
-            console.log('productData: ',productData);
+            console.log('load product: \n\tproductData: ',productData);
            products= productData.map((productDetails) => {
                 if (productDetails.type === "clothing") {
                     return new Clothing(productDetails);

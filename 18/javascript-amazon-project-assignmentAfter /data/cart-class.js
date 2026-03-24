@@ -3,7 +3,7 @@
 // 1: {productId: 'a7ad3bba44ce67fcd915e5c9dc4bd455', quantity: 1, deliveryOptionId: '1'}
 // 2: {productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6', quantity: 4, deliveryOptionId: '2'}
 
- export class Cart {
+export class Cart {
     // 核心 list
     cartItems;
     // 类私有属性
@@ -141,10 +141,10 @@
 // const cart = new Cart('cart-oop');
 // const businessCart = new Cart('cart-business');
 
-export const cart=new Cart('cart-class')
+export const cart = new Cart("cart-class");
 
 // 演示,解决回调地域
-// 使用后端购物车("https://supersimplebackend.dev/products")
+// 使用后端购物车("https://supersimplebackend.dev")
 export let cartFromBackend = [];
 export function loadCart(func_s) {
     const xhr = new XMLHttpRequest();
@@ -157,3 +157,14 @@ export function loadCart(func_s) {
     xhr.open("GET", "https://supersimplebackend.dev/cart");
     xhr.send();
 }
+
+// assignment 18h
+// 使用异步函数处理相关问题
+async function loadCartFetch() {
+    const response = await fetch("https://supersimplebackend.dev/cart");
+    const data = await response.text();
+    console.log('Use async fetch(), load cart from "https://supersimplebackend.dev/cart"');
+    console.log('data form fetch: \n',data);
+    return data
+}
+loadCartFetch();

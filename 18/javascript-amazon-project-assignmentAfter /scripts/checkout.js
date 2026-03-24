@@ -16,20 +16,21 @@ import { products, loadProducts, loadProductsFetch } from "../data/products.js";
 
 // 18: learn backend
 // import '../data/backend-practice.js'
+
 // 演示回调地域
-import { loadCart } from "../data/cart-class.js";
+import { loadCart,loadCartFetch } from "../data/cart-class.js";
 
 // console.log('in checkout',loadProductsFetch());
 
 async function loadPage() {
     try {
-        // throw "error1"
         await loadProductsFetch();
-        await new Promise((resolve) => {
-            loadCart(() => {
-                resolve();
-            });
-        });
+        await loadCartFetch();
+        // await new Promise((resolve) => {
+        //     loadCart(() => {
+        //         resolve();
+        //     });
+        // });
     } catch (error) {
         console.log("@chechout.js|loadPage()\nUnexpected error.\nPlease try again later.");
     console.log(error);

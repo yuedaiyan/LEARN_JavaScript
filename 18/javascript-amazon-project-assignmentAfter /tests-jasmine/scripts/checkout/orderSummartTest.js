@@ -13,10 +13,8 @@ describe("test suite: renderOrderSummary()", () => {
     const productId2 = "15b6fc6f-327a-4ec4-896f-486349e85a3d";
 
     // 等待products列表从后端完全加载之后,才进行下一步操作
-    beforeAll((done) => {
-        loadProductsFetch().then(() => {
-            done();
-        });
+    beforeAll(async () => {
+        await loadProductsFetch();
     });
 
     beforeEach(() => {

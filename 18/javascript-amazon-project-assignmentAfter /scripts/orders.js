@@ -46,7 +46,6 @@ function renderOneOrder() {
                         </div>
                     </div>
 
-
 <!-- order content section start -->
                     <div class="order-details-grid">
 
@@ -74,8 +73,6 @@ function renderOneOrder() {
 
 
 <!-- order content section start -->
-
-
                     </div>
                 </div>
 <!-- orders end -->

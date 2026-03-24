@@ -4,36 +4,23 @@ import { renderOrderSummary } from "./checkout/orderSummary.js";
 import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 // 导入: 后端购物车
 import { products, loadProducts, loadProductsFetch } from "../data/products.js";
-
 // 导入: cart-oop.js
 // import '../data/cart-oop.js'
-
 // 导入: cart-class.js
 // import '../data/cart-class.js'
-
 // 导入: 17a 作业
 // import '../data/car.js'
-
 // 18: learn backend
 // import '../data/backend-practice.js'
-
 // 演示回调地域
-import { loadCart,loadCartFetch } from "../data/cart-class.js";
-
-// console.log('in checkout',loadProductsFetch());
+import { loadCart, loadCartFetch } from "../data/cart-class.js";
 
 async function loadPage() {
     try {
-        await loadProductsFetch();
-        await loadCartFetch();
-        // await new Promise((resolve) => {
-        //     loadCart(() => {
-        //         resolve();
-        //     });
-        // });
+        await Promise.all([loadProductsFetch(), loadCartFetch()]);
     } catch (error) {
         console.log("@chechout.js|loadPage()\nUnexpected error.\nPlease try again later.");
-    console.log(error);
+        console.log(error);
     }
     // 执行: 渲染左侧商品菜单函数
     renderOrderSummary();

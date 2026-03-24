@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>18d</title>
+        <link rel="icon" href="data:," />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="my_habit.css" />
+        <!-- <link rel="stylesheet" href="style.css"> -->
+    </head>
+    <body>
+        <script>
+            async function postGreet() {
+                try{
+                const response = await fetch("https://amazon.com", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        name: "Yue Daiyan",
+                    }),
+                });
+                const data = await response.text();
+                console.log(data);
+                }catch(error){
+                    console.log('@postGreet\n\tcatch an error: CORS error');
+                    console.log(error);
+                }
+            }
+            postGreet();
+        </script>
+    </body>
+</html>

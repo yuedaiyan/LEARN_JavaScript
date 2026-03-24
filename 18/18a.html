@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>18a</title>
+        <link rel="icon" href="data:,">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+        <link rel="stylesheet" href="my_habit.css">
+        <!-- <link rel="stylesheet" href="style.css"> -->
+    </head>
+    <body>
+
+          <script>
+            const xhr=new XMLHttpRequest()
+            xhr.addEventListener('load',()=>{
+                console.log(xhr.response);
+            })
+            xhr.open('GET','http://supersimplebackend.dev/greeting')
+            xhr.send();
+          </script>
+    </body>
+</html>

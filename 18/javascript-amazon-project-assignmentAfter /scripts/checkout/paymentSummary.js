@@ -1,7 +1,7 @@
 // 导入购物车列表
 import { cart } from "../../data/cart-class.js";
 // 导入商品清单,查找完整商品信息函数
-import { products, getProductFromProducts ,loadProductsFetch} from "../../data/products.js";
+import { products, getProductFromProducts, loadProductsFetch } from "../../data/products.js";
 // 导入三档快递时间,档位信息查找函数
 import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
 // 导入money从美分转换为美元的计算函数
@@ -83,12 +83,18 @@ export async function renderPaymentSummary() {
             const order = await response.json();
             // console.log(order);
             addOrder(order);
-            // TODO:执行完毕后注意应清空购物车
         } catch (error) {
             console.log('@paymentSummary.js|function .js-place-order."click"\nUnexpected error.\nPlease try again later.');
         }
+
+        // 点击下单按钮之后,自动清空购物车
+        cart.removeWholeCart();
 
         // 跳转到订单界面
         window.location.href = "orders.html";
     });
 }
+
+console.log("shor cart:",cart);
+
+// TODO:检查为什么总是会莫名奇妙被添加那两个商品

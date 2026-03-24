@@ -13,7 +13,7 @@ import { products, loadProducts, loadProductsFetch } from "../data/products.js";
 // 18: learn backend
 // import '../data/backend-practice.js'
 // 演示回调地域
-import { loadCart, loadCartFetch } from "../data/cart-class.js";
+import { loadCartFetch } from "../data/cart-class.js";
 
 async function loadPage() {
     try {
@@ -23,9 +23,9 @@ async function loadPage() {
         console.log(error);
     }
     // 执行: 渲染左侧商品菜单函数
-    renderOrderSummary();
+    await renderOrderSummary();
     // 执行: 渲染右侧总金额计算函数
-    renderPaymentSummary();
+    await renderPaymentSummary();
 }
 loadPage();
 

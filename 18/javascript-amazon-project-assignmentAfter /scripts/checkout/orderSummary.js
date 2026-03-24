@@ -152,7 +152,7 @@ export async function renderOrderSummary() {
 
     // 监听 save 按钮 → 点击后消失 input + save, 同时显示 update
     document.querySelectorAll(".js-save-quantity-link").forEach((link) => {
-        link.addEventListener("click", () => {
+        link.addEventListener("click",async () => {
             // 获取当前容器 id
             const productId = link.dataset.productId;
             // 获取 input 元素
@@ -170,11 +170,11 @@ export async function renderOrderSummary() {
                 // 更新输入的值到 cart 中
                 cart.updateQuantity(productId, inputNumber);
                 // cart字典已经改变 → 重新渲染左侧购物车详情部分
-                renderOrderSummary();
+                await renderOrderSummary();
                 // 刷新页面面正上方渲染
                 renderCheckoutHeader();
                 // 执行: 渲染右侧总金额计算函数
-                renderPaymentSummary();
+                await renderPaymentSummary();
                 // 移除fucusId列表中的id,表示当前容器已经被关闭
                 focusId = null;
             } else {

@@ -25,12 +25,7 @@ async function renderAllOrders() {
 
 // 一笔订单 渲染函数
 function renderAnOrder(order) {
-    // TODO: format const cents
-    // TODO:注意格式化时间
-    // console.log(orderPlaced.format("dddd, MMMM D"));
-
     let ordersGridHTML = "";
-
     ordersGridHTML += `
 <!-- order start -->
                 <div class="order-container js-order-container">
@@ -78,8 +73,6 @@ function renderAllProduct(products) {
 // 订单详细信息函数(订单中的一个商品)
 function renderAnProduct(product) {
     let oneProductHTML = "";
-    // TODO: render the image
-    // TODO: format time MMMM YY
     const matchingProduct = getProductFromProducts(product.productId);
     console.log("one product: ", matchingProduct);
 
@@ -93,7 +86,7 @@ function renderAnProduct(product) {
                             <div class="product-name">${matchingProduct.name}</div>
                             <div class="product-delivery-date">Arriving on: ${dayjs(product.estimatedDeliveryTime).format('MMMM YY')}</div>
                             <div class="product-quantity">Quantity: ${product.quantity}</div>
-                            <button class="buy-again-button button-primary">
+                            <button class="buy-again-button button-primary js-buy-again-button">
                                 <img class="buy-again-icon" src="images/icons/buy-again.png" />
                                 <span class="buy-again-message">Buy it again</span>
                             </button>
@@ -112,7 +105,5 @@ function renderAnProduct(product) {
 
 // 执行 渲染整个页面
 renderAllOrders();
-// 执行 订单渲染函数 → 渲染一个订单
-// renderOneOrder();
-// 执行 渲染订单中的一个商品
-// renderOneProduct();
+
+// TODO:18m

@@ -3,7 +3,7 @@
 // 2. How the page behaves(2.测试页面的行为逻辑)
 
 import { renderOrderSummary } from "../../../scripts/checkout/orderSummary.js";
-import { cart, loadCart } from "../../../data/cart-class.js";
+import { cart } from "../../../data/cart-class.js";
 // 异步函数
 import { loadProducts, loadProductsFetch } from "../../../data/products.js";
 

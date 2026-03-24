@@ -136,6 +136,16 @@ export class Cart {
             return;
         }
     }
+
+    // 清空购物车(主要供下单的场景使用 → 下单自动清空购物车)
+    removeWholeCart() {
+        this.cartItems = [];
+        // 更新本地存储的购物车信息
+        this.saveToStorage();
+        // 检查并输出
+        const cartCount = this.calculateCartQuantity();
+        console.log('removeWholeCart: ',cartCount);
+    }
 }
 
 // const cart = new Cart('cart-oop');
@@ -145,18 +155,18 @@ export const cart = new Cart("cart-class");
 
 // 演示,解决回调地域
 // 使用后端购物车("https://supersimplebackend.dev")
-export let cartFromBackend = [];
-export function loadCart(func_s) {
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener("load", () => {
-        // console.log(xhr.response);
-        // 服务器已成功返回数据
-        console.log('load cart from "https://supersimplebackend.dev/cart"');
-        func_s();
-    });
-    xhr.open("GET", "https://supersimplebackend.dev/cart");
-    xhr.send();
-}
+// export let cartFromBackend = [];
+// export function loadCart(func_s) {
+//     const xhr = new XMLHttpRequest();
+//     xhr.addEventListener("load", () => {
+//         // console.log(xhr.response);
+//         // 服务器已成功返回数据
+//         console.log('load cart from "https://supersimplebackend.dev/cart"');
+//         func_s();
+//     });
+//     xhr.open("GET", "https://supersimplebackend.dev/cart");
+//     xhr.send();
+// }
 
 // assignment 18h
 // 使用异步函数处理相关问题

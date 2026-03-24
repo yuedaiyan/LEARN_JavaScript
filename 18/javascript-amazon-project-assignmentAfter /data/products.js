@@ -76,15 +76,20 @@ export function getProductFromProducts(productId) {
     });
 }
 
+// 从后端 API 获取商品数据，并将结果填充到 products 数组中
 export function loadProductsFetch() {
+    // 缓存判断
+    if (products.length > 0) {
+        return Promise.resolve();
+    }
     const promise = fetch("https://supersimplebackend.dev/products")
         .then((response) => {
-            console.log("response:", response);
+            // console.log("response:", response);
             // console.log(response.json);
             return response.json();
         })
         .then((productData) => {
-            console.log("load product: \n\tproductData: ", productData);
+            // console.log("load product: \n\tproductData: ", productData);
             products = productData.map((productDetails) => {
                 if (productDetails.type === "clothing") {
                     return new Clothing(productDetails);
@@ -107,7 +112,7 @@ export function loadProductsFetch() {
 
 // 使用后端商品清单("https://supersimplebackend.dev/products")
 export let products = [];
-
+// 和 loadProductsFetch() 目的相同——从后端获取商品数据填充 products 数组
 export function loadProducts(func_s) {
     const xhr = new XMLHttpRequest();
     // 添加回调函数

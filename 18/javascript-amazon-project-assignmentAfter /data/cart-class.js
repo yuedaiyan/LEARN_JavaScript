@@ -160,7 +160,7 @@ export function loadCart(func_s) {
 
 // assignment 18h
 // 使用异步函数处理相关问题
-async function loadCartFetch() {
+export async function loadCartFetch() {
     const response = await fetch("https://supersimplebackend.dev/cart");
     const data = await response.text();
     console.log('Use async fetch(), load cart from "https://supersimplebackend.dev/cart"');

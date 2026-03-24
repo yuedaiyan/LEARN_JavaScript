@@ -1,30 +1,37 @@
-// TODO:查看orders.html中的TODO
-// TODO:注意修改购物车中的商品数量
-
 // 导入订单清单
 import { orders } from "../data/orders.js";
-// 0
-// :
-// {id: '8997d0c5-e6a6-4550-b19f-d9e3d27b497a', orderTime: '2026-03-23T19:09:53.264Z', totalCostCents: 6350, products: Array(2)}
-// 1
-// :
-// {id: '66f3df50-0c75-4b0d-82a8-1f7708eaeb5a', orderTime: '2026-03-23T19:08:34.959Z', totalCostCents: 6350, products: Array(2)}
-// 2
-// :
-// {id: '1063f268-093a-490f-8b92-fe3e04344bcd', orderTime: '2026-03-23T19:08:26.406Z', totalCostCents: 6350, products: Array(2)}
-// 3
-// :
-// {id: '4048f735-8e2a-4245-83fd-80358f7bd884', orderTime: '2026-03-23T19:08:08.845Z', totalCostCents: 6350, products: Array(2)}
-// length
-// :
-// 4
+// 导入时间模块
+import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
+// 导入money从美分转换为美元的计算函数
+import { formatCurrency } from "../scripts/utils/money.js";
+// 导入商品清单,查找完整商品信息函数
+import { getProductFromProducts, loadProductsFetch } from "../data/products.js";
+// 导入购物车列表
+import { cart } from "../data/cart-class.js";
 
-console.log('orders.js check');
+console.log(orders);
 
-// 订单渲染函数
-function renderOneOrder() {
-    let ordersGridHTML = `
-    
+// 处理页眉购物车数量标签
+document.querySelector(".js-cart-quantity").innerHTML = cart.calculateCartQuantity(cart);
+
+// 整个页面的渲染函数
+async function renderAllOrders() {
+    await loadProductsFetch();
+    orders.forEach((order) => {
+        console.log("one new order: ", order);
+        renderAnOrder(order);
+    });
+}
+
+// 一笔订单 渲染函数
+function renderAnOrder(order) {
+    // TODO: format const cents
+    // TODO:注意格式化时间
+    // console.log(orderPlaced.format("dddd, MMMM D"));
+
+    let ordersGridHTML = "";
+
+    ordersGridHTML += `
 <!-- order start -->
                 <div class="order-container js-order-container">
                     
@@ -32,32 +39,60 @@ function renderOneOrder() {
                         <div class="order-header-left-section">
                             <div class="order-date">
                                 <div class="order-header-label">Order Placed:</div>
-                                <div>June 10</div>
+                                <div>${dayjs(order.time).format('MMMM YY')}</div>
                             </div>
                             <div class="order-total">
                                 <div class="order-header-label">Total:</div>
-                                <div>$41.90</div>
+                                <div>$ ${formatCurrency(order.totalCostCents)}</div>
                             </div>
                         </div>
 
                         <div class="order-header-right-section">
                             <div class="order-header-label">Order ID:</div>
-                            <div>b6b6c212-d30e-4d4a-805d-90b52ce6b37d</div>
+                            <div>${order.id}</div>
                         </div>
                     </div>
 
 <!-- order content section start -->
-                    <div class="order-details-grid">
+                    <div class="order-details-grid js-order-details-grid">
+                        ${renderAllProduct(order.products)}
+                    </div>
+<!-- order content section end -->
 
+                </div>
+<!-- orders end -->
+    
+    `;
+    document.querySelector(".js-orders-grid").innerHTML += ordersGridHTML;
+}
+
+function renderAllProduct(products) {
+    let allProducts = "";
+    // 每一笔订单内部,渲染商品详情
+    products.forEach((product) => {
+        allProducts += renderAnProduct(product);
+    });
+    return allProducts;
+}
+
+// 订单详细信息函数(订单中的一个商品)
+function renderAnProduct(product) {
+    let oneProductHTML = "";
+    // TODO: render the image
+    // TODO: format time MMMM YY
+    const matchingProduct = getProductFromProducts(product.productId);
+    console.log("one product: ", matchingProduct);
+
+    oneProductHTML += `
 <!-- one order start -->
                         <div class="product-image-container">
-                            <img src="images/products/intermediate-composite-basketball.jpg" />
+                            <img src="${matchingProduct.image}" />
                         </div>
 
                         <div class="product-details">
-                            <div class="product-name">Intermediate Size Basketball</div>
-                            <div class="product-delivery-date">Arriving on: June 17</div>
-                            <div class="product-quantity">Quantity: 2</div>
+                            <div class="product-name">${matchingProduct.name}</div>
+                            <div class="product-delivery-date">Arriving on: ${dayjs(product.estimatedDeliveryTime).format('MMMM YY')}</div>
+                            <div class="product-quantity">Quantity: ${product.quantity}</div>
                             <button class="buy-again-button button-primary">
                                 <img class="buy-again-icon" src="images/icons/buy-again.png" />
                                 <span class="buy-again-message">Buy it again</span>
@@ -70,17 +105,14 @@ function renderOneOrder() {
                             </a>
                         </div>
 <!-- one order end -->
-
-
-<!-- order content section start -->
-                    </div>
-                </div>
-<!-- orders end -->
-    
     `;
-    document.querySelector(".js-orders-grid").innerHTML = ordersGridHTML;
+    // document.querySelector(".js-order-details-grid").innerHTML += oneProductHTML;
+    return oneProductHTML;
 }
 
-// 执行 订单渲染函数
-renderOneOrder();
-
+// 执行 渲染整个页面
+renderAllOrders();
+// 执行 订单渲染函数 → 渲染一个订单
+// renderOneOrder();
+// 执行 渲染订单中的一个商品
+// renderOneProduct();

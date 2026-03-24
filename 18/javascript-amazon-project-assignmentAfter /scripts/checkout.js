@@ -2,7 +2,7 @@
 import { renderOrderSummary } from "./checkout/orderSummary.js";
 // 导入: 渲染右侧总金额计算函数
 import { renderPaymentSummary } from "./checkout/paymentSummary.js";
-// 导入: 后端购物车
+// 导入: 后端商品清单
 import { products, loadProducts, loadProductsFetch } from "../data/products.js";
 // 导入: cart-oop.js
 // import '../data/cart-oop.js'

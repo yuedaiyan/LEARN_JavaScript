@@ -1,5 +1,5 @@
 // 导入商品清单,查找完整商品信息函数
-import { getProductFromProducts } from "../../data/products.js";
+import { getProductFromProducts, loadProductsFetch } from "../../data/products.js";
 // 导入购物车列表
 // import { cart, removeFromCart, updateDeliveryOption,  updateQuantity  } from "../../data/cart.js";
 // 导入money从美分转换为美元的计算函数
@@ -17,12 +17,14 @@ import { cart } from "../../data/cart-class.js";
 let focusId;
 
 // 渲染左侧购物车详情函数
-export function renderOrderSummary() {
+export async function renderOrderSummary() {
     let cartSummaryHTML = "";
-    cart.cartItems.forEach((cartItem) => {
+    await loadProductsFetch();
 
+    cart.cartItems.forEach((cartItem) => {
         // 根据 cartItem 查找出完整项目 → 将完整条目存入matchingProduct(HTML将使用matchingProduct生成DOM树)
         // console.log('input id: ',cartItem.productId);
+
         const matchingProduct = getProductFromProducts(cartItem.productId);
         // console.log('matching id: ',matchingProduct);
 
@@ -190,43 +192,42 @@ export function renderOrderSummary() {
 
     // 监听 delete 按钮 → 删除按钮的点击删除功能
     document.querySelectorAll(".js-delete-link").forEach((link) => {
-        link.addEventListener("click", () => {
+        link.addEventListener("click", async () => {
             const productId = link.dataset.productId;
             cart.removeFromCart(productId);
             // 更新页面最上方的购物车内商品总数清单
             renderCheckoutHeader();
             // cart字典已经改变 → 重新渲染左侧购物车详情部分
-            renderOrderSummary();
+            await renderOrderSummary();
             // 执行: 渲染右侧总金额计算函数
-            renderPaymentSummary();
+            await renderPaymentSummary();
         });
     });
 
-
     // 修改: 寄送时间
     document.querySelectorAll(".js-delivery-option").forEach((element) => {
-        element.addEventListener("click", () => {
+        element.addEventListener("click", async() => {
             const { productId, deliveryOptionId } = element.dataset;
             // updateDeliveryOption(productId, deliveryOptionId);
             cart.updateDeliveryOption(productId, deliveryOptionId);
             // cart字典已经改变 → 重新渲染左侧购物车详情部分
-            renderOrderSummary();
+            await renderOrderSummary();
             // 执行: 渲染右侧总金额计算函数
-            renderPaymentSummary();
+            await renderPaymentSummary();
         });
     });
 }
 
-    // 监听 enter 键盘按键 → 实现 save 功能
-    document.addEventListener("keyup", (keyUp) => {
-        if (keyUp.key === "Enter") {
-            // // test
-            // console.log('good');
-            // console.log(focusId);
-            // console.log(document.querySelector(`.js-cart-item-container-${focusId}`));
-            // console.log(document.querySelector(`.js-cart-item-container-${focusId} .js-save-quantity-link`));
-            // //
-            document.querySelector(`.js-cart-item-container-${focusId} .js-save-quantity-link`).click();
-            // document.querySelector(`.js-save-quantity-link`).click();
-        }
-    });
+// 监听 enter 键盘按键 → 实现 save 功能
+document.addEventListener("keyup", (keyUp) => {
+    if (keyUp.key === "Enter") {
+        // // test
+        // console.log('good');
+        // console.log(focusId);
+        // console.log(document.querySelector(`.js-cart-item-container-${focusId}`));
+        // console.log(document.querySelector(`.js-cart-item-container-${focusId} .js-save-quantity-link`));
+        // //
+        document.querySelector(`.js-cart-item-container-${focusId} .js-save-quantity-link`).click();
+        // document.querySelector(`.js-save-quantity-link`).click();
+    }
+});

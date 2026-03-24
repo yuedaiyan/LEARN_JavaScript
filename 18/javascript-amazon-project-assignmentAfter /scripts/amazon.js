@@ -92,8 +92,7 @@ function renderProductsGrid() {
             cart.addToCart(productId);
 
             // 刷新屏幕:修改屏幕右上角购物车商品数量
-            // 处理0的问题
-            document.querySelector(".js-cart-quantity").innerHTML = cart.calculateCartQuantity(cart) || "";
+            document.querySelector(".js-cart-quantity").innerHTML = cart.calculateCartQuantity(cart);
 
             showAddedToCartIcon(productId);
         });

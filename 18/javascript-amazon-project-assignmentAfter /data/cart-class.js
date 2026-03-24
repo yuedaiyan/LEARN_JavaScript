@@ -32,6 +32,35 @@ export class Cart {
         localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
     }
 
+    // 仅加入一份商品至购物车
+    addOneProductToCart(productId) {
+
+
+        // 检测当前cart中是否已经有商品了
+        let marchingId;
+        this.cartItems.forEach((cartItem) => {
+            // item:当前条目
+            if (cartItem.productId === productId) {
+                return (marchingId = cartItem);
+            }
+        });
+
+        if (marchingId) {
+            // 已经在列表中了 → 修改数量
+            marchingId.quantity += 1;
+        } else {
+            // 不再列表中 → 需要将其加入到列表中
+            this.cartItems.push({
+                productId: productId,
+                quantity: 1,
+                deliveryOptionId: "1",
+            });
+        }
+        // 更新本地存储的购物车信息
+        this.saveToStorage();
+
+    }
+
     // 商品加入函数 (点击 Add 按钮触发)
     addToCart(productId) {
         // TODO:此处逻辑不好,不应依赖DOM,建议拆分逻辑,js只接受数字

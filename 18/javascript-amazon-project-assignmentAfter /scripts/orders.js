@@ -18,9 +18,11 @@ document.querySelector(".js-cart-quantity").innerHTML = cart.calculateCartQuanti
 async function renderAllOrders() {
     await loadProductsFetch();
     orders.forEach((order) => {
-        console.log("one new order: ", order);
+        // console.log("one new order: ", order);
         renderAnOrder(order);
     });
+// 添加监听器
+buyAgain();
 }
 
 // 一笔订单 渲染函数
@@ -34,7 +36,7 @@ function renderAnOrder(order) {
                         <div class="order-header-left-section">
                             <div class="order-date">
                                 <div class="order-header-label">Order Placed:</div>
-                                <div>${dayjs(order.time).format('MMMM YY')}</div>
+                                <div>${dayjs(order.time).format("MMMM YY")}</div>
                             </div>
                             <div class="order-total">
                                 <div class="order-header-label">Total:</div>
@@ -74,7 +76,8 @@ function renderAllProduct(products) {
 function renderAnProduct(product) {
     let oneProductHTML = "";
     const matchingProduct = getProductFromProducts(product.productId);
-    console.log("one product: ", matchingProduct);
+    console.log(product);
+    // console.log("one product: ", matchingProduct);
 
     oneProductHTML += `
 <!-- one order start -->
@@ -84,9 +87,11 @@ function renderAnProduct(product) {
 
                         <div class="product-details">
                             <div class="product-name">${matchingProduct.name}</div>
-                            <div class="product-delivery-date">Arriving on: ${dayjs(product.estimatedDeliveryTime).format('MMMM YY')}</div>
+                            <div class="product-delivery-date">Arriving on: ${dayjs(product.estimatedDeliveryTime).format("MMMM YY")}</div>
                             <div class="product-quantity">Quantity: ${product.quantity}</div>
-                            <button class="buy-again-button button-primary js-buy-again-button">
+<!-- buy it again button -->
+                            <button class="buy-again-button button-primary js-buy-again-button" data-product-id="${product.productId}">
+<!-- buy it again button -->
                                 <img class="buy-again-icon" src="images/icons/buy-again.png" />
                                 <span class="buy-again-message">Buy it again</span>
                             </button>
@@ -107,3 +112,17 @@ function renderAnProduct(product) {
 renderAllOrders();
 
 // TODO:18m
+// 点击 Buy it again 按钮之后,将一份商品加入购物车
+function buyAgain() {
+    document.querySelectorAll(".js-buy-again-button").forEach((button) => {
+        button.addEventListener("click", () => {
+            // add to cart
+            const { productId } = button.dataset;
+            console.log(productId);
+            
+            cart.addOneProductToCart(productId);
+            // 刷新屏幕:修改屏幕右上角购物车商品数量,处理页眉购物车数量标签
+            document.querySelector(".js-cart-quantity").innerHTML = cart.calculateCartQuantity(cart);
+        });
+    });
+}

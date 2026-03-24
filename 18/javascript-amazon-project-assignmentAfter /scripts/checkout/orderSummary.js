@@ -21,12 +21,16 @@ export async function renderOrderSummary() {
     let cartSummaryHTML = "";
     await loadProductsFetch();
 
+    console.log("cart; ",cart);
+    console.log("cart.cartItems; ",cart.cartItems);
+
     cart.cartItems.forEach((cartItem) => {
         // 根据 cartItem 查找出完整项目 → 将完整条目存入matchingProduct(HTML将使用matchingProduct生成DOM树)
-        // console.log('input id: ',cartItem.productId);
+        console.log('input id: ',cartItem.productId);
 
         const matchingProduct = getProductFromProducts(cartItem.productId);
-        // console.log('matching id: ',matchingProduct);
+        console.log('matchinProduct: ',matchingProduct);
+        console.log(matchingProduct.id);
 
         // 打印完整的matchingProduct条目
         // console.log("matchingProduct:",matchingProduct);

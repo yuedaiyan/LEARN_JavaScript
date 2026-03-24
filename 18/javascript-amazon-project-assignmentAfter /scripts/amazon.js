@@ -70,7 +70,7 @@ function renderProductsGrid() {
     // 使用实际的cart数据,更新购物车数量
     cartQuantity = cart.calculateCartQuantity(cart);
     // 刷新屏幕
-    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity || "";
+    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
 
     // Add 绿色提示
     function showAddedToCartIcon(productId) {

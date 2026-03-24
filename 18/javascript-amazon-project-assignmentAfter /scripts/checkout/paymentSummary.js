@@ -96,5 +96,3 @@ export async function renderPaymentSummary() {
 }
 
 console.log("shor cart:",cart);
-
-// TODO:检查为什么总是会莫名奇妙被添加那两个商品

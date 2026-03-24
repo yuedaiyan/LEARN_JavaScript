@@ -177,4 +177,4 @@ export async function loadCartFetch() {
     console.log('data form fetch: \n',data);
     return data
 }
-loadCartFetch();
+// loadCartFetch();

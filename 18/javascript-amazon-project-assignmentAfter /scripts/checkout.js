@@ -17,7 +17,7 @@ import { loadCartFetch } from "../data/cart-class.js";
 
 async function loadPage() {
     try {
-        await Promise.all([loadProductsFetch(), loadCartFetch()]);
+        await Promise.all([loadProductsFetch()]);
     } catch (error) {
         console.log("@chechout.js|loadPage()\nUnexpected error.\nPlease try again later.");
         console.log(error);

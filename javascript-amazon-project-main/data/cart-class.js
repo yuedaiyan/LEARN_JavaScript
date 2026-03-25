@@ -63,7 +63,7 @@ export class Cart {
 
     // 商品加入函数 (点击 Add 按钮触发)
     addToCart(productId) {
-        // TODO:此处逻辑不好,不应依赖DOM,建议拆分逻辑,js只接受数字
+        // TODO: 18r 此处逻辑不好,不应依赖DOM,建议拆分逻辑,js只接受数字
         // 获取用户的选择数量
         const selectValueEl = document.querySelector(`.js-quantity-selector-${productId}`)?.value ?? "1";
         const selectValue = Number(selectValueEl);

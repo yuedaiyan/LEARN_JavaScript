@@ -14,5 +14,16 @@ function search() {
     });
 }
 
+// 监听 enter 键盘按键 → 实现 search 功能
+function enterSearch() {
+    document.addEventListener("keyup", (keyUp) => {
+        if (keyUp.key === "Enter") {
+            document.querySelector(`.js-search-button`).click();
+        }
+    });
+}
+
+// 执行 监听enter函数
+enterSearch();
 // 执行 搜索函数
 search();

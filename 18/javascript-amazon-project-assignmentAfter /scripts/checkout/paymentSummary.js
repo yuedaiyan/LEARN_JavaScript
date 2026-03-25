@@ -89,7 +89,6 @@ export async function renderPaymentSummary() {
 
         // 点击下单按钮之后,自动清空购物车
         cart.removeWholeCart();
-
         // 跳转到订单界面
         window.location.href = "orders.html";
     });

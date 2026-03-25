@@ -76,14 +76,11 @@ function renderAnProduct(order,product) {
     let oneProductHTML = "";
     const matchingProduct = getProductFromProducts(product.productId);
     console.log('product: ',product);
-    // console.log("one product: ", matchingProduct);
 
     // 处理 Track package 按钮的url参数传递 → 传两个参数
-    // console.log('one order id: ',order.id);
     const params = new URLSearchParams();
     params.append("orderId", order.id);
     params.append("productId", product.productId);
-    // console.log(params.toString());
 
     oneProductHTML += `
 <!-- one order start -->

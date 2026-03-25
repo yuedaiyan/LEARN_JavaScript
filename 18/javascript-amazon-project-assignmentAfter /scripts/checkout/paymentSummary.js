@@ -81,7 +81,7 @@ export async function renderPaymentSummary() {
                 body: JSON.stringify({ cart: cart }),
             });
             const order = await response.json();
-            // console.log(order);
+            // console.log('make an order',order);
             addOrder(order);
         } catch (error) {
             console.log('@paymentSummary.js|function .js-place-order."click"\nUnexpected error.\nPlease try again later.');

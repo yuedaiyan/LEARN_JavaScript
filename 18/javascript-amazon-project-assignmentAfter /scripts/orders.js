@@ -21,8 +21,8 @@ async function renderAllOrders() {
         // console.log("one new order: ", order);
         renderAnOrder(order);
     });
-// 添加监听器
-buyAgain();
+    // 添加监听器
+    buyAgain();
 }
 
 // 一笔订单 渲染函数
@@ -52,7 +52,7 @@ function renderAnOrder(order) {
 
 <!-- order content section start -->
                     <div class="order-details-grid js-order-details-grid">
-                        ${renderAllProduct(order.products)}
+                        ${renderAllProduct(order)}
                     </div>
 <!-- order content section end -->
 
@@ -63,21 +63,28 @@ function renderAnOrder(order) {
     document.querySelector(".js-orders-grid").innerHTML += ordersGridHTML;
 }
 
-function renderAllProduct(products) {
+function renderAllProduct(order) {
     let allProducts = "";
     // 每一笔订单内部,渲染商品详情
-    products.forEach((product) => {
-        allProducts += renderAnProduct(product);
+    order.products.forEach((product) => {
+        allProducts += renderAnProduct(order,product);
     });
     return allProducts;
 }
 
 // 订单详细信息函数(订单中的一个商品)
-function renderAnProduct(product) {
+function renderAnProduct(order,product) {
     let oneProductHTML = "";
     const matchingProduct = getProductFromProducts(product.productId);
-    console.log(product);
+    console.log('product: ',product);
     // console.log("one product: ", matchingProduct);
+
+    // 处理 Track package 按钮的url参数传递 → 传两个参数
+    // console.log('one order id: ',order.id);
+    const params = new URLSearchParams();
+    params.append("orderId", order.id);
+    params.append("productId", product.productId);
+    // console.log(params.toString());
 
     oneProductHTML += `
 <!-- one order start -->
@@ -87,7 +94,7 @@ function renderAnProduct(product) {
 
                         <div class="product-details">
                             <div class="product-name">${matchingProduct.name}</div>
-                            <div class="product-delivery-date">Arriving on: ${dayjs(product.estimatedDeliveryTime).format("MMMM YY")}</div>
+                            <div class="product-delivery-date">Arriving on: ${dayjs(product.estimatedDeliveryTime).format("MMMM D")}</div>
                             <div class="product-quantity">Quantity: ${product.quantity}</div>
 <!-- buy it again button -->
                             <button class="buy-again-button button-primary js-buy-again-button" data-product-id="${product.productId}">
@@ -96,30 +103,29 @@ function renderAnProduct(product) {
                                 <span class="buy-again-message">Buy it again</span>
                             </button>
                         </div>
-
                         <div class="product-actions">
-                            <a href="tracking.html">
+
+<!-- go to tracking.html page -->
+                            <a href="tracking.html?${params.toString()}">
+<!-- go to tracking.html page -->
+
                                 <button class="track-package-button button-secondary">Track package</button>
                             </a>
                         </div>
 <!-- one order end -->
     `;
-    // document.querySelector(".js-order-details-grid").innerHTML += oneProductHTML;
     return oneProductHTML;
 }
 
 // 执行 渲染整个页面
 renderAllOrders();
 
-// TODO:18m
 // 点击 Buy it again 按钮之后,将一份商品加入购物车
 function buyAgain() {
     document.querySelectorAll(".js-buy-again-button").forEach((button) => {
         button.addEventListener("click", () => {
             // add to cart
             const { productId } = button.dataset;
-            console.log(productId);
-            
             cart.addOneProductToCart(productId);
             // 刷新屏幕:修改屏幕右上角购物车商品数量,处理页眉购物车数量标签
             document.querySelector(".js-cart-quantity").innerHTML = cart.calculateCartQuantity(cart);

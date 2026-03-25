@@ -52,8 +52,8 @@
             </div>
         </div>
 
-        <div class="main">
-            <div class="order-tracking">
+        <div class="main js-main">
+            <!-- <div class="order-tracking">
                 <a class="back-to-orders-link link-primary" href="orders.html"> View all orders </a>
 
                 <div class="delivery-date">Arriving on Monday, June 13</div>
@@ -73,17 +73,13 @@
                 <div class="progress-bar-container">
                     <div class="progress-bar"></div>
                 </div>
-            </div>
+            </div> -->
         </div>
         <!-- 个人签名 -->
         <div class="signature">
             <div class="name">- Yue Dayan -</div>
             <div class="time">2026 - xx - xx</div>
         </div>
-        <script>
-            const url = new URL(window.location.href);
-            const urlId=url.searchParams.get('orderId')
-            console.log(urlId);
-        </script>
+        <script type="module" src="scripts/tracking.js"></script>
     </body>
 </html>

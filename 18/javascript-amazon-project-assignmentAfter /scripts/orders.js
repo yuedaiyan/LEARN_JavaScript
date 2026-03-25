@@ -18,7 +18,6 @@ document.querySelector(".js-cart-quantity").innerHTML = cart.calculateCartQuanti
 async function renderAllOrders() {
     await loadProductsFetch();
     orders.forEach((order) => {
-        // console.log("one new order: ", order);
         renderAnOrder(order);
     });
     // 添加监听器

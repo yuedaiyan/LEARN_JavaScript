@@ -5,19 +5,16 @@ import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 // 导入商品清单,查找完整商品信息函数
 import { getProductFromProducts, loadProductsFetch } from "../data/products.js";
 
-console.log(orders);
+// console.log(orders);
 
 // 获取本页product id
 const url = new URL(window.location.href);
 const orderId = url.searchParams.get("orderId");
 const productId = url.searchParams.get("productId");
-console.log("orderId: ", orderId);
-console.log("productId: ", productId);
 
 // 获取本页面订单中的商品
 const orderOfPage = getOrderFromOrders(orderId);
 const productOfPage = getTheProductInOrder(orderOfPage, productId);
-console.log("product of the page;", productOfPage);
 
 // 格式化时间
 const estimateDateFormat = dayjs(productOfPage.estimatedDeliveryTime).format("dddd, MMM D");
@@ -25,7 +22,6 @@ const estimateDateFormat = dayjs(productOfPage.estimatedDeliveryTime).format("dd
 // 获取商品基本信息
 await loadProductsFetch();
 const matchingProduct = getProductFromProducts(productId);
-console.log("matchingProduct", matchingProduct);
 
 // 渲染页面核心区
 async function renderMain() {

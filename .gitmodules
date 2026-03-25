@@ -1,0 +1,3 @@
+[submodule "standardAnswer-clone/javascript-course"]
+	path = standardAnswer-clone/javascript-course
+	url = https://github.com/SuperSimpleDev/javascript-course.git

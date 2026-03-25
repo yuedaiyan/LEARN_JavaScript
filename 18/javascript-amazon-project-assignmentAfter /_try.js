@@ -1,12 +1,7 @@
-const obj3 = {
-    method() {
-        console.log('hello');
-        console.log("0",this);
+const a = ['a','b','c'];
+const b = "aaa";
+const c={"1":[2]}
 
-        [1, 2, 3].forEach(() => {
-            console.log('1',this);
-        });
-    },
-};
-
-obj3.method()
+console.log(typeof a);
+console.log(typeof b);
+console.log(typeof c);

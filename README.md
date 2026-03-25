@@ -6,6 +6,12 @@ Project Focus on DOM Tree Generation and Interaction.
 
 The project centers on the generation and manipulation of DOM trees, maintaining enterprise-grade coding standards throughout, with the Jasmine testing framework integrated for unit and behavioral testing.
 
+
+其中包含过程式变成与面向对象编程,
+也包含了与后端的交互,并解决了异步相关问题(async function() ,fetch() await function()等)
+
+
+
 ##  Final Project
 * **File Path:** `/javascript-amazon-project-main/amazon.html`
 * **Best Viewed In:** Google Chrome

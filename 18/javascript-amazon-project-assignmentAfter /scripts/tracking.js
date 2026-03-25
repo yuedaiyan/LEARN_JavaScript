@@ -7,24 +7,24 @@ import { getProductFromProducts, loadProductsFetch } from "../data/products.js";
 
 // console.log(orders);
 
-// 获取本页product id
-const url = new URL(window.location.href);
-const orderId = url.searchParams.get("orderId");
-const productId = url.searchParams.get("productId");
-
-// 获取本页面订单中的商品
-const orderOfPage = getOrderFromOrders(orderId);
-const productOfPage = getTheProductInOrder(orderOfPage, productId);
-
-// 格式化时间
-const estimateDateFormat = dayjs(productOfPage.estimatedDeliveryTime).format("dddd, MMM D");
-
-// 获取商品基本信息
-await loadProductsFetch();
-const matchingProduct = getProductFromProducts(productId);
-
 // 渲染页面核心区
 async function renderMain() {
+    // 获取本页product id
+    const url = new URL(window.location.href);
+    const orderId = url.searchParams.get("orderId");
+    const productId = url.searchParams.get("productId");
+
+    // 获取本页面订单中的商品
+    const orderOfPage = getOrderFromOrders(orderId);
+    const productOfPage = getTheProductInOrder(orderOfPage, productId);
+
+    // 格式化时间
+    const estimateDateFormat = dayjs(productOfPage.estimatedDeliveryTime).format("dddd, MMM D");
+
+    // 获取商品基本信息
+    await loadProductsFetch();
+    const matchingProduct = getProductFromProducts(productId);
+
     let mainHTML = `
             <div class="order-tracking">
                 <a class="back-to-orders-link link-primary" href="orders.html"> View all orders </a>

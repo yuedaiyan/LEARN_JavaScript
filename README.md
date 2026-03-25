@@ -7,7 +7,7 @@ The curriculum focuses on DOM tree generation and interaction, and covers proced
 此次学习聚焦于 DOM 树的生成与交互，并包括过程式编程、面向对象编程、Jasmine 测试框架应用、后端、异步(XML、fetch、async function、await……)，并在全过程遵循企业级代码规范。</small>
 
 ##  Final Project
-* **File Path:** `/javascript-amazon-project-main/amazon.html`
+* **File Path:** `/javascript-amazon-project-main`
 * **Best Viewed In:** Google Chrome
 
 <br>

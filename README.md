@@ -1,6 +1,7 @@
 # Javascript Practice: YouTube Clone
 
 This repository contains my final project and exercises from completing the Javascript comprehensive course.
+
 <small>本仓库包含我完成 JavaScript 综合课程后的期末项目与练习作业。</small>
 
 Project Focus on DOM Tree Generation and Interaction.

@@ -128,8 +128,7 @@ function renderSearchProducts(searchParams) {
     // 依据js文件:data/product.js中的list,逐条生成HTML
     products.forEach((product) => {
         // 逐个检查商品名称中是否包含搜索关键字,有则渲染,没有则跳过
-        // TODO: 现在是大小写敏感状态
-        if (product.name.includes(searchParams)) {
+        if (product.name.toLowerCase().includes(searchParams.toLowerCase())) {
             console.log("includes params: ", searchParams);
             // 只有检测到了,才会添加到渲染队列中
             productsHTML += `

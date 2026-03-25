@@ -13,13 +13,11 @@ describe("test suite: renderOrderSummary()", () => {
     const productId2 = "15b6fc6f-327a-4ec4-896f-486349e85a3d";
 
     // 等待products列表从后端完全加载之后,才进行下一步操作
-    beforeAll((done) => {
-        loadProductsFetch().then(() => {
-            done();
-        });
+    beforeAll(async () => {
+        await loadProductsFetch();
     });
 
-    beforeEach(() => {
+    beforeEach(async () => {
         // 模拟:创建一个 js-order-summary 的容器,以便于 renderOrderSummary 往里面拼接字符串
         document.querySelector(".js-test-container").innerHTML = `
                 <div class="js-order-summary"></div>
@@ -36,7 +34,7 @@ describe("test suite: renderOrderSummary()", () => {
             { productId: productId2, quantity: 1, deliveryOptionId: "2" },
         ];
         // 呼叫被测试主函数
-        renderOrderSummary();
+        await renderOrderSummary();
     });
 
     // 测试页面长相部分
@@ -54,14 +52,19 @@ describe("test suite: renderOrderSummary()", () => {
     });
 
     // 测试交互行为: 删除按钮
-    it("removes a product", () => {
+    it("removes a product", async () => {
         // 补充:劫持函数: localStorage.setItem → null
         spyOn(localStorage, "setItem");
 
         // 原本有两个条目
         expect(document.querySelectorAll(".js-cart-item-container").length).toEqual(2);
+
         // 删除一个条目
+        // click()会触发异步!
         document.querySelector(`.js-delete-link-${productId1}`).click();
+        // 等待 async 事件处理器中的 await renderOrderSummary() 完成
+        await new Promise((resolve) => setTimeout(resolve, 0));
+
         // 测试发现只有一个了
         expect(document.querySelectorAll(".js-cart-item-container").length).toEqual(1);
         // 删除之后,第一个条目应为空
@@ -96,7 +99,7 @@ describe("updating the delivery option", () => {
     });
 
     // 初始化共享设置
-    beforeEach(() => {
+    beforeEach(async() => {
         // 模拟:创建一个 js-order-summary 的容器,以便于 renderOrderSummary 往里面拼接字符串
         document.querySelector(".js-test-container").innerHTML = `
                 <div class="js-order-summary"></div>
@@ -113,11 +116,12 @@ describe("updating the delivery option", () => {
         ];
 
         // 呼叫被测试主函数
-        renderOrderSummary();
+        await renderOrderSummary();
     });
 
-    it("测试: 可否成功将商品1的寄送方式从 1 → 3", () => {
+ it("测试: 可否成功将商品1的寄送方式从 1 → 3", async () => {
         const productContainer = document.querySelector(`.js-delivery-options-${productId1}`);
+
         // 测试 选项1 已处于点击状态
         const radio1 = productContainer.querySelector(`.js-delivery-option[data-delivery-option-id="1"] .delivery-option-input`);
         expect(radio1.checked).toBe(true);
@@ -125,6 +129,9 @@ describe("updating the delivery option", () => {
         // 将寄送选项从 1 改到 3
         const radio3 = productContainer.querySelector(`.js-delivery-option[data-delivery-option-id="3"] .delivery-option-input`);
         radio3.click();
+        // click()会触发异步!
+        // 等待 async 事件处理器中的 await renderOrderSummary() 完成
+        await new Promise((resolve) => setTimeout(resolve, 0));
         // 测试 选项3 已处于点击状态
         expect(radio3.checked).toBe(true);
 

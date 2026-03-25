@@ -4,16 +4,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 30px 0 40px 0;
+    padding: 50px 0 40px 0;
+    color: hsl(0, 0%, 50%);
+    font-style: italic;
+    opacity: 0.25;
 }
 .signature .name {
-    color: #cfcfcf;
-    font-style: italic;
     font-size: 30px;
     margin: 0 0 5px 0;
-}
-
-.signature .time {
-    font-style: italic;
-    color: #cfcfcf;
 }

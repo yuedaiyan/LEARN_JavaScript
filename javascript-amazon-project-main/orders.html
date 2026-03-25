@@ -8,7 +8,6 @@
       smaller screen sizes like a phone or a tablet). -->
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-        <link rel="icon" href="images/icons/favicon.ico" />
         <!-- Load a font called Roboto from Google Fonts. -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,11 +30,15 @@
             </div>
 
             <div class="amazon-header-middle-section">
-                <input class="search-bar" type="text" placeholder="Search" />
+<!-- search input -->
+                <input class="search-bar js-search-bar" type="text" placeholder="Search" />
+<!-- search input -->
 
-                <button class="search-button">
+<!-- search button -->
+                <button class="search-button js-search-button">
                     <img class="search-icon" src="images/icons/search-icon.png" />
                 </button>
+<!-- search button -->
             </div>
 
             <div class="amazon-header-right-section">
@@ -46,17 +49,21 @@
 
                 <a class="cart-link header-link" href="checkout.html">
                     <img class="cart-icon" src="images/icons/cart-icon.png" />
-                    <div class="cart-quantity">3</div>
+                    <div class="cart-quantity js-cart-quantity"></div>
                     <div class="cart-text">Cart</div>
                 </a>
             </div>
         </div>
 
         <div class="main">
+            <!-- 订单开头标签 开始 -->
             <div class="page-title">Your Orders</div>
+            <!-- 订单开头标签 结束 -->
 
-            <div class="orders-grid">
-                <div class="order-container">
+            <!-- 订单内容部分 开始 -->
+            <div class="orders-grid js-orders-grid">
+                <!-- 订单一 开始 -->
+                <!-- <div class="order-container">
                     <div class="order-header">
                         <div class="order-header-left-section">
                             <div class="order-date">
@@ -91,8 +98,7 @@
                         </div>
 
                         <div class="product-actions">
-                            // TODO:注意生成链接的时候,要添加两个url索引
-                            <a href="tracking.html?orderId=123&productId=456">
+                            <a href="tracking.html">
                                 <button class="track-package-button button-secondary">Track package</button>
                             </a>
                         </div>
@@ -117,9 +123,11 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </div> -->
+                <!-- 订单一 结束 -->
 
-                <div class="order-container">
+                <!-- 订单二 开始-->
+                <!-- <div class="order-container">
                     <div class="order-header">
                         <div class="order-header-left-section">
                             <div class="order-date">
@@ -159,13 +167,17 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </div> -->
+                <!-- 订单二 结束 -->
             </div>
+            <!-- 订单内容部分 结束 -->
         </div>
         <!-- 个人签名 -->
         <div class="signature">
             <div class="name">- Yue Dayan -</div>
             <div class="time">2026 - xx - xx</div>
         </div>
+        <script type="module" src="scripts/orders.js"></script>
+        <script type="module" src="scripts/search.js"></script>
     </body>
 </html>

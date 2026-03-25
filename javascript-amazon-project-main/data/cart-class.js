@@ -3,7 +3,7 @@
 // 1: {productId: 'a7ad3bba44ce67fcd915e5c9dc4bd455', quantity: 1, deliveryOptionId: '1'}
 // 2: {productId: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6', quantity: 4, deliveryOptionId: '2'}
 
- export class Cart {
+export class Cart {
     // 核心 list
     cartItems;
     // 类私有属性
@@ -30,6 +30,35 @@
     // 将购物车信息 储存到本地 local storage 中
     saveToStorage() {
         localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
+    }
+
+    // 仅加入一份商品至购物车
+    addOneProductToCart(productId) {
+
+
+        // 检测当前cart中是否已经有商品了
+        let marchingId;
+        this.cartItems.forEach((cartItem) => {
+            // item:当前条目
+            if (cartItem.productId === productId) {
+                return (marchingId = cartItem);
+            }
+        });
+
+        if (marchingId) {
+            // 已经在列表中了 → 修改数量
+            marchingId.quantity += 1;
+        } else {
+            // 不再列表中 → 需要将其加入到列表中
+            this.cartItems.push({
+                productId: productId,
+                quantity: 1,
+                deliveryOptionId: "1",
+            });
+        }
+        // 更新本地存储的购物车信息
+        this.saveToStorage();
+
     }
 
     // 商品加入函数 (点击 Add 按钮触发)
@@ -136,24 +165,45 @@
             return;
         }
     }
+
+    // 清空购物车(主要供下单的场景使用 → 下单自动清空购物车)
+    removeWholeCart() {
+        this.cartItems = [];
+        // 更新本地存储的购物车信息
+        this.saveToStorage();
+        // 检查并输出
+        const cartCount = this.calculateCartQuantity();
+        console.log('removeWholeCart: ',cartCount);
+    }
 }
 
 // const cart = new Cart('cart-oop');
 // const businessCart = new Cart('cart-business');
 
-export const cart=new Cart('cart-class')
+export const cart = new Cart("cart-class");
 
 // 演示,解决回调地域
-// 使用后端购物车("https://supersimplebackend.dev/products")
-export let cartFromBackend = [];
-export function loadCart(func_s) {
-    const xhr = new XMLHttpRequest();
-    xhr.addEventListener("load", () => {
-        // console.log(xhr.response);
-        // 服务器已成功返回数据
-        console.log('load cart from "https://supersimplebackend.dev/cart"');
-        func_s();
-    });
-    xhr.open("GET", "https://supersimplebackend.dev/cart");
-    xhr.send();
+// 使用后端购物车("https://supersimplebackend.dev")
+// export let cartFromBackend = [];
+// export function loadCart(func_s) {
+//     const xhr = new XMLHttpRequest();
+//     xhr.addEventListener("load", () => {
+//         // console.log(xhr.response);
+//         // 服务器已成功返回数据
+//         console.log('load cart from "https://supersimplebackend.dev/cart"');
+//         func_s();
+//     });
+//     xhr.open("GET", "https://supersimplebackend.dev/cart");
+//     xhr.send();
+// }
+
+// assignment 18h
+// 使用异步函数处理相关问题
+export async function loadCartFetch() {
+    const response = await fetch("https://supersimplebackend.dev/cart");
+    const data = await response.text();
+    console.log('Use async fetch(), load cart from "https://supersimplebackend.dev/cart"');
+    console.log('data form fetch: \n',data);
+    return data
 }
+// loadCartFetch();

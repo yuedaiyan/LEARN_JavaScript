@@ -4,6 +4,8 @@ import { orders } from "../data/orders.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
 // 导入商品清单,查找完整商品信息函数
 import { getProductFromProducts, loadProductsFetch } from "../data/products.js";
+// 导入购物车列表
+import { cart } from "../data/cart-class.js";
 
 // console.log(orders);
 
@@ -110,6 +112,9 @@ function calculateDeliveryPercent() {
         changeCurrentLabel(2);
     }
 }
+
+// 处理页眉购物车数量标签
+document.querySelector(".js-cart-quantity").innerHTML = cart.calculateCartQuantity(cart);
 
 // 执行 渲染页面核心区
 renderMain();

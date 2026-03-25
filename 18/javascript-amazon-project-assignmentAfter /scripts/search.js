@@ -1,5 +1,3 @@
-console.log("search page");
-
 // 搜索函数
 function search() {
     const searchButtonEl = document.querySelector(".js-search-button");

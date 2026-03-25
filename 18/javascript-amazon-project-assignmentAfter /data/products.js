@@ -112,6 +112,7 @@ export function loadProductsFetch() {
 
 // 使用后端商品清单("https://supersimplebackend.dev/products")
 export let products = [];
+
 // 和 loadProductsFetch() 目的相同——从后端获取商品数据填充 products 数组
 export function loadProducts(func_s) {
     const xhr = new XMLHttpRequest();
@@ -127,7 +128,7 @@ export function loadProducts(func_s) {
             return new Product(productDetails);
         });
         // 服务器已成功返回数据
-        console.log('load products from "https://supersimplebackend.dev/products"');
+        // console.log('load products from "https://supersimplebackend.dev/products"');
         func_s();
     });
     xhr.addEventListener("error", (error) => {

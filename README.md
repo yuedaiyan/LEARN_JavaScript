@@ -10,20 +10,70 @@ The curriculum focuses on DOM tree generation and interaction, and covers proced
 * **File Path:** `/javascript-amazon-project-main/amazon.html`
 * **Best Viewed In:** Google Chrome
 
-    <div align="center">
+
+
+<div align="center">
         <a href="https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/amazon.html">
             <img src="amazon.png" height="200"  alt="Amazon.com Diagram">
         </a>
-    </div>
+</div>
 
 <div align="center">
 
-[Click me to enter the webpage](https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/amazon.html)
+[page 1 amazon.html](https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/amazon.html)
 
 </div>
 
+
+
+
+<div align="center">
+        <a href="https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/checkout.html">
+            <img src="amazon.png" height="200"  alt="Amazon.com Diagram">
+        </a>
+</div>
+
+<div align="center">
+
+[page 2 ckeckout.html](https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/checkout.html)
+
+</div>
+
+
+
+
+
+
+
+<div align="center">
+        <a href="https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/orders.html">
+            <img src="amazon.png" height="200"  alt="Amazon.com Diagram">
+        </a>
+</div>
+
+<div align="center">
+
+[page 3 orders.html](https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/orders.html)
+
+</div>
+
+
+
+<div align="center">
+        <a href="https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/tests-jasmine/SpecRunner.html">
+            <img src="amazon.png" height="200"  alt="Amazon.com Diagram">
+        </a>
+</div>
+
+<div align="center">
+
+[Jasmine Test Framework](https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/tests-jasmine/SpecRunner.html)
+
+</div>
+
+
 ##  Resources & Credits
-* **Course Video:** [JavaScript Tutorial Full Course - Beginner to Pro](https://www.youtube.com/watch?v=EerdGm-ehJQ&t=61267s) by SuperSimpleDev
+* **Course Video:** [JavaScript Tutorial Full Course - Beginner to Pro](https://www.youtube.com/watch?v=EerdGm-ehJQ&t=61267s)
 * **Assignments:** [Course Repository](https://github.com/SuperSimpleDev/javascript-course)
 * **Reference Example:** [Live Demo](https://supersimple.dev/exercises/amazon/)
 

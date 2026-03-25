@@ -10,23 +10,19 @@ The curriculum focuses on DOM tree generation and interaction, and covers proced
 * **File Path:** `/javascript-amazon-project-main/amazon.html`
 * **Best Viewed In:** Google Chrome
 
-
-
+<br>
 <div align="center">
         <a href="https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/amazon.html">
             <img src="amazon.png" height="200"  alt="Amazon.com Diagram">
         </a>
 </div>
-
+<br>
 <div align="center">
 
 [page 1 amazon.html](https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/amazon.html)
 
 </div>
-
-
-
-
+<br>
 <div align="center">
         <a href="https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/checkout.html">
             <img src="checkout.png" height="200"  alt="Amazon.com Diagram">
@@ -38,9 +34,7 @@ The curriculum focuses on DOM tree generation and interaction, and covers proced
 [page 2 checkout.html](https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/checkout.html)
 
 </div>
-
-
-
+<br>
 <div align="center">
         <a href="https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/orders.html">
             <img src="orders.png" height="200"  alt="Amazon.com Diagram">
@@ -52,10 +46,7 @@ The curriculum focuses on DOM tree generation and interaction, and covers proced
 [page 3 orders.html](https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/orders.html)
 
 </div>
-
-
-
-
+<br>
 <div align="center">
         <a href="https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/tracking.html">
             <img src="tracking.png" height="200"  alt="Amazon.com Diagram">
@@ -67,9 +58,7 @@ The curriculum focuses on DOM tree generation and interaction, and covers proced
 [page 4 tracking.html](https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/tracking.html)
 
 </div>
-
-
-
+<br>
 <div align="center">
         <a href="https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/tests-jasmine/SpecRunner.html">
             <img src="jasmine.png" height="200"  alt="Amazon.com Diagram">
@@ -81,7 +70,7 @@ The curriculum focuses on DOM tree generation and interaction, and covers proced
 [Jasmine Test Framework](https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/tests-jasmine/SpecRunner.html)
 
 </div>
-
+<br>
 
 ##  Resources & Credits
 * **Course Video:** [JavaScript Tutorial Full Course - Beginner to Pro](https://www.youtube.com/watch?v=EerdGm-ehJQ&t=61267s)

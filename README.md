@@ -75,7 +75,7 @@ The course focuses on DOM tree generation and interaction, emphasizes the concep
 ##  Resources & Credits
 * **Course Video:** [JavaScript Tutorial Full Course - Beginner to Pro](https://www.youtube.com/watch?v=EerdGm-ehJQ&t=61267s)
 * **Assignments:** [Course Repository](https://github.com/SuperSimpleDev/javascript-course)
-* **Reference Example:** [Live Demo](https://supersimple.dev/exercises/amazon/)
+<!-- * **Reference Example:** [Live Demo](https://supersimple.dev/exercises/amazon/) -->
 
 ---
 *Completed as part of my Front-End development learning journey.*

@@ -1,4 +1,4 @@
-# Javascript Practice: YouTube Clone
+# Javascript Course: Amazon Clone
 
 This repository documents my journey learning a JavaScript course, including assignments and the final project.  
 The course focuses on DOM tree generation and interaction, emphasizes the concept of "state", and covers procedural programming, object-oriented programming, the Jasmine testing framework, backend development, and asynchronous programming (XML, fetch, async functions, await, etc.) — all following enterprise-level coding standards throughout.

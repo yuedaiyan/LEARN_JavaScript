@@ -14,8 +14,10 @@ import { products, loadProducts, loadProductsFetch } from "../data/products.js";
 // import '../data/backend-practice.js'
 // 演示回调地域
 import { loadCartFetch } from "../data/cart-class.js";
+// 为 cart 使用类
+import { cart } from "../data/cart-class.js";
 
-async function loadPage() {
+async function loadPage(cart) {
     try {
         await Promise.all([loadProductsFetch()]);
     } catch (error) {
@@ -23,11 +25,11 @@ async function loadPage() {
         console.log(error);
     }
     // 执行: 渲染左侧商品菜单函数
-    await renderOrderSummary();
+    await renderOrderSummary(cart);
     // 执行: 渲染右侧总金额计算函数
-    await renderPaymentSummary();
+    await renderPaymentSummary(cart);
 }
-loadPage();
+loadPage(cart);
 
 // Promise.all([
 //     loadProductsFetch(),

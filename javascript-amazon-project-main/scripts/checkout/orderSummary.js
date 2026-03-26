@@ -11,29 +11,18 @@ import { renderPaymentSummary } from "./paymentSummary.js";
 // 导入: 上面 Checkout (3 items) 数量计算函数
 import { renderCheckoutHeader } from "./checkoutHeader.js";
 // 为 cart 使用类
-import { cart } from "../../data/cart-class.js";
+// import { cart } from "../../data/cart-class.js";
 
 // 全局变量: 最后一次鼠标的Id,指向最后交互Id(主要功能是处理键盘enter确认save的效果)
 let focusId;
 
 // 渲染左侧购物车详情函数
-export async function renderOrderSummary() {
+export async function renderOrderSummary(cart) {
     let cartSummaryHTML = "";
     await loadProductsFetch();
-
-    console.log("cart; ",cart);
-    console.log("cart.cartItems; ",cart.cartItems);
-
+   // 应该采用传入参数 
     cart.cartItems.forEach((cartItem) => {
-        // 根据 cartItem 查找出完整项目 → 将完整条目存入matchingProduct(HTML将使用matchingProduct生成DOM树)
-        console.log('input id: ',cartItem.productId);
-
         const matchingProduct = getProductFromProducts(cartItem.productId);
-        console.log('matchinProduct: ',matchingProduct);
-        console.log(matchingProduct.id);
-
-        // 打印完整的matchingProduct条目
-        // console.log("matchingProduct:",matchingProduct);
 
         // 计算真实的delivery date
         // 获取该商品的 寄送id
@@ -174,11 +163,11 @@ export async function renderOrderSummary() {
                 // 更新输入的值到 cart 中
                 cart.updateQuantity(productId, inputNumber);
                 // cart字典已经改变 → 重新渲染左侧购物车详情部分
-                await renderOrderSummary();
+                await renderOrderSummary(cart);
                 // 刷新页面面正上方渲染
                 renderCheckoutHeader();
                 // 执行: 渲染右侧总金额计算函数
-                await renderPaymentSummary();
+                await renderPaymentSummary(cart);
                 // 移除fucusId列表中的id,表示当前容器已经被关闭
                 focusId = null;
             } else {
@@ -202,9 +191,9 @@ export async function renderOrderSummary() {
             // 更新页面最上方的购物车内商品总数清单
             renderCheckoutHeader();
             // cart字典已经改变 → 重新渲染左侧购物车详情部分
-            await renderOrderSummary();
+            await renderOrderSummary(cart);
             // 执行: 渲染右侧总金额计算函数
-            await renderPaymentSummary();
+            await renderPaymentSummary(cart);
         });
     });
 
@@ -215,9 +204,9 @@ export async function renderOrderSummary() {
             // updateDeliveryOption(productId, deliveryOptionId);
             cart.updateDeliveryOption(productId, deliveryOptionId);
             // cart字典已经改变 → 重新渲染左侧购物车详情部分
-            await renderOrderSummary();
+            await renderOrderSummary(cart);
             // 执行: 渲染右侧总金额计算函数
-            await renderPaymentSummary();
+            await renderPaymentSummary(cart);
         });
     });
 }

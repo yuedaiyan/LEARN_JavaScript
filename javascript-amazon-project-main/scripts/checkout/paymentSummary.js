@@ -1,5 +1,5 @@
 // 导入购物车列表
-import { cart } from "../../data/cart-class.js";
+// import { cart } from ../../data/cart-class.js";
 // 导入商品清单,查找完整商品信息函数
 import { products, getProductFromProducts, loadProductsFetch } from "../../data/products.js";
 // 导入三档快递时间,档位信息查找函数
@@ -9,7 +9,7 @@ import { formatCurrency } from "../utils/money.js";
 
 import { addOrder } from "../../data/orders.js";
 
-export async function renderPaymentSummary() {
+export async function renderPaymentSummary(cart) {
     let productPriceCents = 0;
     let shippingPriceCents = 0;
     let itemsNumbers = 0;
@@ -93,5 +93,3 @@ export async function renderPaymentSummary() {
         window.location.href = "orders.html";
     });
 }
-
-console.log("shor cart:",cart);

@@ -3,12 +3,14 @@
 // 2. How the page behaves(2.测试页面的行为逻辑)
 
 import { renderOrderSummary } from "../../../scripts/checkout/orderSummary.js";
-import { cart } from "../../../data/cart-class.js";
+// import { cart } from "../../../data/cart-class.js";
+import { Cart } from "../../../data/cart-class.js";
 // 异步函数
 import { loadProducts, loadProductsFetch } from "../../../data/products.js";
 
 describe("test suite: renderOrderSummary()", () => {
     // 初始化数据(全局变量,让beforeEach()和it()都可以使用)
+    let cart;
     const productId1 = "e43638ce-6aa0-4b85-b27f-e1d07eb678c6";
     const productId2 = "15b6fc6f-327a-4ec4-896f-486349e85a3d";
 
@@ -26,15 +28,17 @@ describe("test suite: renderOrderSummary()", () => {
             `;
 
         // 劫持函数: localStorage.getItem → 替换为空数组
-        spyOn(localStorage, "getItem");
+        spyOn(localStorage, "getItem").and.returnValue('[]');
 
         // 直接向 cart.cartItems 中注入商品
+        cart = new Cart('cart-test')
         cart.cartItems = [
             { productId: productId1, quantity: 2, deliveryOptionId: "1" },
             { productId: productId2, quantity: 1, deliveryOptionId: "2" },
         ];
+
         // 呼叫被测试主函数
-        await renderOrderSummary();
+        await renderOrderSummary(cart);
     });
 
     // 测试页面长相部分
@@ -88,6 +92,7 @@ describe("test suite: renderOrderSummary()", () => {
 
 describe("updating the delivery option", () => {
     // 初始化数据(全局变量,让beforeEach()和it()都可以使用)
+    let cart;
     const productId1 = "e43638ce-6aa0-4b85-b27f-e1d07eb678c6";
     const productId2 = "15b6fc6f-327a-4ec4-896f-486349e85a3d";
 
@@ -107,8 +112,8 @@ describe("updating the delivery option", () => {
                 <div class="js-payment-summary"></div>
             `;
         // 劫持函数: localStorage.getItem → 替换为空数组
-        spyOn(localStorage, "getItem");
-
+        spyOn(localStorage, "getItem").and.returnValue('[]');
+        cart=new Cart('cart-test')
         // 直接向 cart.cartItems 中注入商品
         cart.cartItems = [
             { productId: productId1, quantity: 2, deliveryOptionId: "1" },
@@ -116,7 +121,7 @@ describe("updating the delivery option", () => {
         ];
 
         // 呼叫被测试主函数
-        await renderOrderSummary();
+        await renderOrderSummary(cart);
     });
 
  it("测试: 可否成功将商品1的寄送方式从 1 → 3", async () => {

@@ -14,11 +14,6 @@ export class Cart {
     constructor(localStorageKey) {
         this.#localStorageKey = localStorageKey;
         this.#loadFromStorage();
-
-        // 购物车刷新至视频中状态(两件商品)
-        // this.addToCart("e43638ce-6aa0-4b85-b27f-e1d07eb678c6");
-        // this.addToCart("15b6fc6f-327a-4ec4-896f-486349e85a3d");
-        // console.log(this.cartItems);
     }
 
     // 读取本地储存的购物车数组
@@ -32,41 +27,8 @@ export class Cart {
         localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
     }
 
-    // 仅加入一份商品至购物车
-    addOneProductToCart(productId) {
-
-
-        // 检测当前cart中是否已经有商品了
-        let marchingId;
-        this.cartItems.forEach((cartItem) => {
-            // item:当前条目
-            if (cartItem.productId === productId) {
-                return (marchingId = cartItem);
-            }
-        });
-
-        if (marchingId) {
-            // 已经在列表中了 → 修改数量
-            marchingId.quantity += 1;
-        } else {
-            // 不再列表中 → 需要将其加入到列表中
-            this.cartItems.push({
-                productId: productId,
-                quantity: 1,
-                deliveryOptionId: "1",
-            });
-        }
-        // 更新本地存储的购物车信息
-        this.saveToStorage();
-
-    }
-
-    // 商品加入函数 (点击 Add 按钮触发)
-    addToCart(productId) {
-        // TODO: 18r 此处逻辑不好,不应依赖DOM,建议拆分逻辑,js只接受数字
-        // 获取用户的选择数量
-        const selectValueEl = document.querySelector(`.js-quantity-selector-${productId}`)?.value ?? "1";
-        const selectValue = Number(selectValueEl);
+    // 商品加入函数 (点击 Add 按钮触发),接受两个参数: 指定商品及其数量
+    addToCart(productId,selectValue) {
 
         // 检测当前cart中是否已经有商品了
         let marchingId;

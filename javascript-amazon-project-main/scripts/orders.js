@@ -122,7 +122,7 @@ function buyAgain() {
         button.addEventListener("click", () => {
             // add to cart
             const { productId } = button.dataset;
-            cart.addOneProductToCart(productId);
+            cart.addToCart(productId, 1);
             // 刷新屏幕:修改屏幕右上角购物车商品数量,处理页眉购物车数量标签
             document.querySelector(".js-cart-quantity").innerHTML = cart.calculateCartQuantity(cart);
         });

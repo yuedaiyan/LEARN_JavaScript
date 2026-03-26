@@ -225,13 +225,6 @@ export async function renderOrderSummary() {
 // 监听 enter 键盘按键 → 实现 save 功能
 document.addEventListener("keyup", (keyUp) => {
     if (keyUp.key === "Enter") {
-        // // test
-        // console.log('good');
-        // console.log(focusId);
-        // console.log(document.querySelector(`.js-cart-item-container-${focusId}`));
-        // console.log(document.querySelector(`.js-cart-item-container-${focusId} .js-save-quantity-link`));
-        // //
         document.querySelector(`.js-cart-item-container-${focusId} .js-save-quantity-link`).click();
-        // document.querySelector(`.js-save-quantity-link`).click();
     }
 });

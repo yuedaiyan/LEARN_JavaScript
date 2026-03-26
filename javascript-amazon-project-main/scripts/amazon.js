@@ -41,49 +41,15 @@ function renderProductsGrid() {
         productsHTMLAdd(product);
     });
 
-    // 将生成的商品条目HTML,加入到.js-products-grid中,以供渲染
-    document.querySelector(".js-products-grid").innerHTML = productsHTML;
-
-    // 初始化购物车内商品数量
-    let cartQuantity = 0;
-    // 使用实际的cart数据,更新购物车数量
-    cartQuantity = cart.calculateCartQuantity(cart);
-    // 刷新屏幕
-    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
-
-    // Add 绿色提示
-    function showAddedToCartIcon(productId) {
-        // 提前取消上一轮遗留的显示效果(如果显示效果存在的话(即便不存在,setTimeOut也不会报错))
-        clearTimeout(pressId[productId]);
-        // 点击 Add 按钮之后,上面出现绿色的提示
-        const addedToCartEl = document.querySelector(`.js-added-to-cart-${productId}`);
-        addedToCartEl.classList.add("added-to-cart-pressed");
-        pressId[productId] = setTimeout(() => {
-            addedToCartEl.classList.remove("added-to-cart-pressed");
-            delete pressId[productId];
-        }, 1500);
-    }
-
-    // 给每个按钮添加监听器 → 添加到购物车列表
-    document.querySelectorAll(".js-add-to-cart").forEach((button) => {
-        button.addEventListener("click", () => {
-            const { productId } = button.dataset;
-            cart.addToCart(productId);
-
-            // 刷新屏幕:修改屏幕右上角购物车商品数量
-            document.querySelector(".js-cart-quantity").innerHTML = cart.calculateCartQuantity(cart);
-
-            showAddedToCartIcon(productId);
-        });
-    });
+    productsHTMLfunction();
 }
 
 // 搜索模式: 渲染特定商品
 function renderSearchProducts(searchParams) {
     // 依据js文件:data/product.js中的list,逐条生成HTML
     products.forEach((product) => {
-        console.log('00');
-        console.log(product.name);        
+        console.log("00");
+        console.log(product.name);
         // 逐个检查商品名称中是否包含搜索关键字,有则渲染,没有则跳过
         const nameCheck = includesIgnoreCase(product.name, searchParams);
         const keywrodsCheck = searchProduct(product.id, searchParams);
@@ -93,46 +59,10 @@ function renderSearchProducts(searchParams) {
             productsHTMLAdd(product);
         }
     });
-
-    // 将生成的商品条目HTML,加入到.js-products-grid中,以供渲染
-    document.querySelector(".js-products-grid").innerHTML = productsHTML;
-
-    // 初始化购物车内商品数量
-    let cartQuantity = 0;
-    // 使用实际的cart数据,更新购物车数量
-    cartQuantity = cart.calculateCartQuantity(cart);
-    // 刷新屏幕
-    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
-
-    // 初始化pressId(用户记录显示的绿色icon Id)
-    const pressId = {};
-    // Add 绿色提示
-    function showAddedToCartIcon(productId) {
-        // 提前取消上一轮遗留的显示效果(如果显示效果存在的话(即便不存在,setTimeOut也不会报错))
-        clearTimeout(pressId[productId]);
-        // 点击 Add 按钮之后,上面出现绿色的提示
-        const addedToCartEl = document.querySelector(`.js-added-to-cart-${productId}`);
-        addedToCartEl.classList.add("added-to-cart-pressed");
-        pressId[productId] = setTimeout(() => {
-            addedToCartEl.classList.remove("added-to-cart-pressed");
-            delete pressId[productId];
-        }, 1500);
-    }
-
-    // 给每个按钮添加监听器 → 添加到购物车列表
-    document.querySelectorAll(".js-add-to-cart").forEach((button) => {
-        button.addEventListener("click", () => {
-            const { productId } = button.dataset;
-            cart.addToCart(productId);
-
-            // 刷新屏幕:修改屏幕右上角购物车商品数量
-            document.querySelector(".js-cart-quantity").innerHTML = cart.calculateCartQuantity(cart);
-
-            showAddedToCartIcon(productId);
-        });
-    });
+    productsHTMLfunction();
 }
 
+// 合成页面DOM树
 function productsHTMLAdd(product) {
     productsHTML += `
                    <div class="product-container">
@@ -177,4 +107,52 @@ function productsHTMLAdd(product) {
                     <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${product.id}">Add to Cart</button>
                 </div> 
     `;
+}
+
+// 为DOM树添加交互
+function productsHTMLfunction() {
+    // 将生成的商品条目HTML,加入到.js-products-grid中,以供渲染
+    document.querySelector(".js-products-grid").innerHTML = productsHTML;
+
+    // 初始化购物车内商品数量
+    let cartQuantity = 0;
+    // 使用实际的cart数据,更新购物车数量
+    cartQuantity = cart.calculateCartQuantity(cart);
+    // 刷新屏幕
+    document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+
+    // 给每个按钮添加监听器 → 添加到购物车列表
+    document.querySelectorAll(".js-add-to-cart").forEach((button) => {
+        button.addEventListener("click", () => {
+            const { productId } = button.dataset;
+
+        // 获取用户的选择数量
+        const selectValueEl = document.querySelector(`.js-quantity-selector-${productId}`)?.value ?? "1";
+        const selectValue = Number(selectValueEl);
+
+            // 点击后 → 添加指定数量到购物车
+            cart.addToCart(productId,selectValue);
+
+            // 刷新屏幕:修改屏幕右上角购物车商品数量
+            document.querySelector(".js-cart-quantity").innerHTML = cart.calculateCartQuantity(cart);
+
+            // 显示 Add绿色提示
+            showAddedToCartIcon(productId);
+        });
+    });
+}
+
+// 初始化pressId(用户记录显示的绿色icon Id)
+const pressId = {};
+// Add 绿色提示
+function showAddedToCartIcon(productId) {
+    // 提前取消上一轮遗留的显示效果(如果显示效果存在的话(即便不存在,setTimeOut也不会报错))
+    clearTimeout(pressId[productId]);
+    // 点击 Add 按钮之后,上面出现绿色的提示
+    const addedToCartEl = document.querySelector(`.js-added-to-cart-${productId}`);
+    addedToCartEl.classList.add("added-to-cart-pressed");
+    pressId[productId] = setTimeout(() => {
+        addedToCartEl.classList.remove("added-to-cart-pressed");
+        delete pressId[productId];
+    }, 1500);
 }

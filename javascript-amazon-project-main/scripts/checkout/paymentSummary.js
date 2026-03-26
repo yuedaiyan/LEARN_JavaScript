@@ -6,7 +6,7 @@ import { products, getProductFromProducts, loadProductsFetch } from "../../data/
 import { deliveryOptions, getDeliveryOption } from "../../data/deliveryOptions.js";
 // 导入money从美分转换为美元的计算函数
 import { formatCurrency } from "../utils/money.js";
-//
+
 import { addOrder } from "../../data/orders.js";
 
 export async function renderPaymentSummary() {

@@ -67,7 +67,7 @@ The course focuses on DOM tree generation and interaction, emphasizes the concep
 
 <div align="center">
 
-[Jasmine Test Framework](https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/tests-jasmine/SpecRunner.html)
+[Jasmine Test Framework (Must use Chrome on the computer)](https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/tests-jasmine/SpecRunner.html)
 
 </div>
 <br>

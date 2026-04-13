@@ -1,10 +1,10 @@
 # Javascript Course: Amazon Clone
 
-This repository documents my journey learning a JavaScript course, including assignments and the final project.  
-The course focuses on DOM tree generation and interaction, emphasizes the concept of "state", and covers procedural programming, object-oriented programming, the Jasmine testing framework, backend development, and asynchronous programming (XML, fetch, async functions, await, etc.) — all following enterprise-level coding standards throughout.
+This repository documents my progress through a JavaScript course, including assignments and the final project. 
+Topics covered include DOM manipulation and interaction, state management, procedural and object-oriented programming, the Jasmine testing framework, and asynchronous programming (XMLHttpRequest, Fetch API, async/await).
 
 <small>本仓库记录了我学习 JavaScript 课程的过程，包括作业与最终项目。</small>  
-<small>此次学习聚焦于 DOM 树的生成与交互,注重"状态"的思想，并包括过程式编程、面向对象编程、Jasmine 测试框架应用、后端、异步(XML、fetch、async function、await……)，并在全过程遵循企业级代码规范。</small>
+<small>课程内容涵盖 DOM 操作与交互、状态管理、过程式编程与面向对象编程、Jasmine 测试框架，以及异步编程（XMLHttpRequest、Fetch API、async/await）。</small>
 
 ##  Final Project
 * **File Path:** `/javascript-amazon-project-main`
@@ -16,13 +16,11 @@ The course focuses on DOM tree generation and interaction, emphasizes the concep
             <img src="amazon.png" height="200"  alt="Amazon.com Diagram">
         </a>
 </div>
-<br>
 <div align="center">
 
 [page 1 amazon.html](https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/amazon.html)
 
 </div>
-<br>
 <div align="center">
         <a href="https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/checkout.html">
             <img src="checkout.png" height="200"  alt="Amazon.com Diagram">
@@ -34,7 +32,6 @@ The course focuses on DOM tree generation and interaction, emphasizes the concep
 [page 2 checkout.html](https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/checkout.html)
 
 </div>
-<br>
 <div align="center">
         <a href="https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/orders.html">
             <img src="orders.png" height="200"  alt="Amazon.com Diagram">
@@ -46,7 +43,6 @@ The course focuses on DOM tree generation and interaction, emphasizes the concep
 [page 3 orders.html](https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/orders.html)
 
 </div>
-<br>
 <div align="center">
         <a href="https://yuedaiyan.github.io/LEARN_JavaScript/javascript-amazon-project-main/tracking.html">
             <img src="tracking.png" height="200"  alt="Amazon.com Diagram">

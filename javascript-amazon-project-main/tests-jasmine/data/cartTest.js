@@ -14,8 +14,16 @@ describe("test suite: cart.addToCart", () => {
         // 劫持函数: localStorage.getItem → 提前放入两个商品
         spyOn(localStorage, "getItem").and.callFake(() => {
             return JSON.stringify([
-                { productId: "a7ad3bba44ce67fcd915e5c9dc4bd455", quantity: 1, deliveryOptionId: "1" },
-                { productId: "9baab029f463f330bb33ed5676aa4dfd", quantity: 1, deliveryOptionId: "1" },
+                {
+                    productId: "a7ad3bba44ce67fcd915e5c9dc4bd455",
+                    quantity: 1,
+                    deliveryOptionId: "1",
+                },
+                {
+                    productId: "9baab029f463f330bb33ed5676aa4dfd",
+                    quantity: 1,
+                    deliveryOptionId: "1",
+                },
             ]);
         });
         // 劫持函数: localStorage.setItem → null
@@ -31,11 +39,21 @@ describe("test suite: cart.addToCart", () => {
         expect(localStorage.setItem).toHaveBeenCalledWith(
             "cart-test",
             JSON.stringify([
-                { productId: "a7ad3bba44ce67fcd915e5c9dc4bd455", quantity: 1, deliveryOptionId: "1" },
-                { productId: "9baab029f463f330bb33ed5676aa4dfd", quantity: 4, deliveryOptionId: "1" },
+                {
+                    productId: "a7ad3bba44ce67fcd915e5c9dc4bd455",
+                    quantity: 1,
+                    deliveryOptionId: "1",
+                },
+                {
+                    productId: "9baab029f463f330bb33ed5676aa4dfd",
+                    quantity: 4,
+                    deliveryOptionId: "1",
+                },
             ]),
         );
-        expect(cart.cartItems[1].productId).toEqual("9baab029f463f330bb33ed5676aa4dfd");
+        expect(cart.cartItems[1].productId).toEqual(
+            "9baab029f463f330bb33ed5676aa4dfd",
+        );
         expect(cart.cartItems[1].quantity).toEqual(4);
     });
 
@@ -55,8 +73,19 @@ describe("test suite: cart.addToCart", () => {
         cart.addToCart("9baab029f463f330bb33ed5676aa4dfd", 2);
         expect(cart.cartItems.length).toEqual(1);
         expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-        expect(localStorage.setItem).toHaveBeenCalledWith("cart-test", JSON.stringify([{ productId: "9baab029f463f330bb33ed5676aa4dfd", quantity: 2, deliveryOptionId: "1" }]));
-        expect(cart.cartItems[0].productId).toEqual("9baab029f463f330bb33ed5676aa4dfd");
+        expect(localStorage.setItem).toHaveBeenCalledWith(
+            "cart-test",
+            JSON.stringify([
+                {
+                    productId: "9baab029f463f330bb33ed5676aa4dfd",
+                    quantity: 2,
+                    deliveryOptionId: "1",
+                },
+            ]),
+        );
+        expect(cart.cartItems[0].productId).toEqual(
+            "9baab029f463f330bb33ed5676aa4dfd",
+        );
         expect(cart.cartItems[0].quantity).toEqual(2);
     });
 });
@@ -77,15 +106,32 @@ describe("test suit: cart.removeFromCart (删除购物车中的商品)", () => {
         spyOn(localStorage, "setItem");
 
         cart.cartItems = [
-            { productId: "a7ad3bba44ce67fcd915e5c9dc4bd455", quantity: 1, deliveryOptionId: "1" },
-            { productId: "9baab029f463f330bb33ed5676aa4dfd", quantity: 1, deliveryOptionId: "1" },
+            {
+                productId: "a7ad3bba44ce67fcd915e5c9dc4bd455",
+                quantity: 1,
+                deliveryOptionId: "1",
+            },
+            {
+                productId: "9baab029f463f330bb33ed5676aa4dfd",
+                quantity: 1,
+                deliveryOptionId: "1",
+            },
         ];
     });
 
     it("remove a productId that is in the cart.", () => {
         cart.removeFromCart("a7ad3bba44ce67fcd915e5c9dc4bd455");
         expect(cart.cartItems.length).toEqual(1);
-        expect(localStorage.setItem).toHaveBeenCalledWith("cart-test", JSON.stringify([{ productId: "9baab029f463f330bb33ed5676aa4dfd", quantity: 1, deliveryOptionId: "1" }]));
+        expect(localStorage.setItem).toHaveBeenCalledWith(
+            "cart-test",
+            JSON.stringify([
+                {
+                    productId: "9baab029f463f330bb33ed5676aa4dfd",
+                    quantity: 1,
+                    deliveryOptionId: "1",
+                },
+            ]),
+        );
     });
 
     it("remove a productId that's not in the cart (does nothing).", () => {
@@ -94,8 +140,16 @@ describe("test suit: cart.removeFromCart (删除购物车中的商品)", () => {
         expect(localStorage.setItem).toHaveBeenCalledWith(
             "cart-test",
             JSON.stringify([
-                { productId: "a7ad3bba44ce67fcd915e5c9dc4bd455", quantity: 1, deliveryOptionId: "1" },
-                { productId: "9baab029f463f330bb33ed5676aa4dfd", quantity: 1, deliveryOptionId: "1" },
+                {
+                    productId: "a7ad3bba44ce67fcd915e5c9dc4bd455",
+                    quantity: 1,
+                    deliveryOptionId: "1",
+                },
+                {
+                    productId: "9baab029f463f330bb33ed5676aa4dfd",
+                    quantity: 1,
+                    deliveryOptionId: "1",
+                },
             ]),
         );
     });
@@ -138,8 +192,16 @@ describe("test suit: cart.updateDeliveryOption() (更改购物车中特定商品
         expect(localStorage.setItem).toHaveBeenCalledWith(
             "cart-test",
             JSON.stringify([
-                { productId: `${productId1}`, quantity: 1, deliveryOptionId: "3" },
-                { productId: `${productId2}`, quantity: 1, deliveryOptionId: "1" },
+                {
+                    productId: `${productId1}`,
+                    quantity: 1,
+                    deliveryOptionId: "3",
+                },
+                {
+                    productId: `${productId2}`,
+                    quantity: 1,
+                    deliveryOptionId: "1",
+                },
             ]),
         );
     });
@@ -148,20 +210,40 @@ describe("test suit: cart.updateDeliveryOption() (更改购物车中特定商品
         // 测试: 堆不存在购物车中的 productId3 进行 update…
         const productId3 = "aaaaaaa-bbbb-ccccc-dddddd-eeeeeee";
         cart.updateDeliveryOption(productId3, "3");
-        expect(cart.cartItems[0]).toEqual({ productId: productId1, quantity: 1, deliveryOptionId: "1" });
-        expect(cart.cartItems[1]).toEqual({ productId: productId2, quantity: 1, deliveryOptionId: "1" });
+        expect(cart.cartItems[0]).toEqual({
+            productId: productId1,
+            quantity: 1,
+            deliveryOptionId: "1",
+        });
+        expect(cart.cartItems[1]).toEqual({
+            productId: productId2,
+            quantity: 1,
+            deliveryOptionId: "1",
+        });
         expect(localStorage.setItem).toHaveBeenCalledWith(
             "cart-test",
             JSON.stringify([
-                { productId: `${productId1}`, quantity: 1, deliveryOptionId: "1" },
-                { productId: `${productId2}`, quantity: 1, deliveryOptionId: "1" },
+                {
+                    productId: `${productId1}`,
+                    quantity: 1,
+                    deliveryOptionId: "1",
+                },
+                {
+                    productId: `${productId2}`,
+                    quantity: 1,
+                    deliveryOptionId: "1",
+                },
             ]),
         );
     });
 
-    it("illegal input test: 尝试堆 update 函数传入一个不存在的寄送id 7", () => {
+    it("illegal input test: 尝试对 update 函数传入一个不存在的寄送id 7", () => {
         cart.updateDeliveryOption(productId1, "4");
-        expect(cart.cartItems[0]).toEqual({ productId: productId1, quantity: 1, deliveryOptionId: "1" });
+        expect(cart.cartItems[0]).toEqual({
+            productId: productId1,
+            quantity: 1,
+            deliveryOptionId: "1",
+        });
 
         // 如果输入不合法,函数直接 return, 不会尝试写入 localStorage
         expect(localStorage.setItem).toHaveBeenCalledTimes(0);

@@ -2,7 +2,13 @@
 // Test each condition of an if-statement
 // 测试要求
 // 1.被测试函数中的每个if逻辑,都应测试
-import { addToCart, cart, loadFromStorage, removeFromCart, updateDeliveryOption } from "../../data/cart.js";
+import {
+    addToCart,
+    cart,
+    loadFromStorage,
+    removeFromCart,
+    updateDeliveryOption,
+} from "../../data/cart.js";
 
 // 测试 "加入购物车"
 describe("test suite: addToCart", () => {
@@ -16,7 +22,13 @@ describe("test suite: addToCart", () => {
     it("adds an existing product to the cart", () => {
         // 劫持函数: localStorage.getItem → 替换为空数组
         spyOn(localStorage, "getItem").and.callFake(() => {
-            return JSON.stringify([{ productId: "9baab029f463f330bb33ed5676aa4dfd", quantity: 1, deliveryOptionId: "1" }]);
+            return JSON.stringify([
+                {
+                    productId: "9baab029f463f330bb33ed5676aa4dfd",
+                    quantity: 1,
+                    deliveryOptionId: "1",
+                },
+            ]);
         });
         // 将cart数组直接提出到栈中,模拟cart.js中,cart数组也一直在栈中的效果
         loadFromStorage();
@@ -29,7 +41,16 @@ describe("test suite: addToCart", () => {
         addToCart("9baab029f463f330bb33ed5676aa4dfd");
         expect(cart.length).toEqual(1);
         expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-        expect(localStorage.setItem).toHaveBeenCalledWith("cart", JSON.stringify([{ productId: "9baab029f463f330bb33ed5676aa4dfd", quantity: 2, deliveryOptionId: "1" }]));
+        expect(localStorage.setItem).toHaveBeenCalledWith(
+            "cart",
+            JSON.stringify([
+                {
+                    productId: "9baab029f463f330bb33ed5676aa4dfd",
+                    quantity: 2,
+                    deliveryOptionId: "1",
+                },
+            ]),
+        );
         expect(cart[0].productId).toEqual("9baab029f463f330bb33ed5676aa4dfd");
         expect(cart[0].quantity).toEqual(2);
     });
@@ -51,7 +72,16 @@ describe("test suite: addToCart", () => {
         addToCart("9baab029f463f330bb33ed5676aa4dfd");
         expect(cart.length).toEqual(1);
         expect(localStorage.setItem).toHaveBeenCalledTimes(1);
-        expect(localStorage.setItem).toHaveBeenCalledWith("cart", JSON.stringify([{ productId: "9baab029f463f330bb33ed5676aa4dfd", quantity: 1, deliveryOptionId: "1" }]));
+        expect(localStorage.setItem).toHaveBeenCalledWith(
+            "cart",
+            JSON.stringify([
+                {
+                    productId: "9baab029f463f330bb33ed5676aa4dfd",
+                    quantity: 1,
+                    deliveryOptionId: "1",
+                },
+            ]),
+        );
         expect(cart[0].productId).toEqual("9baab029f463f330bb33ed5676aa4dfd");
         expect(cart[0].quantity).toEqual(1);
     });
@@ -64,8 +94,16 @@ describe("test suit: removeFromCart (删除购物车中的商品)", () => {
         // 劫持函数: localStorage.getItem → 提前放入两个商品
         spyOn(localStorage, "getItem").and.callFake(() => {
             return JSON.stringify([
-                { productId: "a7ad3bba44ce67fcd915e5c9dc4bd455", quantity: 1, deliveryOptionId: "1" },
-                { productId: "9baab029f463f330bb33ed5676aa4dfd", quantity: 1, deliveryOptionId: "1" },
+                {
+                    productId: "a7ad3bba44ce67fcd915e5c9dc4bd455",
+                    quantity: 1,
+                    deliveryOptionId: "1",
+                },
+                {
+                    productId: "9baab029f463f330bb33ed5676aa4dfd",
+                    quantity: 1,
+                    deliveryOptionId: "1",
+                },
             ]);
         });
         // 将cart数组直接提出到栈中,模拟cart.js中,cart数组也一直在栈中的效果
@@ -81,7 +119,16 @@ describe("test suit: removeFromCart (删除购物车中的商品)", () => {
     it("remove a productId that is in the cart.", () => {
         removeFromCart("a7ad3bba44ce67fcd915e5c9dc4bd455");
         expect(cart.length).toEqual(1);
-        expect(localStorage.setItem).toHaveBeenCalledWith("cart", JSON.stringify([{ productId: "9baab029f463f330bb33ed5676aa4dfd", quantity: 1, deliveryOptionId: "1" }]));
+        expect(localStorage.setItem).toHaveBeenCalledWith(
+            "cart",
+            JSON.stringify([
+                {
+                    productId: "9baab029f463f330bb33ed5676aa4dfd",
+                    quantity: 1,
+                    deliveryOptionId: "1",
+                },
+            ]),
+        );
     });
 
     it("remove a productId that's not in the cart (does nothing).", () => {
@@ -90,8 +137,16 @@ describe("test suit: removeFromCart (删除购物车中的商品)", () => {
         expect(localStorage.setItem).toHaveBeenCalledWith(
             "cart",
             JSON.stringify([
-                { productId: "a7ad3bba44ce67fcd915e5c9dc4bd455", quantity: 1, deliveryOptionId: "1" },
-                { productId: "9baab029f463f330bb33ed5676aa4dfd", quantity: 1, deliveryOptionId: "1" },
+                {
+                    productId: "a7ad3bba44ce67fcd915e5c9dc4bd455",
+                    quantity: 1,
+                    deliveryOptionId: "1",
+                },
+                {
+                    productId: "9baab029f463f330bb33ed5676aa4dfd",
+                    quantity: 1,
+                    deliveryOptionId: "1",
+                },
             ]),
         );
     });
@@ -130,8 +185,16 @@ describe("test suit: updateDeliveryOption() (更改购物车中特定商品额�
         expect(localStorage.setItem).toHaveBeenCalledWith(
             "cart",
             JSON.stringify([
-                { productId: `${productId1}`, quantity: 1, deliveryOptionId: "3" },
-                { productId: `${productId2}`, quantity: 1, deliveryOptionId: "1" },
+                {
+                    productId: `${productId1}`,
+                    quantity: 1,
+                    deliveryOptionId: "3",
+                },
+                {
+                    productId: `${productId2}`,
+                    quantity: 1,
+                    deliveryOptionId: "1",
+                },
             ]),
         );
     });
@@ -140,26 +203,42 @@ describe("test suit: updateDeliveryOption() (更改购物车中特定商品额�
         // 测试: 堆不存在购物车中的 productId3 进行 update…
         const productId3 = "aaaaaaa-bbbb-ccccc-dddddd-eeeeeee";
         updateDeliveryOption(productId3, "3");
-        expect(cart[0]).toEqual({ productId: productId1, quantity: 1, deliveryOptionId: "1" });
-        expect(cart[1]).toEqual({ productId: productId2, quantity: 1, deliveryOptionId: "1" });
+        expect(cart[0]).toEqual({
+            productId: productId1,
+            quantity: 1,
+            deliveryOptionId: "1",
+        });
+        expect(cart[1]).toEqual({
+            productId: productId2,
+            quantity: 1,
+            deliveryOptionId: "1",
+        });
         expect(localStorage.setItem).toHaveBeenCalledWith(
             "cart",
             JSON.stringify([
-                { productId: `${productId1}`, quantity: 1, deliveryOptionId: "1" },
-                { productId: `${productId2}`, quantity: 1, deliveryOptionId: "1" },
+                {
+                    productId: `${productId1}`,
+                    quantity: 1,
+                    deliveryOptionId: "1",
+                },
+                {
+                    productId: `${productId2}`,
+                    quantity: 1,
+                    deliveryOptionId: "1",
+                },
             ]),
         );
     });
 
-    it('illegal input test: 尝试堆 update 函数传入一个不存在的寄送id 7',()=> {
-
+    it("illegal input test: 尝试对 update 函数传入一个不存在的寄送id 7", () => {
         updateDeliveryOption(productId1, "4");
-        expect(cart[0]).toEqual({ productId: productId1, quantity: 1, deliveryOptionId: "1" });
+        expect(cart[0]).toEqual({
+            productId: productId1,
+            quantity: 1,
+            deliveryOptionId: "1",
+        });
 
         // 如果输入不合法,函数直接 return, 不会尝试写入 localStorage
-        expect(localStorage.setItem).toHaveBeenCalledTimes(0)
-    
-    })
-
-
+        expect(localStorage.setItem).toHaveBeenCalledTimes(0);
+    });
 });

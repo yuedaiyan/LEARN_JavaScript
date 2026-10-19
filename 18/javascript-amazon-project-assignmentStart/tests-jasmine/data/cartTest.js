@@ -205,8 +205,8 @@ describe("test suit: cart.updateDeliveryOption() (更改购物车中特定商品
         );
     });
 
-    it("illegal input test: 如果堆不存在购物车中的商品修改 deliveryOptionId, 函数应该自动 return, 不改变 cart 中的任何信息", () => {
-        // 测试: 堆不存在购物车中的 productId3 进行 update…
+    it("illegal input test: 如果对不存在购物车中的商品修改 deliveryOptionId, 函数应该自动 return, 不改变 cart 中的任何信息", () => {
+        // 测试: 对不存在购物车中的 productId3 进行 update…
         const productId3 = "aaaaaaa-bbbb-ccccc-dddddd-eeeeeee";
         cart.updateDeliveryOption(productId3, "3");
         expect(cart.cartItems[0]).toEqual({
